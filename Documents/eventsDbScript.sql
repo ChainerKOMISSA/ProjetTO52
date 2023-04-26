@@ -30,12 +30,9 @@ CREATE TABLE Ticket(
 
 CREATE TABLE Utilisateur (
     idUtilisateur INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    nomUtilisateur VARCHAR(255),
-    prenomUtilisateur VARCHAR(255),
-    ageUtilisateur INTEGER,
-    emailUtilisateur VARCHAR(255),
-    telephoneUtilisateur VARCHAR(255),
-    villeUtilisateur VARCHAR(255)
+    nomUtilisateur VARCHAR(255) NOT NULL,
+    emailUtilisateur VARCHAR(255) NOT NULL,
+    mdpUtilisateur VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Paiement (
@@ -54,13 +51,9 @@ CREATE TABLE Avis(
 
 CREATE TABLE Administrateur (
     idAdmin INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    nomAdmin VARCHAR(255),
-    prenomAdmin VARCHAR(255),
-    ageAdmin INTEGER,
-    emailAdmin VARCHAR(255),
-    telephoneAdmin VARCHAR(255),
-    villeAdmin VARCHAR(255),
-    roleAdmin VARCHAR(255) NOT NULL
+    nomAdmin VARCHAR(255) NOT NULL,
+    emailAdmin VARCHAR(255) NOT NULL,
+    motdepasseAdmin VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Publicite(

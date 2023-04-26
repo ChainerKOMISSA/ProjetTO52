@@ -24,9 +24,10 @@
     <div class="card-body">
       <p class="login-box-msg">Connexion</p>
 
-      <form action="" method="post">
+      <form method="POST" action="{{route('connexion')}}">
+        @csrf
         <div class="input-group mb-3">
-          <input type="email" name="email" class="form-control" placeholder="johndoe@gmail.com">
+          <input type="email" name="email" class="form-control" placeholder="johndoe@gmail.com" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -34,13 +35,13 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" name="password" class="form-control" placeholder="••••••••">
+          <input type="password" name="password" class="form-control" placeholder="••••••••" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
-        </div>
+        </div><br><br>
         <div class="row">
           <div class="col-12">
             <button type="submit" class="btn btn-danger btn-block">Valider</button>
@@ -48,10 +49,6 @@
           <!-- /.col -->
         </div>
       </form><br>
-
-      <p class="mb-1">
-        <a href="forgot-password.html">J'ai oublié mon mot de passe</a>
-      </p>
       <p class="mb-0">
         Je n'ai pas encore de compte
         <a href="register.html" class="text-center">S'inscrire</a>

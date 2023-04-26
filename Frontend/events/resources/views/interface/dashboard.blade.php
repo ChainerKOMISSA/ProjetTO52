@@ -174,7 +174,6 @@
                 <span class="info-box-text">Concerts</span>
                 <span class="info-box-number">
                   10
-                  <small>%</small>
                 </span>
               </div>
               <!-- /.info-box-content -->
