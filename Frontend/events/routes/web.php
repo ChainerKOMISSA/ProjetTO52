@@ -15,3 +15,6 @@ Route::get('/login', [App\Http\Controllers\LoginController::class, 'index'])-> n
 
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])-> name('home');
 
+Route::get('/addevent', [App\Http\Controllers\EventController::class, 'index'])-> name('newevent');
+
+Route::get('/concert',[App\Http\Controllers\EventController::class, 'listeconcert'])-> name('concert');
