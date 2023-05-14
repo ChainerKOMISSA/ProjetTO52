@@ -63,6 +63,12 @@ CREATE TABLE Publicite(
     CONSTRAINT fk_admin FOREIGN KEY (idAdmin) REFERENCES Administrateur(idAdmin)
 );
 
+CREATE TABLE Newsletter(
+    idNewsletter INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    libelleNewsletter VARCHAR(255),
+    idAdmin INTEGER NOT NULL,
+    CONSTRAINT fk_admin FOREIGN KEY (idAdmin) REFERENCES Administrateur(idAdmin)
+);
 
 
 
