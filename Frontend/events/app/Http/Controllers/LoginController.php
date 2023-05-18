@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Client;
 
 
 class LoginController extends Controller
@@ -16,7 +17,8 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function login(REQUEST $request){
+    /*public function login(REQUEST $request){
+
     
        //dd($request->all());
        $email = $request->input('email');
@@ -36,6 +38,31 @@ class LoginController extends Controller
         // Authentication failed
         return redirect('/login')->withErrors(['Invalid credentials']);
         }
+    }*/
+
+    public function register(REQUEST $request){
+        $client = new Client(['base_uri' => 'http://localhost:5000/']);
+        $response = $client->post('register', [
+            'json' => [
+                'username' => $request->username,
+                'email' => $request->email,
+                'password' => $request->password
+            ]
+        ]);
+        $data = json_decode($response->getBody(), true);
+        return redirect('/login');
+    }
+
+    public function login(REQUEST $request){
+        $client = new Client(['base_uri' => 'http://localhost:5000/']);
+        $response = $client->post('login', [
+            'json' => [
+                'username' => $request->username,
+                'password' => $request->password
+            ]
+        ]);
+        $data = json_decode($response->getBody(), true);
+        return redirect('/dashboard');
     }
 
 }

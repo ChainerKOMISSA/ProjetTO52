@@ -4,17 +4,28 @@ use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use GuzzleHttp\Client;
 
-
-Route::get('/', [App\Http\Controllers\HomeController::class, 'acceuil'])-> name('acceuil');
-
-Route::post('/login', [LoginController::class, 'login'])-> name('connexion');
-
+//Connexions
 Route::get('/login', [App\Http\Controllers\LoginController::class, 'index'])-> name('loginpage');
+Route::post('/register', [App\Http\Controllers\LoginController::class, 'register'])-> name('register');
+Route::post('/login', [App\Http\Controllers\LoginController::class, 'login'])-> name('login');
 
-//Route::get('/protected', function () {})->middleware('auth');
+//Acceuil
+Route::get('/', [App\Http\Controllers\HomeController::class, 'acceuil'])-> name('acceuil');
+Route::get('/details', [App\Http\Controllers\HomeController::class, 'detailsfimu'])-> name('detailsfimu');
 
+//Administrateur
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])-> name('home');
 
-Route::get('/addevent', [App\Http\Controllers\EventController::class, 'index'])-> name('newevent');
+//Evenement
+Route::get('/addevent', [App\Http\Controllers\EventController::class, 'index'])-> name('newevent'); //afficher la page de création
+Route::post('/newevent', [App\Http\Controllers\EventController::class, 'create']) -> name('createevent'); //créer un new event
+Route::put('/updatevent/{idEvenement}', [App\Http\Controllers\EventController::class, 'update']) -> name('updatevent');//mettre à jour un évènement
+Route::delete('/deletevent/{idEvenement}', [App\Http\Controllers\EventController::class, 'delete']) -> name('deletevent'); //supprimer un évènement
 
-Route::get('/concert',[App\Http\Controllers\EventController::class, 'listeconcert'])-> name('concert');
+//Affichages des différents types d'évènements
+Route::get('/concert',[App\Http\Controllers\EventController::class, 'listeconcert'])-> name('concert'); //afficher les concerts uniquement
+Route::get('/festival',[App\Http\Controllers\EventController::class, 'listefestival'])-> name('festival'); //afficher les festivals uniquement
+
+//Newsletter
+Route::get('/createnewsletter', [App\Http\Controllers\NewsletterController::class, 'index']) -> name('createnewsletter'); //page de création de la newsletter
+Route::get('/newsletter', [App\Http\Controllers\NewsletterController::class, 'show']) -> name('newsletter'); //affichage des newsletter

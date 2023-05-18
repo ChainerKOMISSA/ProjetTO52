@@ -4,7 +4,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Events</title>
-  
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -29,7 +28,7 @@
         <a href="{{route('acceuil')}}" class="nav-link">Acceuil</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Evènements</a>
+        <a href="#" class="nav-link">Créer une newsletter</a>
       </li>
     </ul>
 
@@ -74,7 +73,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
+            <a href="{{route('home')}}" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Tableau de bord
@@ -82,7 +81,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('newevent')}}" class="nav-link">
+            <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-calendar-alt"></i>
               <p>
                 Evènements
@@ -119,7 +118,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('newsletter')}}" class="nav-link">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-envelope"></i>
               <p>
                 Newsletter
@@ -165,12 +164,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Tableau de bord</h1>
+            <h1 class="m-0">Créer une nouvelle newsletter</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{route('acceuil')}}">Acceuil</a></li>
-              <li class="breadcrumb-item active">Tableau de bord</li>
+              <li class="breadcrumb-item"><a href="#">Acceuil</a></li>
+              <li class="breadcrumb-item active">Créer une nouvelle newsletter</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -183,64 +182,33 @@
       <div class="container-fluid">
         <!-- Info boxes -->
         <div class="row">
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box">
-              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-cog"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Concerts</span>
-                <span class="info-box-number">
-                  10
-                </span>
-              </div>
-              <!-- /.info-box-content -->
+            <div class="card col-lg-12">
+                <div class="card-header text-white border-danger">
+                    <div class="card-title">
+                        <h3>Veuillez renseigner les informations</h3>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form action="" method="POST">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Titre de la newsletter</label>
+                                    <input type="text" name="titre" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nom" required>
+                                    <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="exampleInputPassword1">Contenu</label>
+                                    <textarea name="libelleNewsletter" id="" cols="30" rows="5" class="form-control"></textarea>
+                                  </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-danger">Enregistrer</button>&nbsp;&nbsp;&nbsp;
+                        <button type="reset" class="btn btn-secondary">Annuler</button>
+                    </form>
+                </div>
             </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Festivals</span>
-                <span class="info-box-number">41,410</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-
-          <!-- fix for small devices only -->
-          <div class="clearfix hidden-md-up"></div>
-
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-shopping-cart"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Théâtres</span>
-                <span class="info-box-number">760</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-users"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Autres</span>
-                <span class="info-box-number">2,000</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
         </div>
         <!-- /.row -->
 

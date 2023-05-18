@@ -11,6 +11,11 @@ class HomeController extends Controller
         return view('interface.acceuil');
     }
 
+    public function detailsfimu(){
+        return view('interface.detailsfimu');
+    }
+
+
     public function index()
     {
         return view('interface.dashboard');

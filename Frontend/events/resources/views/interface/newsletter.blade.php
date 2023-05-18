@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Events</title>
-  
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Theme style -->
@@ -26,10 +26,10 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{route('acceuil')}}" class="nav-link">Acceuil</a>
+        <a href="index3.html" class="nav-link">Acceuil</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Evènements</a>
+        <a href="#" class="nav-link">Newsletters</a>
       </li>
     </ul>
 
@@ -74,7 +74,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
+            <a href="{{route('home')}}" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Tableau de bord
@@ -82,7 +82,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('newevent')}}" class="nav-link">
+            <a href="{{route('newevent')}}" class="nav-link active">
               <i class="nav-icon fas fa-calendar-alt"></i>
               <p>
                 Evènements
@@ -90,25 +90,25 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('concert')}}" class="nav-link">
-                  <i class="far fa-music nav-icon"></i>
-                  <p>Concerts</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                  <a href="{{route('festival')}}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                    <p>Festivals</p>
+                <li class="nav-item">
+                  <a href="{{route('concert')}}" class="nav-link">
+                    <i class="far fa-music nav-icon"></i>
+                    <p>Concerts</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Théâtres</p>
-                  </a>
-                </li>
-            </ul>
+                    <a href="{{route('festival')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                      <p>Festivals</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Théâtres</p>
+                    </a>
+                  </li>
+              </ul>
           </li>
           <li class="nav-item">
             <a href="" class="nav-link">
@@ -119,7 +119,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('newsletter')}}" class="nav-link">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-envelope"></i>
               <p>
                 Newsletter
@@ -165,12 +165,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Tableau de bord</h1>
+            <h1 class="m-0">Newsletters</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{route('acceuil')}}">Acceuil</a></li>
-              <li class="breadcrumb-item active">Tableau de bord</li>
+              <li class="breadcrumb-item"><a href="#">Acceuil</a></li>
+              <li class="breadcrumb-item active">Newsletters</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -183,64 +183,52 @@
       <div class="container-fluid">
         <!-- Info boxes -->
         <div class="row">
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box">
-              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-cog"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Concerts</span>
-                <span class="info-box-number">
-                  10
-                </span>
-              </div>
-              <!-- /.info-box-content -->
+            <div class="card col-lg-12">
+                <div class="card-header text-white border-danger">
+                    <div class="card-title">
+                        <h3>Newsletters</h3>
+                    </div>
+                    <div class="card-tools">
+                        <a href="{{route('createnewsletter')}}" class="btn btn-danger">Créer une nouvelle newsletter</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                  @if(session()->has("successDelete"))
+                  <div class="alert alert-secondary">
+                    <p><h4>{{session()->get('successDelete')}}</h4></p>
+                  </div>
+                  @endif
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table id="newsletter" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>N°</th>
+                                    <td>Titre</td>
+                                    <td>Contenu</td>
+                                    <td>Créateur</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                  @foreach ($newsletters as $key =>$newsletter)
+                                    <tr>
+                                      <th scope="row">{{++$key}}</th>
+                                      <td>{{ $newsletter['libelleNewsletter'] }}</td>
+                                      <td>{{ $newsletter['contenuNewsletter'] }}</td>
+                                      <td>{{ $newsletter['idAdmin']}}</td>
+                                      <td class="project-actions text-right">
+                                        <a class="btn btn-danger btn-sm" href=""><i class="fas fa-folder"></i></a><br>
+                                        <a class="btn btn-secondary btn-sm" href=""><i class="far fa-edit"></i></a><br>
+                                        <a class="btn btn-danger btn-sm" href=""><i class="fas fa-trash"></i></a>
+                                      </td>
+                                    </tr>
+                                  @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Festivals</span>
-                <span class="info-box-number">41,410</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-
-          <!-- fix for small devices only -->
-          <div class="clearfix hidden-md-up"></div>
-
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-shopping-cart"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Théâtres</span>
-                <span class="info-box-number">760</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-users"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Autres</span>
-                <span class="info-box-number">2,000</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
         </div>
         <!-- /.row -->
 

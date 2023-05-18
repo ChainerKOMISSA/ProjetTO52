@@ -24,7 +24,7 @@
     <div class="card-body">
       <p class="login-box-msg">Connexion</p>
 
-      <form method="POST" action="{{route('connexion')}}">
+      <form method="POST" action="{{route('login')}}">
         @csrf
         <div class="input-group mb-3">
           <input type="email" name="email" class="form-control" placeholder="johndoe@gmail.com" required>
@@ -51,7 +51,7 @@
       </form><br>
       <p class="mb-0">
         Je n'ai pas encore de compte
-        <a href="register.html" class="text-center">S'inscrire</a>
+        <a href="{{route('register')}}" class="text-center">S'inscrire</a>
       </p>
     </div>
     <!-- /.card-body -->

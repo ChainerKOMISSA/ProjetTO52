@@ -25,7 +25,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Acceuil</a>
+        <a href="{{route('acceuil')}}" class="nav-link">Acceuil</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Ajouter un évènement</a>
@@ -62,8 +62,8 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <a href="" class="brand-link">
+      <img src="dist/img/ELogo.png" alt="E Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Events.com</span>
     </a>
 
@@ -96,13 +96,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                  <a href="pages/examples/invoice.html" class="nav-link">
+                  <a href="{{route('festival')}}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                     <p>Festivals</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="pages/examples/invoice.html" class="nav-link">
+                  <a href="" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Théâtres</p>
                   </a>
@@ -110,7 +110,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Publicités
@@ -118,7 +118,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="" class="nav-link">
               <i class="nav-icon fas fa-envelope"></i>
               <p>
                 Newsletter
@@ -136,7 +136,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/examples/invoice.html" class="nav-link">
+                <a href="" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Invoice</p>
                 </a>
@@ -145,7 +145,7 @@
           </li>
           <li class="nav-header">AUTRES</li>
           <li class="nav-item">
-            <a href="https://adminlte.io/docs/3.1/" class="nav-link">
+            <a href="" class="nav-link">
               <i class="nav-icon fas fa-file"></i>
               <p>Documentation</p>
             </a>
@@ -192,51 +192,62 @@
                     </div>-->
                 </div>
                 <div class="card-body">
-                    <form action="">
+                    <form action="{{route('createevent')}}" method="POST">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Nom</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nom" required>
+                                    <label for="exampleInputEmail1">Nom de l'évènement</label>
+                                    <input type="text" name="nomEvenement" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nom" required>
                                     <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
                                   </div>
                                   <div class="form-group">
                                     <label for="exampleInputPassword1">Type</label>
-                                    <select name="" id="exampleInputPassword1" class="form-control" required>
+                                    <select name="idType" id="exampleInputPassword1" class="form-control" required>
                                         <option value="">Choisissez un type...</option>
+                                        @foreach ($types as $type )
+                                        <option value="{{$type['idType']}}">{{$type['libelleType']}}</option>
+                                        @endforeach
                                     </select>
                                   </div>
                                   <div class="form-group">
                                     <label for="exampleInputPassword1">Date (début)</label>
-                                    <input type="date" class="form-control" id="exampleInputPassword1" required>
+                                    <input type="date" name="dateDebut" class="form-control" id="exampleInputPassword1" required>
                                   </div>
                                   <div class="form-group">
                                     <label for="exampleInputPassword1">Heure (début)</label>
-                                    <input type="time" class="form-control" id="exampleInputPassword1" required>
+                                    <input type="time" name="heureDebut" class="form-control" id="exampleInputPassword1" required>
                                   </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Description</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Description" required>
+                                    <input type="text" name="descriptionEvenement" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Description" required>
                                   </div>
                                   <div class="form-group">
                                     <label for="exampleInputPassword1">Lieu</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Lieu" required>
+                                    <input type="text" name="lieuEvenement" class="form-control" id="exampleInputPassword1" placeholder="Lieu" required>
                                   </div>
                                   <div class="form-group">
                                     <label for="exampleInputPassword1">Date (fin)</label>
-                                    <input type="date" class="form-control" id="exampleInputPassword1" required>
+                                    <input type="date" name="dateFin" class="form-control" id="exampleInputPassword1" required>
                                   </div>
                                   <div class="form-group">
                                     <label for="exampleInputPassword1">Heure (fin)</label>
-                                    <input type="time" class="form-control" id="exampleInputPassword1" required>
+                                    <input type="time" name="heureFin" class="form-control" id="exampleInputPassword1" required>
                                   </div>
                             </div>
                         </div>
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <div class="from-group">
+                              <label for="exampleInputPassword1">Programme</label>
+                              <textarea class="form-control" name="programme" id="programme" cols="30" rows="5" required></textarea>
+                            </div>
+                          </div>
+                        </div><br>
                         <button type="submit" class="btn btn-danger">Enregistrer</button>&nbsp;&nbsp;&nbsp;
-                        <button type="submit" class="btn btn-secondary">Annuler</button>
+                        <button type="reset" class="btn btn-secondary">Annuler</button>
                     </form>
                 </div>
             </div>

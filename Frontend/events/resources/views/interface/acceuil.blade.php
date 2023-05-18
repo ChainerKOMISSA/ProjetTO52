@@ -22,7 +22,7 @@
 <!--Navbar-->
    <nav class="main-header navbar navbar-expand navbar-dark">
         <a class="navbar-brand" href="#">
-            <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+            <img src="{{asset("my_image_link/Elogo.png")}}" width="30" height="30" class="d-inline-block align-top" alt="">
             Events.com
         </a>
 
@@ -62,7 +62,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Sidebar -->
     <div class="sidebar">
-
+      Publicités
     </div>
     <!-- /.sidebar -->
   </aside>
@@ -77,19 +77,20 @@
               <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
               <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
               <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
             </ol>
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img class="d-block w-100" src="../images/car1.jpeg" alt="First slide">
+                <img class="d-block w-100" src="{{asset("my_image_link/car1.jpeg")}}" alt="First slide" height="400">
               </div>
               <div class="carousel-item">
-                <img class="d-block w-100" src="../images/car2.jpg" alt="Second slide">
+                <img class="d-block w-100" src="{{asset("my_image_link/car2.jpg")}}" alt="Second slide" height="400">
               </div>
               <div class="carousel-item">
-                <img class="d-block w-100" src="../images/car3.jpg" alt="Third slide">
+                <img class="d-block w-100" src="{{asset("my_image_link/car3.jpg")}}" alt="Third slide" height="400">
               </div>
               <div class="carousel-item">
-                <img class="d-block w-100" src="../images/car4.jpg" alt="Fourth slide">
+                <img class="d-block w-100" src="{{asset("my_image_link/car4.jpg")}}" alt="Fourth slide" height="400">
               </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -102,7 +103,7 @@
             </a>
           </div>
       </div><!-- /.container-fluid -->
-    </div>
+    </div><br>
     <!-- /.content-header -->
 
     <!-- Main content -->
@@ -115,7 +116,7 @@
                 <div class="row">
           <div class="col-md-3 col-sm-6 col-12">
             <div class="info-box">
-              <span class="info-box-icon bg-danger"><i class="far fa-envelope"></i></span>
+              <span class="info-box-icon bg-danger"><i class="fa fa-music"></i></span>
 
               <div class="info-box-content">
                 <b><span class="info-box-text">Musique</span></b>
@@ -127,7 +128,7 @@
           <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-12">
             <div class="info-box">
-              <span class="info-box-icon bg-secondary"><i class="far fa-flag"></i></span>
+              <span class="info-box-icon bg-secondary"><i class="fas fa-guitar"></i></span>
 
               <div class="info-box-content">
                 <b><span class="info-box-text">Arts de spectacle</span></b>
@@ -139,7 +140,7 @@
           <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-12">
             <div class="info-box">
-              <span class="info-box-icon bg-secondary"><i class="far fa-copy"></i></span>
+              <span class="info-box-icon bg-secondary"><i class="fas fa-theater-masks"></i></span>
 
               <div class="info-box-content">
                 <b><span class="info-box-text">Théâtres</span></b>
@@ -151,7 +152,7 @@
           <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-12">
             <div class="info-box">
-              <span class="info-box-icon bg-danger"><i class="far fa-star"></i></span>
+              <span class="info-box-icon bg-danger"><i class="fas fa-glass-cheers"></i></span>
 
               <div class="info-box-content">
                 <b><span class="info-box-text">Fêtes</span></b>
@@ -166,7 +167,7 @@
         <div class="row">
             <div class="col-md-3 col-sm-6 col-12">
               <div class="info-box">
-                <span class="info-box-icon bg-danger"><i class="far fa-envelope"></i></span>
+                <span class="info-box-icon bg-danger"><i class="far fa-star"></i></span>
   
                 <div class="info-box-content">
                     <b><span class="info-box-text">Loisirs</span></b>
@@ -178,7 +179,7 @@
             <!-- /.col -->
             <div class="col-md-3 col-sm-6 col-12">
               <div class="info-box">
-                <span class="info-box-icon bg-secondary"><i class="far fa-flag"></i></span>
+                <span class="info-box-icon bg-secondary"><i class="fas fa-pizza-slice"></i></span>
   
                 <div class="info-box-content">
                     <b><span class="info-box-text">Gastronomie</span></b>
@@ -190,7 +191,7 @@
             <!-- /.col -->
             <div class="col-md-3 col-sm-6 col-12">
               <div class="info-box">
-                <span class="info-box-icon bg-secondary"><i class="far fa-copy"></i></span>
+                <span class="info-box-icon bg-secondary"><i class="fas fa-book"></i></span>
   
                 <div class="info-box-content">
                   <b><span class="info-box-text">Education</span></b>
@@ -202,7 +203,7 @@
             <!-- /.col -->
             <div class="col-md-3 col-sm-6 col-12">
               <div class="info-box">
-                <span class="info-box-icon bg-danger"><i class="far fa-star"></i></span>
+                <span class="info-box-icon bg-danger"><i class="fas fa-hand-holding-medical"></i></span>
   
                 <div class="info-box-content">
                     <b><span class="info-box-text">Santé</span></b>
@@ -219,19 +220,19 @@
         <h4>A ne pas rater!</h4><br>
         <div class="row">
             &nbsp;&nbsp;<div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="" alt="Card image cap">
+                <img class="card-img-top" src="{{asset("my_image_links/fimu1.jpg")}}" alt="Card image cap">
                 <div class="card-body">
                   <h3>FIMU BELFORT</h3>
                   <p class="card-text">La ville de Belfort accueille la 36ème édition du FIMU (Festival International de Musique Universitaire). 
                     Un rendez-vous autour de la musique, où le Canada sera tout particulièrement à l'honneur cette année. 
                     Comme chaque année, des centaines de concerts en plein air sont prévus dans tous les coins de la ville au Lion.</p>
                     <small><p class="text-danger">Du 25 au 28 Mai 2023</p></small>
-                  <a href="#" class="btn btn-danger">Voir les détails</a>
+                  <a href="{{route('detailsfimu')}}" class="btn btn-danger">Voir les détails</a>
                 </div>
               </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
               <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
+                <img class="card-img-top" src="{{asset("my_image_links/")}}" alt="Card image cap">
                 <div class="card-body">
                     <h3>FIMU BELFORT</h3>
                     <p class="card-text">La ville de Belfort accueille la 36ème édition du FIMU (Festival International de Musique Universitaire). 
@@ -244,7 +245,7 @@
   
 
                 <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="..." alt="Card image cap">
+                    <img class="card-img-top" src="{{asset("my_image_links/")}}" alt="Card image cap">
                     <div class="card-body">
                         <h3>FIMU BELFORT</h3>
                         <p class="card-text">La ville de Belfort accueille la 36ème édition du FIMU (Festival International de Musique Universitaire). 
@@ -256,7 +257,7 @@
                     </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                     <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="..." alt="Card image cap">
+                        <img class="card-img-top" src="{{asset("my_image_links/")}}" alt="Card image cap">
                         <div class="card-body">
                             <h3>FIMU BELFORT</h3>
                             <p class="card-text">La ville de Belfort accueille la 36ème édition du FIMU (Festival International de Musique Universitaire). 
@@ -273,7 +274,7 @@
         <h4>Autres évènements</h4><br>
         <div class="row">
             &nbsp;&nbsp;<div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
+                <img class="card-img-top" src="{{asset("my_image_links/")}}" alt="Card image cap">
                 <div class="card-body">
                   <h3 class="card-title">Card title</h3>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -282,7 +283,7 @@
               </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
               <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
+                <img class="card-img-top" src="{{asset("my_image_links/")}}" alt="Card image cap">
                 <div class="card-body">
                   <h4 class="card-title">Card title</h4>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -291,7 +292,7 @@
               </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
               <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
+                <img class="card-img-top" src="{{asset("my_image_links/")}}" alt="Card image cap">
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -300,7 +301,7 @@
               </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
               <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
+                <img class="card-img-top" src="{{asset("my_image_links/")}}" alt="Card image cap">
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>

@@ -23,7 +23,7 @@
     <div class="card-body">
       <p class="login-box-msg">Inscription</p>
 
-      <form action="" method="post">
+      <form action="{{route('register')}}" method="post">
         <div class="input-group mb-3">
           <input type="text" name="username" class="form-control" placeholder="John DOE">
           <div class="input-group-append">
@@ -63,7 +63,7 @@
           <!-- /.col -->
         </div>
       </form><br>
-      <p>J'ai déjà un compte&nbsp;&nbsp;<a href="" class="text-center">Me connecter</a></p>
+      <p>J'ai déjà un compte&nbsp;&nbsp;<a href="{{route('login')}}" class="text-center">Me connecter</a></p>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

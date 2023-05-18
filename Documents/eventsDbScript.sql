@@ -66,8 +66,9 @@ CREATE TABLE Publicite(
 CREATE TABLE Newsletter(
     idNewsletter INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
     libelleNewsletter VARCHAR(255),
+    contenuNewsletter VARCHAR(255),
     idAdmin INTEGER NOT NULL,
-    CONSTRAINT fk_admin FOREIGN KEY (idAdmin) REFERENCES Administrateur(idAdmin)
+    CONSTRAINT fk_admin_news FOREIGN KEY (idAdmin) REFERENCES Administrateur(idAdmin)
 );
 
 

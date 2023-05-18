@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Theme style -->
@@ -62,8 +63,8 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <a href="" class="brand-link">
+      <img src="dist/img/ELogo.png" alt="E Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Events.com</span>
     </a>
 
@@ -73,7 +74,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item menu-open">
-            <a href="#" class="nav-link">
+            <a href="{{route('home')}}" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Tableau de bord
@@ -96,13 +97,13 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/examples/invoice.html" class="nav-link">
+                    <a href="{{route('festival')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                       <p>Festivals</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="pages/examples/invoice.html" class="nav-link">
+                    <a href="" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Théâtres</p>
                     </a>
@@ -110,7 +111,7 @@
               </ul>
           </li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Publicités
@@ -118,7 +119,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="" class="nav-link">
               <i class="nav-icon fas fa-envelope"></i>
               <p>
                 Newsletter
@@ -136,7 +137,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/examples/invoice.html" class="nav-link">
+                <a href="" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Invoice</p>
                 </a>
@@ -145,7 +146,7 @@
           </li>
           <li class="nav-header">AUTRES</li>
           <li class="nav-item">
-            <a href="https://adminlte.io/docs/3.1/" class="nav-link">
+            <a href="" class="nav-link">
               <i class="nav-icon fas fa-file"></i>
               <p>Documentation</p>
             </a>
@@ -192,24 +193,52 @@
                     </div>
                 </div>
                 <div class="card-body">
+                  @if(session()->has("successDelete"))
+                  <div class="alert alert-secondary">
+                    <p><h4>{{session()->get('successDelete')}}</h4></p>
+                  </div>
+                  @endif
                     <div class="row">
                         <div class="col-md-12">
                             <table id="listeconcert" class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
-                                    <th>Libellé</th>
-                                    <th>Artistes</th>
-                                    <th>Lieu</th>
-                                    <th>Programme</th>
+                                    <th>N°</th>
+                                    <td>Nom du concert</td>
+                                    <td>Decription</td>
+                                    <td>Date de début</td>
+                                    <td>Date de fin</td>
+                                    <td>Heure de début</td>
+                                    <td>Heure de fin</td>
+                                    <td>Lieu</td>
+                                    <td>Programme</td>
+                                    <td>Actions</td>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>Trident</td>
-                                    <td>Internet</td>
-                                    <td>Internet</td>
-                                    <td>Internet</td>
-                                </tr>
+                                  @foreach ($concerts as $key =>$concert)
+                                    <tr>
+                                      <th scope="row">{{++$key}}</th>
+                                      <td>{{ $concert['nomEvenement'] }}</td>
+                                      <td>{{ $concert['descriptionEvenement'] }}</td>
+                                      <td>{{ $concert['dateDebut'] }}</td>
+                                      <td>{{ $concert['dateFin'] }}</td>
+                                      <td>{{ $concert['heureDebut'] }}</td>
+                                      <td>{{ $concert['heureFin'] }}</td>
+                                      <td>{{ $concert['lieuEvenement']}}</td>
+                                      <td>{{ $concert['programme'] }}</td>
+                                      <td class="project-actions text-right">
+                                        <a class="btn btn-danger btn-sm" href=""><i class="fas fa-folder"></i></a><br>
+                                        <a class="btn btn-secondary btn-sm" href="{{ route('updatevent', ['idEvenement' => $concert['idEvenement']]) }}"><i class="far fa-edit"></i></a><br>
+                                        <a class="btn btn-danger btn-sm" href="" onclick="if(confirm('Voulez-vous vraiment supprimer cet évènement?')){
+                                          document.getElementById('form-{{$concert['idEvenement']}}').submit()}"><i class="fas fa-trash"></i></a>
+                                          <form id="form-{{$concert['idEvenement']}}" action="{{route('deletevent', ['idEvenement' => $concert['idEvenement']])}}" method="POST">
+                                            @csrf
+                                          <input type="hidden" name="_method" value="delete">
+                                          </form>
+                                      </td>
+                                    </tr>
+                                  @endforeach
                                 </tbody>
                             </table>
                         </div>

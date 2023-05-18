@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="2ec56bf7-5e6c-49c4-abf6-89fd41a729a3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projet_TO52/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projet_TO52/.idea/Projet_TO52.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projet_TO52/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projet_TO52/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projet_TO52/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projet_TO52/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documents/DOCUMENT TECHNIQUE version 1.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../Documents/DOCUMENT TECHNIQUE version 1.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/events/app/Http/Controllers/EventController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/events/app/Http/Controllers/EventController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/events/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/events/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/events/config/filesystems.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/events/config/filesystems.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/events/resources/views/images/car1.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/events/resources/views/images/car2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/events/resources/views/images/car3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/events/resources/views/images/car4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/events/resources/views/interface/acceuil.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/events/resources/views/interface/acceuil.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/events/resources/views/interface/addevent.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/events/resources/views/interface/addevent.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/events/resources/views/interface/listeconcert.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/events/resources/views/interface/listeconcert.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/events/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/events/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
