@@ -1,7 +1,4 @@
-import requests, json
 from flask import Flask, request, session, jsonify
-import MySQLdb
-import MySQLdb.cursors
 import mysql.connector
 
 app = Flask(__name__)
@@ -21,6 +18,8 @@ def serialize_timedelta(timedelta_obj):
     return str(timedelta_obj)
 
 
+
+#---------------------------------------------------
 #fonctions LOGIN & REGISTER
 @app.route('/login', methods = ['GET','POST'])
 def login():
@@ -38,7 +37,6 @@ def login():
     else:
         return jsonify({'message': 'Identifiants invalides'})
 
-
 @app.route('/register', methods = ['GET','POST'])
 def register():
    data = request.get_json()
@@ -53,6 +51,8 @@ def register():
    return jsonify({'message': 'Inscription réussie'})
 
 
+
+#----------------------------------------------------
 #fonctions CREATE
 @app.route('/createvent', methods=['POST'])
 def createvent():
@@ -76,7 +76,24 @@ def createvent():
     cursor.close()
     return jsonify({'message' : 'Evènement créé avec succès'})
 
+@app.route('/addnewsletter', methods=['POST'])
+def createnewsletter():
+    data = request.get_json()
+    titre = data['libelleNewsletter']
+    contenu = data['contenuNewsletter']
+    admin = data['idAdmin']
+    cursor = db.cursor()
+    query = "INSERT INTO Newsletter(libelleNewsletter, contenuNewsletter, " \
+            "idAdmin) VALUES (%s, %s, %s)"
+    cursor.execute(query, (titre, contenu, admin))
+    db.commit()
+    cursor.close()
+    return jsonify({'message': 'Newsletter créée avec succès'})
 
+
+
+
+#----------------------------------------------------
 #fonctions READ
 @app.route('/concert', methods = ['GET','POST'])
 def readconcert():
@@ -162,8 +179,51 @@ def newsletter():
         newsletters_list.append(newsletter_dict)
     return jsonify({'newsletters': newsletters_list})
 
+@app.route('/admin', methods=['GET', 'POST'])
+def readadmins():
+    cursor = db.cursor()
+    query = "SELECT * FROM Administrateur"
+    cursor.execute(query)
+    admins = cursor.fetchall()
+    cursor.close()
+
+    admins_list = []
+    for admin in admins:
+        admin_dict = {
+            'idAdmin': admin[0],
+            'nomAdmin': admin[1],
+            'emailAdmin': admin[2],
+            'motdepasseAdmin': admin[3],
+        }
+        admins_list.append(admin_dict)
+    return jsonify({'admins': admins_list})
+
+@app.route('/readevents', methods=['GET', 'POST'])
+def readevents():
+    cursor = db.cursor()
+    query = "SELECT * FROM Evenement"
+    cursor.execute(query)
+    events = cursor.fetchall()
+    cursor.close()
+
+    events_list = []
+    for event in events:
+        event_dict = {
+            'idEvenement': event[0],
+            'nomEvenement': event[1],
+            'descriptionEvenement': event[2],
+            'dateDebut': event[4],
+            'dateFin': event[5],
+            'heureDebut': serialize_timedelta(event[6]),
+            'heureFin': serialize_timedelta(event[7]),
+            'lieuEvenement': event[8],
+            'programme': event[9],
+        }
+        events_list.append(event_dict)
+    return jsonify({'events': events_list})
 
 
+#---------------------------------------------------
 #fonctions UPDATE
 @app.route('/updatevent/<int:idEvenement>', methods=['PUT'])
 def updatevent(idEvenement):
@@ -188,6 +248,7 @@ def updatevent(idEvenement):
 
 
 
+#---------------------------------------------------
 #fonctions DELETE
 @app.route('/deletevent/<int:idEvenement>', methods=['DELETE'])
 def deletevent(idEvenement):

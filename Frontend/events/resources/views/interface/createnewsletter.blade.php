@@ -118,7 +118,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('newsletter')}}" class="nav-link">
               <i class="nav-icon fas fa-envelope"></i>
               <p>
                 Newsletter
@@ -189,21 +189,30 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="" method="POST">
+                    <form action="{{route('addnewsletter')}}" method="POST">
                         @csrf
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Titre de la newsletter</label>
-                                    <input type="text" name="titre" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nom" required>
+                                    <input type="text" name="libelleNewsletter" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Titre de la newsletter" required>
                                     <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
                                   </div>
                                   <div class="form-group">
                                     <label for="exampleInputPassword1">Contenu</label>
-                                    <textarea name="libelleNewsletter" id="" cols="30" rows="5" class="form-control"></textarea>
+                                    <textarea name="contenuNewsletter" id="" cols="30" rows="5" class="form-control"></textarea>
+                                  </div>
+                                  <div class="from-group">
+                                    <label for="exampleInputEmail1">Créateur de la newsletter</label>
+                                    <select name="idAdmin" id="" class="form-control" required>
+                                      <option value="" selected>Choisissez un administrateur</option>
+                                      @foreach ($admins as $admin)
+                                        <option value="{{$admin['idAdmin']}}">{{$admin['nomAdmin']}}</option>
+                                      @endforeach
+                                    </select>
                                   </div>
                             </div>
-                        </div>
+                        </div><br>
                         <button type="submit" class="btn btn-danger">Enregistrer</button>&nbsp;&nbsp;&nbsp;
                         <button type="reset" class="btn btn-secondary">Annuler</button>
                     </form>

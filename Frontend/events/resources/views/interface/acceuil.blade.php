@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <!--Main css-->
   <link rel="stylesheet" href="css/app.css">
+
+  <link rel="icon" type="image/x-icon" href="{{asset("my_image_link/Elogo.png")}}">
 </head>
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
@@ -62,7 +64,9 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Sidebar -->
     <div class="sidebar">
-      Publicités
+      <div class="badge bg-danger text-wrap" style="width: 15rem;">
+        <h3>Publicités</h3>
+      </div>
     </div>
     <!-- /.sidebar -->
   </aside>
@@ -219,95 +223,33 @@
       <div class="container-fluid">
         <h4>A ne pas rater!</h4><br>
         <div class="row">
-            &nbsp;&nbsp;<div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{{asset("my_image_links/fimu1.jpg")}}" alt="Card image cap">
-                <div class="card-body">
-                  <h3>FIMU BELFORT</h3>
-                  <p class="card-text">La ville de Belfort accueille la 36ème édition du FIMU (Festival International de Musique Universitaire). 
-                    Un rendez-vous autour de la musique, où le Canada sera tout particulièrement à l'honneur cette année. 
-                    Comme chaque année, des centaines de concerts en plein air sont prévus dans tous les coins de la ville au Lion.</p>
-                    <small><p class="text-danger">Du 25 au 28 Mai 2023</p></small>
-                  <a href="{{route('detailsfimu')}}" class="btn btn-danger">Voir les détails</a>
-                </div>
-              </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-              <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{{asset("my_image_links/")}}" alt="Card image cap">
-                <div class="card-body">
-                    <h3>FIMU BELFORT</h3>
-                    <p class="card-text">La ville de Belfort accueille la 36ème édition du FIMU (Festival International de Musique Universitaire). 
-                      Un rendez-vous autour de la musique, où le Canada sera tout particulièrement à l'honneur cette année. 
-                      Comme chaque année, des centaines de concerts en plein air sont prévus dans tous les coins de la ville au Lion.</p>
-                      <small><p class="text-danger">Du 25 au 28 Mai 2023</p></small>
-                    <a href="#" class="btn btn-danger">Voir les détails</a>
-                  </div>
-                </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  
-
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="{{asset("my_image_links/")}}" alt="Card image cap">
-                    <div class="card-body">
-                        <h3>FIMU BELFORT</h3>
-                        <p class="card-text">La ville de Belfort accueille la 36ème édition du FIMU (Festival International de Musique Universitaire). 
-                          Un rendez-vous autour de la musique, où le Canada sera tout particulièrement à l'honneur cette année. 
-                          Comme chaque année, des centaines de concerts en plein air sont prévus dans tous les coins de la ville au Lion.</p>
-                          <small><p class="text-danger">Du 25 au 28 Mai 2023</p></small>
-                        <a href="#" class="btn btn-danger">Voir les détails</a>
-                      </div>
-                    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="{{asset("my_image_links/")}}" alt="Card image cap">
-                        <div class="card-body">
-                            <h3>FIMU BELFORT</h3>
-                            <p class="card-text">La ville de Belfort accueille la 36ème édition du FIMU (Festival International de Musique Universitaire). 
-                              Un rendez-vous autour de la musique, où le Canada sera tout particulièrement à l'honneur cette année. 
-                              Comme chaque année, des centaines de concerts en plein air sont prévus dans tous les coins de la ville au Lion.</p>
-                              <small><p class="text-danger">Du 25 au 28 Mai 2023</p></small>
-                            <a href="#" class="btn btn-danger">Voir les détails</a>
-                          </div>
-                        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          @foreach ($events as $event)
+          &nbsp;&nbsp;<div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{{asset("my_image_links/fimu1.jpg")}}" alt="Card image cap">
+            <div class="card-body">
+              <h3>{{$event['nomEvenement']}}</h3>
+              <p class="card-text">{{$event['descriptionEvenement']}}</p>
+                <small><p class="text-danger">{{$event['dateDebut']}} au {{$event['dateFin']}}</p></small>
+              <a href="{{route('detailsfimu')}}" class="btn btn-danger">Voir les détails</a>
+            </div>
+          </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          @endforeach
         </div>
       </div><br><br><!--/. container-fluid -->
 
       <div class="container-fluid">
         <h4>Autres évènements</h4><br>
         <div class="row">
-            &nbsp;&nbsp;<div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{{asset("my_image_links/")}}" alt="Card image cap">
-                <div class="card-body">
-                  <h3 class="card-title">Card title</h3>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-              <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{{asset("my_image_links/")}}" alt="Card image cap">
-                <div class="card-body">
-                  <h4 class="card-title">Card title</h4>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-              <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{{asset("my_image_links/")}}" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-              <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{{asset("my_image_links/")}}" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          @foreach ($events as $event)
+          &nbsp;&nbsp;<div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{{asset("my_image_links/")}}" alt="Card image cap">
+            <div class="card-body">
+              <h3 class="card-title">{{$event['nomEvenement']}}</h3>
+              <p class="card-text">{{$event['descriptionEvenement']}}</p>
+              <a href="#" class="btn btn-secondary">Voir</a>
+            </div>
+          </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          @endforeach
         </div>
       </div><!--/. container-fluid -->
 

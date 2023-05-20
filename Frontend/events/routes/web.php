@@ -28,4 +28,5 @@ Route::get('/festival',[App\Http\Controllers\EventController::class, 'listefesti
 
 //Newsletter
 Route::get('/createnewsletter', [App\Http\Controllers\NewsletterController::class, 'index']) -> name('createnewsletter'); //page de création de la newsletter
+Route::post('addnewsletter', [App\Http\Controllers\NewsletterController::class, 'create']) -> name('addnewsletter');//créer une newsletter
 Route::get('/newsletter', [App\Http\Controllers\NewsletterController::class, 'show']) -> name('newsletter'); //affichage des newsletter

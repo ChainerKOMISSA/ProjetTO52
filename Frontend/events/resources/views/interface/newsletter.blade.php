@@ -26,7 +26,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Acceuil</a>
+        <a href="{{route('acceuil')}}" class="nav-link">Acceuil</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Newsletters</a>
@@ -204,9 +204,9 @@
                                 <thead>
                                 <tr>
                                     <th>N°</th>
-                                    <td>Titre</td>
-                                    <td>Contenu</td>
-                                    <td>Créateur</td>
+                                    <th>Titre</th>
+                                    <th>Contenu</th>
+                                    <th>Créateur</th>
                                 </tr>
                                 </thead>
                                 <tbody>
