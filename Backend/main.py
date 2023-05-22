@@ -1,16 +1,18 @@
 from flask import Flask, request, session, jsonify
 import mysql.connector
+from werkzeug.utils import secure_filename
+import os
 
 app = Flask(__name__)
 app.secret_key = 'secret-key' # Clé secrète utilisée pour la gestion de la session
-
+upload_folder = r"C:\Users\KOMISSA ZOTSU SHINER\Documents\GitHub\ProjetTO52\Images"
 
 # Configuration de la base de données MySQL
 db = mysql.connector.connect(
     host="localhost",
     user="root",
     password="",
-    database="eventsdatabase"
+    database="eventsdatabase",
 )
 
 # Convertir les objets timedelta en une représentation sérialisable
@@ -56,25 +58,33 @@ def register():
 #fonctions CREATE
 @app.route('/createvent', methods=['POST'])
 def createvent():
-    data = request.get_json()
-    nom = data['nomEvenement']
-    description = data['descriptionEvenement']
-    type = data['idType']
-    dateDebut = data['dateDebut']
-    dateFin = data['dateFin']
-    heureDebut = data['heureDebut']
-    heureFin = data['heureFin']
-    lieu = data['lieuEvenement']
-    programme = data['programme']
+    #récupération des données du formulaire
+    nom = request.form['nomEvenement']
+    description = request.form['descriptionEvenement']
+    type = request.form['idType']
+    dateDebut = request.form['dateDebut']
+    dateFin = request.form['dateFin']
+    heureDebut = request.form['heureDebut']
+    heureFin = request.form['heureFin']
+    lieu = request.form['lieuEvenement']
+    programme = request.form['programme']
+    image_file = request.files['imageEvenement']
+    filename = secure_filename(image_file.filename)
+    image_path = os.path.join(upload_folder, filename)
+    image_file.save(image_path)
+
     cursor = db.cursor()
     query = "INSERT INTO Evenement " \
             "(nomEvenement, descriptionEvenement, idType, dateDebut, dateFin, " \
-            "heureDebut, heureFin, lieuEvenement, programme) " \
-            "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s) "
-    cursor.execute(query, (nom, description, type, dateDebut, dateFin, heureDebut, heureFin, lieu, programme))
-    db.commit()
-    cursor.close()
-    return jsonify({'message' : 'Evènement créé avec succès'})
+            "heureDebut, heureFin, lieuEvenement, programme, imageEvenement) " \
+            "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s) "
+    if nom and description and type and dateDebut and dateFin and heureDebut and heureFin and lieu and programme and image_path:
+        cursor.execute(query, (nom, description, type, dateDebut, dateFin, heureDebut, heureFin, lieu, programme, image_path))
+        db.commit()
+        cursor.close()
+        return jsonify({'message' : 'Evènement créé avec succès'})
+    else :
+        print("Erreur! Tous les champs requi ne sont pas remplis")
 
 @app.route('/addnewsletter', methods=['POST'])
 def createnewsletter():
@@ -218,6 +228,7 @@ def readevents():
             'heureFin': serialize_timedelta(event[7]),
             'lieuEvenement': event[8],
             'programme': event[9],
+            'imageEvenement' : event[10]
         }
         events_list.append(event_dict)
     return jsonify({'events': events_list})
@@ -237,11 +248,16 @@ def updatevent(idEvenement):
     heureFin = data['heureFin']
     lieu = data['lieuEvenement']
     programme = data['programme']
+    image_file = request.files['imageEvenement']
+    filename = secure_filename(image_file.filename)
+    image_path = os.path.join(upload_folder, filename)
+    image_file.save(image_path)
+
     cursor = db.cursor()
     query = "UPDATE Evenement SET nomEvenement = %s, descriptionEvenement = %s, " \
             "idType = %s, dateDebut = %s, dateFin = %s, heureDebut = %s, " \
-            "heureFin = %s, lieuEvenement = %s, programme = %s WHERE idEvenement = %s"
-    cursor.execute(query, (nom, description, type, dateDebut, dateFin, heureDebut, heureFin, lieu, programme, idEvenement))
+            "heureFin = %s, lieuEvenement = %s, programme = %s, imageEvenement = %s WHERE idEvenement = %s"
+    cursor.execute(query, (nom, description, type, dateDebut, dateFin, heureDebut, heureFin, lieu, programme, idEvenement, image_path))
     db.commit()
     cursor.close()
     return jsonify({'message': 'Evènement mis à jour avec succès'})

@@ -225,7 +225,7 @@
         <div class="row">
           @foreach ($events as $event)
           &nbsp;&nbsp;<div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="{{asset("my_image_links/fimu1.jpg")}}" alt="Card image cap">
+            <img class="card-img-top" src="{{$event['imageEvenement']}}" alt="Card image cap">
             <div class="card-body">
               <h3>{{$event['nomEvenement']}}</h3>
               <p class="card-text">{{$event['descriptionEvenement']}}</p>

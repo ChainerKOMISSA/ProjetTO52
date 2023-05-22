@@ -192,7 +192,7 @@
                     </div>-->
                 </div>
                 <div class="card-body">
-                    <form action="{{route('createevent')}}" method="POST">
+                    <form action="{{route('createevent')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
@@ -218,6 +218,10 @@
                                     <label for="exampleInputPassword1">Heure (début)</label>
                                     <input type="time" name="heureDebut" class="form-control" id="exampleInputPassword1" required>
                                   </div>
+                                  <div class="from-group">
+                                    <label for="exampleInputPassword1">Programme</label>
+                                    <textarea class="form-control" name="programme" id="programme" cols="30" rows="5" required></textarea>
+                                  </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -236,16 +240,12 @@
                                     <label for="exampleInputPassword1">Heure (fin)</label>
                                     <input type="time" name="heureFin" class="form-control" id="exampleInputPassword1" required>
                                   </div>
+                                  <div class="form-group">
+                                    <label for="imageEvenement">Ajoutez une image</label>
+                                    <input type="file" name="imageEvenement" id="imageEvenement" class="form-control" required>
+                                  </div>
                             </div>
                         </div>
-                        <div class="row">
-                          <div class="col-lg-12">
-                            <div class="from-group">
-                              <label for="exampleInputPassword1">Programme</label>
-                              <textarea class="form-control" name="programme" id="programme" cols="30" rows="5" required></textarea>
-                            </div>
-                          </div>
-                        </div><br>
                         <button type="submit" class="btn btn-danger">Enregistrer</button>&nbsp;&nbsp;&nbsp;
                         <button type="reset" class="btn btn-secondary">Annuler</button>
                     </form>

@@ -29,7 +29,7 @@ class EventController extends Controller
     }
 
     public function create(REQUEST $request){
-        $response = Http::post('http://localhost:5000/createvent', [
+        $response = Http::asMultipart()->attach('imageEvenement', $request->imageEvenement, $request->nomEvenement.$request->imageEvenement->getClientOriginalName())->post('http://localhost:5000/createvent', [
             'nomEvenement' => $request->nomEvenement,
             'descriptionEvenement' => $request->descriptionEvenement,
             'idType' => $request->idType,
@@ -38,8 +38,21 @@ class EventController extends Controller
             'heureDebut' => $request->heureDebut,
             'heureFin' => $request->heureFin,
             'lieuEvenement' => $request->lieuEvenement,
-            'programme' => $request->programme 
+            'programme' => $request->programme
         ]);
+
+        /*$response = Http::asMultipart()->post('http://localhost:5000/createvent', [
+            'nomEvenement' => $request->input('nomEvenement'),
+            'descriptionEvenement' => $request->input('descriptionEvenement'),
+            'idType' => $request->input('idType'),
+            'dateDebut' => $request->input('dateDebut'),
+            'dateFin' => $request->input('dateFin'),
+            'heureDebut' => $request->input('heureDebut'),
+            'heureFin' => $request->input('heureFin'),
+            'lieuEvenement' => $request->input('lieuEvenement'),
+            'programme' => $request->input('programme'),
+            'imageEvenement' => $request->file('imageEvenement')
+        ]);*/
 
         return back()->with('success', 'Evènement créé avec succès');
     }
