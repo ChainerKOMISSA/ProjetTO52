@@ -16,6 +16,8 @@ CREATE TABLE Evenement(
     heureDebut TIME,
     heureFin TIME,
     lieuEvenement VARCHAR(255) NOT NULL,
+    programme VARCHAR(255) NOT NULL,
+    imageEvenement VARCHAR(255) NOT NULL,
     CONSTRAINT fk_type FOREIGN KEY (idType) REFERENCES Type(idType)
 );
 

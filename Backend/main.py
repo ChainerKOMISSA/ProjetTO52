@@ -1,4 +1,5 @@
 from flask import Flask, request, session, jsonify
+
 import mysql.connector
 from werkzeug.utils import secure_filename
 import os
@@ -14,6 +15,7 @@ db = mysql.connector.connect(
     password="",
     database="eventsdatabase",
 )
+
 
 # Convertir les objets timedelta en une représentation sérialisable
 def serialize_timedelta(timedelta_obj):
