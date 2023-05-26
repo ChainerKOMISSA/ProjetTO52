@@ -1,10 +1,12 @@
 from flask import Flask, request, session, jsonify
+from flask_cors import CORS
 
 import mysql.connector
 from werkzeug.utils import secure_filename
 import os
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/*" : {"origins" : "*"}})
 app.secret_key = 'secret-key' # Clé secrète utilisée pour la gestion de la session
 upload_folder = r"C:\Users\KOMISSA ZOTSU SHINER\Documents\GitHub\ProjetTO52\Images"
 
@@ -48,8 +50,8 @@ def register():
    email = data['email']
    password = data['password']
    cursor = db.cursor()
-   query = "INSERT INTO Utilisateurs (nomUtilisateur, emailUtilisateur, mdpUtilisateur) VALUES (%s, %s, %s)"
-   cursor.execute(query, username, email, password)
+   query = "INSERT INTO Utilisateur (nomUtilisateur, emailUtilisateur, mdpUtilisateur) VALUES (%s, %s, %s)"
+   cursor.execute(query, (username, email, password))
    db.commit()
    cursor.close()
    return jsonify({'message': 'Inscription réussie'})
