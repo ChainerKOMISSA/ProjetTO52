@@ -15,8 +15,8 @@ function Carouselfunction() {
           height= "500vh"
         />
         <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          <h1>Bienvenue sur Events</h1>
+          <p>Toutes les infos sur les plus grands évènements sont ici!</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
@@ -28,8 +28,7 @@ function Carouselfunction() {
         />
 
         <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <p>Soyez informés de tout ce qui se passe autour de vous!</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
@@ -41,10 +40,7 @@ function Carouselfunction() {
         />
 
         <Carousel.Caption>
-          <h3>Third slide label</h3>
-          <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
+          <p>Ayez les bonnes informations au bon moment§</p>
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>

@@ -5,26 +5,26 @@ import { faShoppingCart, faFolderOpen, faTachometerAlt,faCalendarDays, faEnvelop
 import CardHeader from 'react-bootstrap/esm/CardHeader';
 
 const sidebarStyles = {
-  backgroundColor: '#343a40',
-  color: '#fff',
-  height: '100vh',
-};
+    backgroundColor: '#343a40',
+    color: '#fff',
+    height: '100vh',
+  };
+  
+  const sidebarIconStyles = {
+    marginRight: '8px',
+  
+  };
+  
+  const buttonStyles = {
+    margin: '5px 0',
+    backgroundColor: '#343a40',
+    //color: '#dc3545',
+    color: '#fff',
+    border: 'none',
+  };
 
-const sidebarIconStyles = {
-  marginRight: '8px',
 
-};
-
-const buttonStyles = {
-  margin: '5px 0',
-  backgroundColor: '#343a40',
-  //color: '#dc3545',
-  color: '#fff',
-  border: 'none',
-};
-
-
-function Listeconcert() {
+function Newsletter() {
   return (
       <Row>
         <Col md={2} style={sidebarStyles}>
@@ -34,7 +34,7 @@ function Listeconcert() {
             <FontAwesomeIcon icon={faTachometerAlt} style={sidebarIconStyles}/>
             Tableau de bord
             </Nav.Link>
-            <Link to="#" style={buttonStyles}>
+            <Link to="" style={buttonStyles}>
             <Button>
             <FontAwesomeIcon icon={faCalendarDays} style={sidebarIconStyles}/>
             Evènements
@@ -53,16 +53,16 @@ function Listeconcert() {
         </Col>
 
         <Col md={10} style={sidebarStyles}>
-        <h2>Concerts</h2>
+        <h2>Newsletters</h2>
         <Card border="danger">
           <CardHeader>
             <Row>
               <Col md={4}>
-              <Card.Title>Liste des concerts</Card.Title>
+              <Card.Title>Newsletter</Card.Title>
               </Col>
               <Col md={8}>
                 <Link to="/dashboard/newevent">
-                  <Button backgroundColor='#dc3545'>Ajouter un nouvel évènement</Button>
+                  <Button backgroundColor='#dc3545'>Créer une nouvelle newsletter</Button>
                 </Link>
               </Col>
             </Row>
@@ -72,23 +72,14 @@ function Listeconcert() {
         <thead>
           <tr>
             <th>N°</th>
-            <th>Nom du concert</th>
-            <th>Description</th>
-            <th>Date de début</th>
-            <th>Date de fin</th>
-            <th>Heure de début</th>
-            <th>Heure de fin</th>
-            <th>Lieu</th>
-            <th>Programme</th>
+            <th>Titre de la newsletter</th>
+            <th>Contenu de la newsletter</th>
+            <th>Créateur</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
             <td>1</td>
             <td>Mark</td>
             <td>Otto</td>
@@ -116,4 +107,4 @@ function Listeconcert() {
   )
 }
 
-export default Listeconcert
+export default Newsletter

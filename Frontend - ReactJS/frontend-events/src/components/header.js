@@ -1,18 +1,17 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import Offcanvas from 'react-bootstrap/Offcanvas';
+import {Button, Container, Form, Nav, Navbar, NavDropdown, Image} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Elogo from '../images/ELogo.png';
+
+const logoStyles = {
+  width : '35px'
+}
 
 function Header(){
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" id="navbar">
         <Container>
-          <Navbar.Brand className="text-danger" href="#home">Events.com</Navbar.Brand>
+          <Navbar.Brand className="text-danger" href="#home"><Image src={Elogo} style={logoStyles}/>Events.com</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">

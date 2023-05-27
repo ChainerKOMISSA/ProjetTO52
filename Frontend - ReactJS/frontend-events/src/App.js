@@ -14,6 +14,7 @@ function App() {
       <Carouselfunction/>
       </div>
       <Body/>
+      <p></p>
     </div>
   );
 }

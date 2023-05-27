@@ -5,26 +5,25 @@ import { faShoppingCart, faFolderOpen, faTachometerAlt,faCalendarDays, faEnvelop
 import CardHeader from 'react-bootstrap/esm/CardHeader';
 
 const sidebarStyles = {
-  backgroundColor: '#343a40',
-  color: '#fff',
-  height: '100vh',
-};
+    backgroundColor: '#343a40',
+    color: '#fff',
+    height: '100vh',
+  };
+  
+  const sidebarIconStyles = {
+    marginRight: '8px',
+  
+  };
+  
+  const buttonStyles = {
+    margin: '5px 0',
+    backgroundColor: '#343a40',
+    //color: '#dc3545',
+    color: '#fff',
+    border: 'none',
+  };
 
-const sidebarIconStyles = {
-  marginRight: '8px',
-
-};
-
-const buttonStyles = {
-  margin: '5px 0',
-  backgroundColor: '#343a40',
-  //color: '#dc3545',
-  color: '#fff',
-  border: 'none',
-};
-
-
-function Listeconcert() {
+function Listefestival() {
   return (
       <Row>
         <Col md={2} style={sidebarStyles}>
@@ -53,12 +52,12 @@ function Listeconcert() {
         </Col>
 
         <Col md={10} style={sidebarStyles}>
-        <h2>Concerts</h2>
+        <h2>Festivals</h2>
         <Card border="danger">
           <CardHeader>
             <Row>
               <Col md={4}>
-              <Card.Title>Liste des concerts</Card.Title>
+              <Card.Title>Liste des festivals</Card.Title>
               </Col>
               <Col md={8}>
                 <Link to="/dashboard/newevent">
@@ -72,7 +71,7 @@ function Listeconcert() {
         <thead>
           <tr>
             <th>N°</th>
-            <th>Nom du concert</th>
+            <th>Nom du festival</th>
             <th>Description</th>
             <th>Date de début</th>
             <th>Date de fin</th>
@@ -116,4 +115,4 @@ function Listeconcert() {
   )
 }
 
-export default Listeconcert
+export default Listefestival
