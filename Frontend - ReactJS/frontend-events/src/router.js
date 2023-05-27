@@ -8,6 +8,7 @@ import Newevent from "./pages/dashboard/newevent";
 import Listefestival from "./pages/dashboard/listefestival";
 import Newsletter from "./pages/dashboard/newsletter";
 import Createnewsletter from "./pages/dashboard/createnewsletter";
+import Dashindex from "./pages/dashboard/dashindex";
 
 const router = createBrowserRouter([
     {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
         path: "/dashboard",
         element: <Dashboard/>,
         children : [
+            {
+                path : "dashindex",
+                element : <Dashindex/>,
+            },
             {
                 path: "listeconcert",
                 element: <Listeconcert/>,

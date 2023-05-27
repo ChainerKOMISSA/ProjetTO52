@@ -55,7 +55,7 @@ function Dashboard() {
             </Button>
             </Nav.Link>
             <Nav.Link href="">
-              <Link to="/dashboard">
+              <Link to="/dashboard/dashindex">
                 <Button style={buttonStyles}>
                 <FontAwesomeIcon icon={faTachometerAlt} style={sidebarIconStyles}/>
                 Tableau de bord
@@ -114,53 +114,7 @@ function Dashboard() {
           </Navbar>
         </Col>
           <Col md={10}>
-          <h2>Tableau de bord</h2>
-          <Row>
-            <Col md={3}>
-              <Card border="danger" text="black">
-                <Card.Body>
-                  <Card bg='danger' style={cardStyles}>
-                  <FontAwesomeIcon icon={faMusic} style={iconStyles}/>
-                  </Card>
-                  <Card.Title>Concerts</Card.Title>
-                  <Card.Text>100</Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col md={3}>
-              <Card border="danger" text="black">
-                <Card.Body>
-                <Card bg='danger' style={cardStyles}>
-                  <FontAwesomeIcon icon={faShoppingCart} style={iconStyles}/>
-                  </Card>
-                  <Card.Title>Festivals</Card.Title>
-                  <Card.Text>50</Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col md={3}>
-              <Card border="danger" text="black">
-                <Card.Body>
-                <Card bg='danger' style={cardStyles}>
-                  <FontAwesomeIcon icon={faChartLine} style={iconStyles}/>
-                  </Card>
-                  <Card.Title>Spectacles</Card.Title>
-                  <Card.Text>5000</Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col md={3}>
-              <Card border="danger" text="black">
-                <Card.Body>
-                <Card bg='danger' style={cardStyles}>
-                  <FontAwesomeIcon icon={faUsers} style={iconStyles}/>
-                  </Card>
-                  <Card.Title>Utilisateurs</Card.Title>
-                  <Card.Text>5000</Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row><br></br>
+            <br></br>
           <Outlet/>
         </Col>
       </Row>

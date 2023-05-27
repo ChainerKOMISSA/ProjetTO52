@@ -1,8 +1,12 @@
-import React ,{Link} from 'react';
+import React , { useState } from 'react';
 import { Container, Row, Col, Card, Nav, Navbar , Button, Form} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUsers, faShoppingCart, faChartLine, faTachometerAlt,faCalendarDays, faEnvelope, faMusic} from '@fortawesome/free-solid-svg-icons';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
+import { Link, useNavigate} from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const sidebarStyles = {
   backgroundColor: '#343a40',
@@ -25,6 +29,95 @@ const buttonStyles = {
 
 
 function Newevent() {
+
+  const navigate = useNavigate()
+  const [nomEvenement, setNomEvenement] = useState('');
+  const [descriptionEvenement, setDescriptionEvenement] = useState('');
+  const [idType, setIdType] = useState('');
+  const [dateDebut, setDateDebut] = useState('');
+  const [dateFin, setDateFin] = useState('');
+  const [heureDebut, setHeureDebut] = useState('');
+  const [heureFin, setHeureFin] = useState('');
+  const [lieuEvenement, setLieuEvenement] = useState('');
+  const [programme, setProgramme] = useState('');
+  const [imageEvenement, setImageEvenement] = useState(null);
+
+  const handleNomEvenementChange = (e) => {
+    setNomEvenement(e.target.value);
+  }
+
+  const handleDescriptionEvenementChange = (e) => {
+    setDescriptionEvenement(e.target.value);
+  }
+
+  const handleIdTypeChange = (e) => {
+    setIdType(e.target.value);
+  }
+
+  const handleDateDebutChange = (e) => {
+    setDateDebut(e.target.value);
+  }
+  
+  const handleDateFinChange = (e) => {
+    setDateFin(e.target.value);
+  }
+
+  const handleHeureDebutChange = (e) => {
+    setHeureDebut(e.target.value);
+  }
+
+  const handleHeureFinChange = (e) => {
+    setHeureFin(e.target.value);
+  }
+
+  const handleLieuEvenementChange = (e) => {
+    setLieuEvenement(e.target.value);
+  }
+
+  const handleProgrammeChange = (e) => {
+    setProgramme(e.target.value);
+  }
+
+  const handleImageEvenementChange = (e) => {
+    const file = e.target.files[0];
+    setImageEvenement(file);
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('nomEvenement', nomEvenement);
+    formData.append('descriptionEvenement', descriptionEvenement);
+    formData.append('idType', idType);
+    formData.append('dateDebut', dateDebut);
+    formData.append('dateFin', dateFin);
+    formData.append('heureDebut', heureDebut);
+    formData.append('heureFin', heureFin);
+    formData.append('lieuEvenement', lieuEvenement);
+    formData.append('programme', programme);
+    formData.append('imageEvenement', imageEvenement);
+
+    try {
+      const response = await fetch('http://127.0.0.1:5000/createvent', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        toast.success('Evènement ajouté avec succès')
+        navigate('/listeconcert')
+      } else {
+        toast.error('Une erreur s\'est produite.')
+      }
+    } catch (error) {
+      console.log('Une erreur s\'est produite.', error);
+      toast.error('Une erreur s\'est produite.')
+    }
+
+  }
+
   return (
     <Card border='secondary'>
       <CardHeader>
@@ -32,65 +125,65 @@ function Newevent() {
       </CardHeader>
       <Card.Body>
       <Row>
-          <Form>
+          <Form onSubmit={handleSubmit}>
           <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridEmail">
             <Form.Label>Nom de l'évènement</Form.Label>
-            <Form.Control type="text" name='nomEvenement' placeholder="Entrez le nom" />
+            <Form.Control type="text" name='nomEvenement' onChange={handleNomEvenementChange} value={nomEvenement} placeholder="Entrez le nom" required />
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridState">
             <Form.Label>Type</Form.Label>
-            <Form.Select defaultValue="Choose..." name='idType'>
+            <Form.Select defaultValue="Choose..." name='idType' onChange={handleIdTypeChange} value={idType} required>
               <option>Sélectionnez un type...</option>
-              <option>...</option>
+              <option value={4}>Spectacles pour enfants</option>
             </Form.Select>
           </Form.Group>
           </Row>
           <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridEmail">
             <Form.Label>Description de l'évènement</Form.Label>
-            <Form.Control type="text" name='descriptionEvenement' placeholder="Entrez la description" />
+            <Form.Control type="text" name='descriptionEvenement' onChange={handleDescriptionEvenementChange} value={descriptionEvenement} placeholder="Entrez la description" required/>
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridPassword">
             <Form.Label>Lieu</Form.Label>
-            <Form.Control type="text" name='lieuEvenement' placeholder="Entrez le lieu" />
+            <Form.Control type="text" name='lieuEvenement' onChange={handleLieuEvenementChange} value={lieuEvenement} placeholder="Entrez le lieu" required/>
           </Form.Group>
           </Row>
           <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridEmail">
             <Form.Label>Date de début</Form.Label>
-            <Form.Control type="date" name='dateDebut' placeholder="" />
+            <Form.Control type="date" name='dateDebut' onChange={handleDateDebutChange} value={dateDebut} placeholder="" required/>
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridPassword">
             <Form.Label>Heure de début</Form.Label>
-            <Form.Control type="time" name='heureDebut' placeholder="" />
+            <Form.Control type="time" name='heureDebut' onChange={handleHeureDebutChange} value={heureDebut} placeholder="" required/>
           </Form.Group>
           </Row>
 
           <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridEmail">
             <Form.Label>Date de fin</Form.Label>
-            <Form.Control type="date" name='dateFin' placeholder="" />
+            <Form.Control type="date" name='dateFin' onChange={handleDateFinChange} value={dateFin} placeholder="" required/>
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridPassword">
             <Form.Label>Heure de fin</Form.Label>
-            <Form.Control type="time" name='heureFin' placeholder="" />
+            <Form.Control type="time" name='heureFin' onChange={handleHeureFinChange} value={heureFin} placeholder="" required/>
           </Form.Group>
           </Row>
 
           <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridEmail">
             <Form.Label>Programme</Form.Label>
-            <Form.Control type="text" name='programme' placeholder="Entrez le programme..." />
+            <Form.Control type="text" name='programme' onChange={handleProgrammeChange} value={programme} placeholder="Entrez le programme..." required/>
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridPassword">
             <Form.Label>Image</Form.Label>
-            <Form.Control type="file" name='imageEvenement' placeholder="Ajoutez une image" />
+            <Form.Control type="file" onChange={handleImageEvenementChange} placeholder="Ajoutez une image" value={imageEvenement} required/>
           </Form.Group>
           </Row>
 
