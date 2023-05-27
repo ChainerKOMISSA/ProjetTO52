@@ -1,8 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Card, Nav, Navbar , Button, Image} from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUsers, faShoppingCart, faChartLine, faTachometerAlt,faCalendarDays, faEnvelope, faMusic, faGuitar, faBookOpen, faLightbulb, faDrum} from '@fortawesome/free-solid-svg-icons';
+import { FaMusic, FaDrum, FaGuitar, FaUserAlt} from 'react-icons/fa';
 
 const sidebarStyles = {
   backgroundColor: '#343a40',
@@ -30,6 +29,7 @@ const cardStyles = {
 
 const iconStyles = {
   marginTop : '16px',
+  marginLeft : '16px',
   size : "lg",
   color : '#fff'
 }
@@ -46,7 +46,7 @@ function Dashindex() {
               <Card border="danger" text="black">
                 <Card.Body>
                   <Card bg='danger' style={cardStyles}>
-                  <FontAwesomeIcon icon={faMusic} style={iconStyles}/>
+                  <FaMusic style={iconStyles}/>
                   </Card>
                   <Card.Title>Concerts</Card.Title>
                   <Card.Text>100</Card.Text>
@@ -57,7 +57,7 @@ function Dashindex() {
               <Card border="danger" text="black">
                 <Card.Body>
                 <Card bg='danger' style={cardStyles}>
-                  <FontAwesomeIcon icon={faShoppingCart} style={iconStyles}/>
+                  <FaDrum style={iconStyles}/>
                   </Card>
                   <Card.Title>Festivals</Card.Title>
                   <Card.Text>50</Card.Text>
@@ -68,7 +68,7 @@ function Dashindex() {
               <Card border="danger" text="black">
                 <Card.Body>
                 <Card bg='danger' style={cardStyles}>
-                  <FontAwesomeIcon icon={faChartLine} style={iconStyles}/>
+                  <FaGuitar style={iconStyles}/>
                   </Card>
                   <Card.Title>Spectacles</Card.Title>
                   <Card.Text>5000</Card.Text>
@@ -79,7 +79,7 @@ function Dashindex() {
               <Card border="danger" text="black">
                 <Card.Body>
                 <Card bg='danger' style={cardStyles}>
-                  <FontAwesomeIcon icon={faUsers} style={iconStyles}/>
+                  <FaUserAlt style={iconStyles}/>
                   </Card>
                   <Card.Title>Utilisateurs</Card.Title>
                   <Card.Text>5000</Card.Text>

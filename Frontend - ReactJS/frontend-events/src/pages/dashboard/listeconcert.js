@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {Row, Col, Nav, Navbar , Button, Table, Card} from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart, faFolderOpen, faTachometerAlt,faCalendarDays, faEnvelope, faTrash, faPenToSquare} from '@fortawesome/free-solid-svg-icons';
+import { FaFolderOpen} from 'react-icons/fa';
 
 
 const sidebarStyles = {
@@ -31,10 +30,10 @@ function Listeconcert() {
         <Card border="secondary">
           <Card.Header>
             <Row>
-              <Col md={6}>
+              <Col md={8}>
               <h2>Liste des concerts</h2>
               </Col>
-              <Col md={6}>
+              <Col md={4}>
               <Link to="/dashboard/newevent">
                   <Button variant='secondary'>Ajouter un nouvel évènement</Button>
                 </Link>
@@ -70,7 +69,7 @@ function Listeconcert() {
                   <td>1</td>
                   <td>
                     <Link to="">
-                        <Button variant='danger'><FontAwesomeIcon icon={faFolderOpen} /></Button>
+                        <Button variant='danger'><FaFolderOpen /></Button>
                     </Link>
                   </td>
                 </tr>

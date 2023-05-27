@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {Row, Col, Nav, Navbar , Button, Table, Card} from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart, faFolderOpen, faTachometerAlt,faCalendarDays, faEnvelope, faTrash, faPenToSquare} from '@fortawesome/free-solid-svg-icons';
+import { FaFolderOpen} from 'react-icons/fa';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
 
 const sidebarStyles = {
@@ -30,10 +29,10 @@ function Newsletter() {
         <Card border="secondary">
           <CardHeader>
             <Row>
-              <Col md={6}>
+              <Col md={8}>
               <h2>Newsletter</h2>
               </Col>
-              <Col md={6}>
+              <Col md={4}>
                 <Link to="/dashboard/createnewsletter">
                   <Button variant='secondary'>Créer une nouvelle newsletter</Button>
                 </Link>
@@ -58,7 +57,7 @@ function Newsletter() {
             <td>@mdo</td>
             <td>
               <Link to="">
-                  <Button variant='danger'><FontAwesomeIcon icon={faFolderOpen} /></Button>
+                  <Button variant='danger'><FaFolderOpen/></Button>
               </Link>
             </td>
           </tr>

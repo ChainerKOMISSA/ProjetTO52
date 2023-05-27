@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { Container, Row, Col, Card, Nav, Navbar , Button, Image} from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUsers, faShoppingCart, faChartLine, faTachometerAlt,faCalendarDays, faEnvelope, faMusic, faGuitar, faBookOpen, faLightbulb, faDrum} from '@fortawesome/free-solid-svg-icons';
+import { FaEnvelope, FaCube, FaMusic, FaDrum, FaTachometerAlt, FaBookOpen, FaGuitar} from 'react-icons/fa';
+
 
 
 const sidebarStyles = {
@@ -57,7 +57,7 @@ function Dashboard() {
             <Nav.Link href="">
               <Link to="/dashboard/dashindex">
                 <Button style={buttonStyles}>
-                <FontAwesomeIcon icon={faTachometerAlt} style={sidebarIconStyles}/>
+                <FaTachometerAlt style={sidebarIconStyles}/>
                 Tableau de bord
                 </Button>
               </Link>
@@ -65,7 +65,7 @@ function Dashboard() {
             <Nav.Link href="">
               <Link to="/dashboard/listeconcert">
                 <Button style={buttonStyles}>
-                <FontAwesomeIcon icon={faMusic} style={sidebarIconStyles}/>
+                <FaMusic style={sidebarIconStyles}/>
                 Concerts
                 </Button>
               </Link>
@@ -73,7 +73,7 @@ function Dashboard() {
             <Nav.Link href="">
               <Link to="/dashboard/listefestival">
                 <Button style={buttonStyles}>
-                <FontAwesomeIcon icon={faDrum} style={sidebarIconStyles}/>
+                <FaDrum style={sidebarIconStyles}/>
                 Festivals
                 </Button>
               </Link>
@@ -81,7 +81,7 @@ function Dashboard() {
             <Nav.Link href="">
               <Link to="">
                 <Button style={buttonStyles}>
-                <FontAwesomeIcon icon={faBookOpen} style={sidebarIconStyles}/>
+                <FaBookOpen style={sidebarIconStyles}/>
                 Formations
                 </Button>
               </Link>
@@ -89,7 +89,7 @@ function Dashboard() {
             <Nav.Link href="">
               <Link to="">
                 <Button style={buttonStyles}>
-                <FontAwesomeIcon icon={faGuitar} style={sidebarIconStyles}/>
+                <FaGuitar style={sidebarIconStyles}/>
                 Spectacles
                 </Button>
               </Link>
@@ -97,7 +97,7 @@ function Dashboard() {
             <Nav.Link href="">
               <Link to="">
                 <Button style={buttonStyles}>
-                <FontAwesomeIcon icon={faLightbulb} style={sidebarIconStyles}/>
+                <FaCube style={sidebarIconStyles}/>
                 Publicités
                 </Button>
               </Link>
@@ -105,7 +105,7 @@ function Dashboard() {
             <Nav.Link href="">
               <Link to="/dashboard/newsletter">
                 <Button style={buttonStyles}>
-                <FontAwesomeIcon icon={faEnvelope} style={sidebarIconStyles}/>
+                <FaEnvelope style={sidebarIconStyles}/>
                 Newsletter
                 </Button>
               </Link>

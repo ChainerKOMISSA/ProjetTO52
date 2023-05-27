@@ -31,7 +31,7 @@ function Login() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        navigate('/dashboard')
+        navigate('/dashboard/dashindex')
       })
       .catch((error) => {
         console.error(error);

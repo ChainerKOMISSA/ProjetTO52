@@ -1,18 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMasksTheater, faMusic, faUserDoctor, faStar, faChampagneGlasses, faGuitar, faBookOpen, faKitchenSet} from '@fortawesome/free-solid-svg-icons';
+import { FaMusic, FaGuitar, FaMask, FaGlassCheers, FaStar, FaHamburger, FaBookOpen, FaHospitalSymbol} from 'react-icons/fa';
 
-const sidebarStyles = {
-    backgroundColor: '#343a40',
-    color: '#fff',
-    height: '100vh',
-  };
-  
-  const sidebarIconStyles = {
-    marginRight: '8px',
-  
-  };
   
   const buttonStyles = {
     margin: '5px 0',
@@ -35,6 +24,7 @@ const sidebarStyles = {
   
   const iconStyles = {
     marginTop : '16px',
+    marginLeft : '22px',
     size : "lg",
     color : '#fff'
   }
@@ -58,7 +48,7 @@ function Body(){
                     <Row>
                         <Col md={2}>
                             <Card bg='danger' style={cardStyles}>
-                                <FontAwesomeIcon icon={faMusic} style={iconStyles}/>
+                                <FaMusic style={iconStyles}/>
                             </Card>
                         </Col>
                         <Col md={10}>
@@ -75,7 +65,7 @@ function Body(){
                     <Row>
                         <Col md={2}>
                             <Card bg='secondary' style={cardStyles}>
-                                <FontAwesomeIcon icon={faGuitar} style={iconStyles}/>
+                                <FaGuitar style={iconStyles}/>
                             </Card>
                         </Col>
                         <Col md={10}>
@@ -92,7 +82,7 @@ function Body(){
                     <Row>
                         <Col md={2}>
                             <Card bg='secondary' style={cardStyles}>
-                            <FontAwesomeIcon icon={faMasksTheater} style={iconStyles}/>
+                            <FaMask style={iconStyles}/>
                             </Card>
                         </Col>
                         <Col md={10}>
@@ -109,7 +99,7 @@ function Body(){
                     <Row>
                         <Col md={2}>
                             <Card bg='danger' style={cardStyles}>
-                                <FontAwesomeIcon icon={faChampagneGlasses} style={iconStyles}/>
+                                <FaGlassCheers style={iconStyles}/>
                             </Card>
                         </Col>
                         <Col md={10}>
@@ -129,7 +119,7 @@ function Body(){
                     <Row>
                         <Col md={2}>
                             <Card bg='danger' style={cardStyles}>
-                                <FontAwesomeIcon icon={faStar} style={iconStyles}/>
+                                <FaStar style={iconStyles}/>
                             </Card>
                         </Col>
                         <Col md={10}>
@@ -146,7 +136,7 @@ function Body(){
                     <Row>
                         <Col md={2}>
                             <Card bg='secondary' style={cardStyles}>
-                                <FontAwesomeIcon icon={faKitchenSet} style={iconStyles}/>
+                                <FaHamburger style={iconStyles}/>
                             </Card>
                         </Col>
                         <Col md={10}>
@@ -163,7 +153,7 @@ function Body(){
                     <Row>
                         <Col md={2}>
                             <Card bg='secondary' style={cardStyles}>
-                            <FontAwesomeIcon icon={faBookOpen} style={iconStyles}/>
+                            <FaBookOpen style={iconStyles}/>
                             </Card>
                         </Col>
                         <Col md={10}>
@@ -180,7 +170,7 @@ function Body(){
                     <Row>
                         <Col md={2}>
                             <Card bg='danger' style={cardStyles}>
-                                <FontAwesomeIcon icon={faUserDoctor} style={iconStyles}/>
+                                <FaHospitalSymbol style={iconStyles}/>
                             </Card>
                         </Col>
                         <Col md={10}>
