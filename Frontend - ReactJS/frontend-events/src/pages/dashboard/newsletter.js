@@ -1,4 +1,5 @@
-import React ,{Link} from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import {Row, Col, Nav, Navbar , Button, Table, Card} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faFolderOpen, faTachometerAlt,faCalendarDays, faEnvelope, faTrash, faPenToSquare} from '@fortawesome/free-solid-svg-icons';
@@ -26,43 +27,15 @@ const sidebarStyles = {
 
 function Newsletter() {
   return (
-      <Row>
-        <Col md={2} style={sidebarStyles}>
-        <Navbar>
-          <Nav className="flex-column">
-          <Nav.Link href="" style={buttonStyles}>
-            <FontAwesomeIcon icon={faTachometerAlt} style={sidebarIconStyles}/>
-            Tableau de bord
-            </Nav.Link>
-            <Link to="" style={buttonStyles}>
-            <Button>
-            <FontAwesomeIcon icon={faCalendarDays} style={sidebarIconStyles}/>
-            Evènements
-            </Button>
-            </Link>
-            <Nav.Link href="" style={buttonStyles}>
-              <FontAwesomeIcon icon={faShoppingCart} style={sidebarIconStyles} />
-              Publicités
-            </Nav.Link>
-            <Nav.Link href="" style={buttonStyles}>
-            <FontAwesomeIcon icon={faEnvelope} style={sidebarIconStyles}/>
-              Newsletters
-            </Nav.Link>
-          </Nav>
-          </Navbar>
-        </Col>
-
-        <Col md={10} style={sidebarStyles}>
-        <h2>Newsletters</h2>
-        <Card border="danger">
+        <Card border="secondary">
           <CardHeader>
             <Row>
-              <Col md={4}>
-              <Card.Title>Newsletter</Card.Title>
+              <Col md={6}>
+              <h2>Newsletter</h2>
               </Col>
-              <Col md={8}>
-                <Link to="/dashboard/newevent">
-                  <Button backgroundColor='#dc3545'>Créer une nouvelle newsletter</Button>
+              <Col md={6}>
+                <Link to="/dashboard/createnewsletter">
+                  <Button variant='secondary'>Créer une nouvelle newsletter</Button>
                 </Link>
               </Col>
             </Row>
@@ -75,7 +48,6 @@ function Newsletter() {
             <th>Titre de la newsletter</th>
             <th>Contenu de la newsletter</th>
             <th>Créateur</th>
-            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -84,16 +56,9 @@ function Newsletter() {
             <td>Mark</td>
             <td>Otto</td>
             <td>@mdo</td>
-            <td>1</td>
             <td>
               <Link to="">
-                  <Button backgroundColor='#dc3545'><FontAwesomeIcon icon={faFolderOpen} /></Button>
-              </Link>
-              <Link>
-                  <Button backgroundColor='#dc3545'><FontAwesomeIcon icon={faPenToSquare} /></Button>
-              </Link>
-              <Link>
-                  <Button backgroundColor='#dc3545'><FontAwesomeIcon icon={faTrash} /></Button>
+                  <Button variant='danger'><FontAwesomeIcon icon={faFolderOpen} /></Button>
               </Link>
             </td>
           </tr>
@@ -101,9 +66,6 @@ function Newsletter() {
             </Table>
           </Card.Body>
         </Card>
-        </Col>
-
-      </Row>
   )
 }
 

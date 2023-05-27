@@ -2,6 +2,7 @@ import React ,{Link} from 'react';
 import { Container, Row, Col, Card, Nav, Navbar , Button, Form} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUsers, faShoppingCart, faChartLine, faTachometerAlt,faCalendarDays, faEnvelope, faMusic} from '@fortawesome/free-solid-svg-icons';
+import CardHeader from 'react-bootstrap/esm/CardHeader';
 
 const sidebarStyles = {
   backgroundColor: '#343a40',
@@ -25,34 +26,12 @@ const buttonStyles = {
 
 function Newevent() {
   return (
+    <Card border='secondary'>
+      <CardHeader>
+      <h2>Enregister un nouvel évènement</h2>
+      </CardHeader>
+      <Card.Body>
       <Row>
-        <Col md={2} style={sidebarStyles}>
-        <Navbar>
-          <Nav className="flex-column">
-          <Nav.Link href="" style={buttonStyles}>
-            <FontAwesomeIcon icon={faTachometerAlt} style={sidebarIconStyles}/>
-            Tableau de bord
-            </Nav.Link>
-            <Link to="#" style={buttonStyles}>
-            <Button>
-            <FontAwesomeIcon icon={faCalendarDays} style={sidebarIconStyles}/>
-            Evènements
-            </Button>
-            </Link>
-            <Nav.Link href="" style={buttonStyles}>
-              <FontAwesomeIcon icon={faShoppingCart} style={sidebarIconStyles} />
-              Publicités
-            </Nav.Link>
-            <Nav.Link href="" style={buttonStyles}>
-            <FontAwesomeIcon icon={faEnvelope} style={sidebarIconStyles}/>
-              Newsletters
-            </Nav.Link>
-          </Nav>
-          </Navbar>
-        </Col>
-
-        <Col md={10} style={sidebarStyles}>
-        <h2>Enregister un nouvel évènement</h2>
           <Form>
           <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridEmail">
@@ -116,11 +95,13 @@ function Newevent() {
           </Row>
 
           <Button variant="danger" type="submit">Enregister</Button>
-          <Button variant="secondady" type="reset">Annuler</Button>
+          <Button variant="secondary" type="reset">Annuler</Button>
           </Form>
-        </Col>
 
       </Row>
+      </Card.Body>
+    </Card>
+      
   )
 }
 

@@ -5,6 +5,9 @@ import Register from "./pages/register";
 import Dashboard from "./pages/dashboard/dashboard";
 import Listeconcert from "./pages/dashboard/listeconcert";
 import Newevent from "./pages/dashboard/newevent";
+import Listefestival from "./pages/dashboard/listefestival";
+import Newsletter from "./pages/dashboard/newsletter";
+import Createnewsletter from "./pages/dashboard/createnewsletter";
 
 const router = createBrowserRouter([
     {
@@ -31,23 +34,20 @@ const router = createBrowserRouter([
                 path: "newevent",
                 element: <Newevent/>,
             },
+            {
+              path : "listefestival", 
+              element : <Listefestival/>,
+            },
+            {
+              path : "newsletter", 
+              element : <Newsletter/>,
+            },
+            {
+              path : "createnewsletter", 
+              element : <Createnewsletter/>,
+            }
         ]
     },
 ]);
-
-
-/*const router = (
-    <Router>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />}>
-          <Route path="listeconcert" element={<Listeconcert />} />
-          <Route path="newevent" element={<Newevent />} />
-        </Route>
-      </Routes>
-    </Router>
-  );*/
 
 export default router;

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import { Container, Row, Col, Card, Nav, Navbar , Button, Image} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUsers, faShoppingCart, faChartLine, faTachometerAlt,faCalendarDays, faEnvelope, faMusic} from '@fortawesome/free-solid-svg-icons';
+import { faUsers, faShoppingCart, faChartLine, faTachometerAlt,faCalendarDays, faEnvelope, faMusic, faGuitar, faBookOpen, faLightbulb, faDrum} from '@fortawesome/free-solid-svg-icons';
 
 
 const sidebarStyles = {
@@ -55,35 +55,65 @@ function Dashboard() {
             </Button>
             </Nav.Link>
             <Nav.Link href="">
-            <Button style={buttonStyles}>
-            <FontAwesomeIcon icon={faTachometerAlt} style={sidebarIconStyles}/>
-            Tableau de bord
-            </Button>
+              <Link to="/dashboard">
+                <Button style={buttonStyles}>
+                <FontAwesomeIcon icon={faTachometerAlt} style={sidebarIconStyles}/>
+                Tableau de bord
+                </Button>
+              </Link>
             </Nav.Link>
             <Nav.Link href="">
-            <Link to="/dashboard/listeconcert">
-            <Button style={buttonStyles}>
-            <FontAwesomeIcon icon={faCalendarDays} style={sidebarIconStyles}/>
-            Evènements
-            </Button>
-            </Link>
+              <Link to="/dashboard/listeconcert">
+                <Button style={buttonStyles}>
+                <FontAwesomeIcon icon={faMusic} style={sidebarIconStyles}/>
+                Concerts
+                </Button>
+              </Link>
             </Nav.Link>
             <Nav.Link href="">
-              <Button style={buttonStyles}>
-              <FontAwesomeIcon icon={faShoppingCart} style={sidebarIconStyles} />
-              Publicités
-              </Button>
+              <Link to="/dashboard/listefestival">
+                <Button style={buttonStyles}>
+                <FontAwesomeIcon icon={faDrum} style={sidebarIconStyles}/>
+                Festivals
+                </Button>
+              </Link>
             </Nav.Link>
             <Nav.Link href="">
-              <Button style={buttonStyles}>
-              <FontAwesomeIcon icon={faEnvelope} style={sidebarIconStyles}/>
-              Newsletters
-              </Button>
+              <Link to="">
+                <Button style={buttonStyles}>
+                <FontAwesomeIcon icon={faBookOpen} style={sidebarIconStyles}/>
+                Formations
+                </Button>
+              </Link>
+            </Nav.Link>
+            <Nav.Link href="">
+              <Link to="">
+                <Button style={buttonStyles}>
+                <FontAwesomeIcon icon={faGuitar} style={sidebarIconStyles}/>
+                Spectacles
+                </Button>
+              </Link>
+            </Nav.Link>
+            <Nav.Link href="">
+              <Link to="">
+                <Button style={buttonStyles}>
+                <FontAwesomeIcon icon={faLightbulb} style={sidebarIconStyles}/>
+                Publicités
+                </Button>
+              </Link>
+            </Nav.Link>
+            <Nav.Link href="">
+              <Link to="/dashboard/newsletter">
+                <Button style={buttonStyles}>
+                <FontAwesomeIcon icon={faEnvelope} style={sidebarIconStyles}/>
+                Newsletter
+                </Button>
+              </Link>
             </Nav.Link>
           </Nav>
           </Navbar>
         </Col>
-        <Col md={10}>
+          <Col md={10}>
           <h2>Tableau de bord</h2>
           <Row>
             <Col md={3}>
@@ -130,10 +160,12 @@ function Dashboard() {
                 </Card.Body>
               </Card>
             </Col>
-          </Row>
+          </Row><br></br>
+          <Outlet/>
         </Col>
       </Row>
     </Container>
+    
     </>
 
   );
