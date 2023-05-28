@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useState, useEffect} from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { FaMusic, FaGuitar, FaMask, FaGlassCheers, FaStar, FaHamburger, FaBookOpen, FaHospitalSymbol} from 'react-icons/fa';
 
@@ -6,13 +6,6 @@ import { FaMusic, FaGuitar, FaMask, FaGlassCheers, FaStar, FaHamburger, FaBookOp
   const buttonStyles = {
     margin: '5px 0',
     backgroundColor: '#dc3545',
-    color: '#fff',
-    border: 'none',
-  };
-
-  const buttonStyles2 = {
-    margin: '5px 0',
-    backgroundColor: 'grey',
     color: '#fff',
     border: 'none',
   };
@@ -35,6 +28,18 @@ import { FaMusic, FaGuitar, FaMask, FaGlassCheers, FaStar, FaHamburger, FaBookOp
   }
 
 function Body(){
+    const [events, setEvents] = useState([]);
+
+    useEffect(() => {
+      fetch('http://127.0.0.1:5000/readevents')
+      .then(response => response.json())
+      .then(data => {
+        setEvents(data.events)
+      })
+      .catch(error => {
+        console.error('Erreur lors de la récupération des concerts:', error);
+      });
+    }, []);
 
     return (
         <Container fluid>
@@ -183,35 +188,21 @@ function Body(){
             </Row>
 
             <br></br>
-            <h3>A ne pas rater</h3>
+            <h3>Evènements à ne pas rater</h3>
             <br></br>
             <Row>
+              {events.map(event => (
                 <Col md={3}>
                 <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src="" />
+                    <Card.Img variant="top" src={event.imageEvenement} />
                     <Card.Body>
-                        <Card.Title>Nom de l'évènement</Card.Title>
-                        <Card.Text>Just some text</Card.Text>
+                        <Card.Title>{event.nomEvenement}</Card.Title>
+                        <Card.Text>{event.descriptionEvenement}</Card.Text>
                         <Button style={buttonStyles}>Plus de détails</Button>
                     </Card.Body>
                 </Card>
                 </Col>
-            </Row>
-
-            <br></br>
-            <h3>Autres évènements</h3>
-            <br></br>
-            <Row>
-                <Col md={3}>
-                <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src="" />
-                    <Card.Body>
-                        <Card.Title>Nom de l'évènement</Card.Title>
-                        <Card.Text>Just some text</Card.Text>
-                        <Button style={buttonStyles2}>Plus de détails</Button>
-                    </Card.Body>
-                </Card>
-                </Col>
+              ))}
             </Row>
       </Container>
     )

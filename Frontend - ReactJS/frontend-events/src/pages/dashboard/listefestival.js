@@ -1,29 +1,25 @@
-import React from 'react';
+import React , {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import {Row, Col, Button, Table, Card} from 'react-bootstrap';
 import { FaFolderOpen} from 'react-icons/fa';
 
 
-const sidebarStyles = {
-    backgroundColor: '#343a40',
-    color: '#fff',
-    height: '100vh',
-  };
-  
-  const sidebarIconStyles = {
-    marginRight: '8px',
-  
-  };
-  
-  const buttonStyles = {
-    margin: '5px 0',
-    backgroundColor: '#343a40',
-    //color: '#dc3545',
-    color: '#fff',
-    border: 'none',
-  };
 
 function Listefestival() {
+  const [festivals, setFestivals] = useState([]);
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:5000/festival')
+    .then(response => response.json())
+    .then(data => {
+      setFestivals(data.festivals)
+    })
+    .catch(error => {
+      console.error('Erreur lors de la récupération des concerts:', error);
+    });
+  }, []);
+
+
   return (
     <Card border="secondary">
     <Card.Header>
@@ -43,35 +39,39 @@ function Listefestival() {
         <thead>
           <tr>
             <th>N°</th>
-            <th>Nom du concert</th>
-            <th>Description</th>
-            <th>Date de début</th>
-            <th>Date de fin</th>
-            <th>Heure de début</th>
-            <th>Heure de fin</th>
-            <th>Lieu</th>
-            <th>Programme</th>
-            <th></th>
+              <th>Nom</th>
+              <th>Description</th>
+              <th>Date(début)</th>
+              <th>Date(fin)</th>
+              <th>Heure(début)</th>
+              <th>Heure(fin)</th>
+              <th>Lieu</th>
+              <th>Programme</th>
+              <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>1</td>
-            <td>
-              <Link to="">
-                  <Button variant='danger'><FaFolderOpen /></Button>
-              </Link>
-            </td>
-          </tr>
-        </tbody>
+                {festivals.map(festival => (
+                  <tr key={festival.idEvenement}>
+                    <td>{festival.idEvenement}</td>
+                    <td>{festival.nomEvenement}</td>
+                    <td>{festival.descriptionEvenement}</td>
+                    <td>{festival.dateDebut}</td>
+                    <td>{festival.dateFin}</td>
+                    <td>{festival.heureDebut}</td>
+                    <td>{festival.heureFin}</td>
+                    <td>{festival.lieuEvenement}</td>
+                    <td>{festival.programme}</td>
+                    <td>
+                    <Link to="">
+                        <Button variant='danger'><FaFolderOpen /></Button>
+                    </Link>
+                  </td>
+                  </tr>
+                ))}
+                <tr>
+                </tr>
+          </tbody>
       </Table>
     </Card.Body>
   </Card>

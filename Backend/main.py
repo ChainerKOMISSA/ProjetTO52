@@ -238,6 +238,8 @@ def readevents():
     return jsonify({'events': events_list})
 
 
+
+
 #---------------------------------------------------
 #fonctions UPDATE
 @app.route('/updatevent/<int:idEvenement>', methods=['PUT'])

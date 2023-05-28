@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {Row, Col, Nav, Navbar , Button, Table, Card} from 'react-bootstrap';
 import { FaFolderOpen} from 'react-icons/fa';
@@ -26,6 +26,19 @@ const buttonStyles = {
 
 
 function Listeconcert() {
+  const [concerts, setConcerts] = useState([]);
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:5000/concert')
+    .then(response => response.json())
+    .then(data => {
+      setConcerts(data.concerts)
+    })
+    .catch(error => {
+      console.error('Erreur lors de la récupération des concerts:', error);
+    });
+  }, []);
+
   return (
         <Card border="secondary">
           <Card.Header>
@@ -45,33 +58,37 @@ function Listeconcert() {
               <thead>
                 <tr>
                   <th>N°</th>
-                  <th>Nom du concert</th>
+                  <th>Nom</th>
                   <th>Description</th>
-                  <th>Date de début</th>
-                  <th>Date de fin</th>
-                  <th>Heure de début</th>
-                  <th>Heure de fin</th>
+                  <th>Date(début)</th>
+                  <th>Date(fin)</th>
+                  <th>Heure(début)</th>
+                  <th>Heure(fin)</th>
                   <th>Lieu</th>
                   <th>Programme</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>1</td>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>1</td>
-                  <td>
+                {concerts.map(concert => (
+                  <tr key={concert.idEvenement}>
+                    <td>{concert.idEvenement}</td>
+                    <td>{concert.nomEvenement}</td>
+                    <td>{concert.descriptionEvenement}</td>
+                    <td>{concert.dateDebut}</td>
+                    <td>{concert.dateFin}</td>
+                    <td>{concert.heureDebut}</td>
+                    <td>{concert.heureFin}</td>
+                    <td>{concert.lieuEvenement}</td>
+                    <td>{concert.programme}</td>
+                    <td>
                     <Link to="">
                         <Button variant='danger'><FaFolderOpen /></Button>
                     </Link>
                   </td>
+                  </tr>
+                ))}
+                <tr>
                 </tr>
               </tbody>
             </Table>
