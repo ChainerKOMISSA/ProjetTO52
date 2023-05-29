@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {Row, Col, Nav, Navbar , Button, Table, Card} from 'react-bootstrap';
+import {Row, Col, Button, Table, Card, Modal} from 'react-bootstrap';
 import { FaFolderOpen} from 'react-icons/fa';
 
 
@@ -27,6 +27,8 @@ const buttonStyles = {
 
 function Listeconcert() {
   const [concerts, setConcerts] = useState([]);
+  const [showModal, setShowModal] = useState([]);
+  const [selectedConcert, setSelectedConcert] = useState(null);
 
   useEffect(() => {
     fetch('http://127.0.0.1:5000/concert')
@@ -38,6 +40,15 @@ function Listeconcert() {
       console.error('Erreur lors de la récupération des concerts:', error);
     });
   }, []);
+
+  /*const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handleOpenModal = (concert) => {
+    setSelectedConcert(concert);
+    setShowModal(true);
+  };*/
 
   return (
         <Card border="secondary">
@@ -81,11 +92,7 @@ function Listeconcert() {
                     <td>{concert.heureFin}</td>
                     <td>{concert.lieuEvenement}</td>
                     <td>{concert.programme}</td>
-                    <td>
-                    <Link to="">
-                        <Button variant='danger'><FaFolderOpen /></Button>
-                    </Link>
-                  </td>
+                    <td><Button variant='danger'><FaFolderOpen /></Button></td>
                   </tr>
                 ))}
                 <tr>
@@ -93,6 +100,32 @@ function Listeconcert() {
               </tbody>
             </Table>
           </Card.Body>
+          {/*{
+            selectedConcert && (
+              <Modal show={showModal} onHide={handleCloseModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Que voulez-vous faire?</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <div>
+                      <Row>
+                        <Col md={4}>
+                        <Button variant='danger'><FaFolderOpen />Afficher</Button>
+                        </Col>
+                        <Col md={4}>
+                        <Button variant='secondary'><FaFolderOpen />Modifier</Button>
+                        </Col>
+                        <Col md={4}>
+                        <Button variant='secondary'><FaFolderOpen />Supprimer</Button>
+                        </Col>
+                      </Row>
+                  </div>
+                </Modal.Body>
+                <Modal.Footer>
+                <Button variant='secondary' onClick={handleCloseModal}><FaFolderOpen />Fermer</Button>
+                </Modal.Footer>
+              </Modal>
+            )}*/}
         </Card>
 
   )
