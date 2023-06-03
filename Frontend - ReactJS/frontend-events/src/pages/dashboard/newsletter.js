@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {Row, Col, Button, Table, Card} from 'react-bootstrap';
-import { FaFolderOpen} from 'react-icons/fa';
+import {Row, Col, Button, Table, Card, Modal} from 'react-bootstrap';
+import { FaFolderOpen, FaShareSquare, FaEdit, FaTrash} from 'react-icons/fa';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
 
 
 
 function Newsletter() {
   const [newsletters, setNewsletters] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedNewsletter, setSelectedNewsletter] = useState(null);
+  
+
 
   useEffect(() => {
     fetch('http://127.0.0.1:5000/newsletter')
@@ -19,6 +23,22 @@ function Newsletter() {
       console.error('Erreur lors de la récupération des concerts:', error);
     });
   }, []);
+
+
+  const handleCloseModal = () => {
+    setShowModal(false)
+    setSelectedNewsletter(null)
+  }
+
+
+  const handleOpenModal = (newsletter) => {
+    setSelectedNewsletter(newsletter)
+    setShowModal(true)
+  }
+
+  
+
+  
 
   return (
         <Card border="secondary">
@@ -53,7 +73,7 @@ function Newsletter() {
                 <td>{newsletter.idAdmin}</td>
                 <td>
                   <Link to="">
-                          <Button variant='danger'><FaFolderOpen /></Button>
+                          <Button variant='danger' onClick={() => handleOpenModal(newsletter)}><FaFolderOpen /></Button>
                   </Link>
                 </td>
             </tr>
@@ -61,6 +81,33 @@ function Newsletter() {
         </tbody>
             </Table>
           </Card.Body>
+            {
+              selectedNewsletter && (
+                <Modal show={showModal} onHide={handleCloseModal}>
+                  <Modal.Header closeButton>
+                      <Modal.Title>Details de la newsletter</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                  <Card border='danger'>
+                    <Card.Header>
+                      <h3>{selectedNewsletter.libelleNewsletter}</h3>
+                    </Card.Header>
+                    <Card.Body>
+                      <p>{selectedNewsletter.contenuNewsletter}</p>
+                    </Card.Body>
+                    <Card.Footer>
+                    <Button variant='danger'><FaShareSquare/>&nbsp;Partager</Button>&nbsp;&nbsp;
+                    <Button variant='outline-danger'><FaEdit/>&nbsp;Modifier</Button>&nbsp;&nbsp;
+                    <Button variant='outline-secondary'><FaTrash/>&nbsp;Supprimer</Button>
+                    </Card.Footer>
+                  </Card>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button variant='secondary' onClick={handleCloseModal}>Fermer</Button>
+                  </Modal.Footer>
+                </Modal>
+              )
+            }
         </Card>
   )
 }

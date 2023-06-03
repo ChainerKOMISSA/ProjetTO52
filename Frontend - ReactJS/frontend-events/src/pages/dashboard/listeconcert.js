@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {Row, Col, Button, Table, Card, Modal} from 'react-bootstrap';
-import { FaFolderOpen} from 'react-icons/fa';
+import { FaFolderOpen, FaTrash, FaEdit} from 'react-icons/fa';
 
 
 const sidebarStyles = {
@@ -26,8 +26,9 @@ const buttonStyles = {
 
 
 function Listeconcert() {
+  const navigate = useNavigate();
   const [concerts, setConcerts] = useState([]);
-  const [showModal, setShowModal] = useState([]);
+  const [showModal, setShowModal] = useState(false);
   const [selectedConcert, setSelectedConcert] = useState(null);
 
   useEffect(() => {
@@ -41,14 +42,55 @@ function Listeconcert() {
     });
   }, []);
 
-  /*const handleCloseModal = () => {
+  const handleCloseModal = () => {
     setShowModal(false);
+    setSelectedConcert(null);
   };
 
   const handleOpenModal = (concert) => {
     setSelectedConcert(concert);
     setShowModal(true);
-  };*/
+  };
+
+  const handleDelete = (idEvenement) => {
+    fetch('http://127.0.0.1:5000/deletevent/${idEvenement}', {
+      method : 'DELETE'
+    })
+    .then(response => response.json())
+    .then(data => {
+    console.log(data.message);
+    navigate('/listeconcert');
+  })
+    .catch(error => {
+      console.error('Erreur lors de la suppression de l\'évènement:', error);
+  })
+  }
+
+  const handleEdit = (idEvenement) => {
+    const selectedConcert = concerts.find(concert => concert.idEvenement === idEvenement);
+    const updatedData = {
+      nomEvenement: selectedConcert.nomEvenement,
+      descriptionEvenement: selectedConcert.descriptionEvenement,
+      // Ajouter d'autres champs à mettre à jour
+    };
+
+    fetch(`http://127.0.0.1:5000/updatevent/${idEvenement}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(updatedData),
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      navigate('/listeconcert');
+    })
+    .catch(error => {
+      console.error('Erreur lors de la mise à jour de l\'événement:', error);
+    });
+  };
+
 
   return (
         <Card border="secondary">
@@ -92,7 +134,7 @@ function Listeconcert() {
                     <td>{concert.heureFin}</td>
                     <td>{concert.lieuEvenement}</td>
                     <td>{concert.programme}</td>
-                    <td><Button variant='danger'><FaFolderOpen /></Button></td>
+                    <td><Button variant='danger' onClick={() => handleOpenModal(concert)}><FaFolderOpen /></Button></td>
                   </tr>
                 ))}
                 <tr>
@@ -100,35 +142,35 @@ function Listeconcert() {
               </tbody>
             </Table>
           </Card.Body>
-          {/*{
+          {
             selectedConcert && (
               <Modal show={showModal} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Que voulez-vous faire?</Modal.Title>
+                    <Modal.Title>Détails de l'évènement</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <div>
-                      <Row>
-                        <Col md={4}>
-                        <Button variant='danger'><FaFolderOpen />Afficher</Button>
-                        </Col>
-                        <Col md={4}>
-                        <Button variant='secondary'><FaFolderOpen />Modifier</Button>
-                        </Col>
-                        <Col md={4}>
-                        <Button variant='secondary'><FaFolderOpen />Supprimer</Button>
-                        </Col>
-                      </Row>
-                  </div>
+                  <Card border='danger'>
+                    <Card.Header>
+                      <h3>{selectedConcert.nomEvenement}</h3>
+                    </Card.Header>
+                    <Card.Body>
+                      <p>{selectedConcert.descriptionEvenement}</p>
+                    </Card.Body>
+                    <Card.Footer>
+                    <Button variant='outline-danger' onClick={() => handleEdit(selectedConcert.idEvenement)}><FaEdit/>&nbsp;Modifier</Button>&nbsp;&nbsp;
+                    <Button variant='outline-secondary' onClick={() => handleDelete(selectedConcert.idEvenement)}><FaTrash/>&nbsp;Supprimer</Button>
+                    </Card.Footer>
+                  </Card>
                 </Modal.Body>
                 <Modal.Footer>
-                <Button variant='secondary' onClick={handleCloseModal}><FaFolderOpen />Fermer</Button>
+                <Button variant='secondary' onClick={handleCloseModal}>Fermer</Button>
                 </Modal.Footer>
               </Modal>
-            )}*/}
+              )};
         </Card>
-
   )
 }
+
+
 
 export default Listeconcert

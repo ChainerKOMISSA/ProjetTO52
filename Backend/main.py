@@ -237,7 +237,21 @@ def readevents():
         events_list.append(event_dict)
     return jsonify({'events': events_list})
 
+@app.route('/users', methods=['GET', 'POST'])
+def readusers():
+    cursor = db.cursor()
+    query = "SELECT emailUtilisateur FROM Utilisateur"
+    cursor.execute(query)
+    users = cursor.fetchall()
+    cursor.close()
 
+    users_list = []
+    for user in users:
+        user_dict = {
+            'emailUtilisateur' : user[2]
+        }
+        users_list.append(user_dict)
+    return jsonify({'users' : users_list})
 
 
 #---------------------------------------------------
@@ -283,7 +297,7 @@ def deletevent(idEvenement):
     return jsonify({'message' : 'Evènement supprimé avec succès'})
 
 
-
+#fonctions qui permet d'envoyer un mail contenant la newsletter aux utilisateurs
 
 
 
