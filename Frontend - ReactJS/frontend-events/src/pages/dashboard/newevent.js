@@ -1,4 +1,4 @@
-import React , { useState } from 'react';
+import React , { useEffect, useState } from 'react';
 import { Container, Row, Col, Card, Nav, Navbar , Button, Form} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUsers, faShoppingCart, faChartLine, faTachometerAlt,faCalendarDays, faEnvelope, faMusic} from '@fortawesome/free-solid-svg-icons';
@@ -41,6 +41,8 @@ function Newevent() {
   const [lieuEvenement, setLieuEvenement] = useState('');
   const [programme, setProgramme] = useState('');
   const [imageEvenement, setImageEvenement] = useState(null);
+  const [types, SetTypes] = useState([]);
+
 
   const handleNomEvenementChange = (e) => {
     setNomEvenement(e.target.value);
@@ -115,8 +117,18 @@ function Newevent() {
       console.log('Une erreur s\'est produite.', error);
       toast.error('Une erreur s\'est produite.')
     }
-
   }
+
+  useEffect(()  => {
+    fetch('http://127.0.0.1:5000/type')
+    .then(response => response.json())
+    .then(data => {
+      SetTypes(data.types)
+    })
+    .catch(error => {
+      console.error('Erreur lors de la récupération des types:', error);
+    });
+  }, []);
 
   return (
     <Card border='secondary'>
@@ -136,7 +148,9 @@ function Newevent() {
             <Form.Label>Type</Form.Label>
             <Form.Select defaultValue="Choose..." name='idType' onChange={handleIdTypeChange} value={idType} required>
               <option>Sélectionnez un type...</option>
-              <option value={4}>Spectacles pour enfants</option>
+              {types.map(type => (
+                <option value={type.idType}>{type.libelleType}</option>
+              ))}
             </Form.Select>
           </Form.Group>
           </Row>

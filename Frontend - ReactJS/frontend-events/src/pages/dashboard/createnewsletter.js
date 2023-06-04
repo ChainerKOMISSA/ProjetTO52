@@ -87,7 +87,7 @@ function Createnewsletter() {
       SetAdmins(data.admins)
     })
     .catch(error => {
-      console.error('Erreur lors de la récupération des concerts:', error);
+      console.error('Erreur lors de la récupération des admins:', error);
     });
   }, []);
     
