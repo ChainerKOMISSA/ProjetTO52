@@ -199,7 +199,7 @@ def newsletter():
 @app.route('/admin', methods=['GET', 'POST'])
 def readadmins():
     cursor = db.cursor()
-    query = "SELECT * FROM Administrateur"
+    query = "SELECT idAdmin, nomAdmin FROM Administrateur"
     cursor.execute(query)
     admins = cursor.fetchall()
     cursor.close()
@@ -209,8 +209,6 @@ def readadmins():
         admin_dict = {
             'idAdmin': admin[0],
             'nomAdmin': admin[1],
-            'emailAdmin': admin[2],
-            'motdepasseAdmin': admin[3],
         }
         admins_list.append(admin_dict)
     return jsonify({'admins': admins_list})
