@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import {Row, Col, Button, Table, Card, Modal} from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
+import {Row, Col, Button, Table, Card, Modal, Toast, ToastContainer} from 'react-bootstrap';
 import { FaFolderOpen, FaShareSquare, FaEdit, FaTrash} from 'react-icons/fa';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
 
 
 
 function Newsletter() {
+  const navigate = useNavigate();
   const [newsletters, setNewsletters] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedNewsletter, setSelectedNewsletter] = useState(null);
+  const [showToast, setShowToast] = useState(false);
   
 
 
@@ -28,6 +30,11 @@ function Newsletter() {
   const handleCloseModal = () => {
     setShowModal(false)
     setSelectedNewsletter(null)
+    setShowToast(false)
+  }
+
+  const handleCloseToast = () => {
+    setShowToast(false)
   }
 
 
@@ -36,9 +43,31 @@ function Newsletter() {
     setShowModal(true)
   }
 
-  
+  const sendEmail = () => {
+    const libelleNewsletter = selectedNewsletter.libelleNewsletter;
+    const contenuNewsletter = selectedNewsletter.contenuNewsletter;
 
-  
+    const data = {
+      libelleNewsletter : libelleNewsletter,
+      contenuNewsletter : contenuNewsletter
+    };
+    fetch('http://localhost:5000/send_emails', {
+      method : 'POST',
+      headers : {
+        'Content-Type' : 'application/json'
+      },
+      body : JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data.message)
+      setShowToast(true)
+      navigate('/dashboard/newsletter')
+    })
+    .catch(error => {
+      console.error('Erreur lors de l\'envoi des e-mails:', error)
+    })
+  }
 
   return (
         <Card border="secondary">
@@ -83,7 +112,7 @@ function Newsletter() {
           </Card.Body>
             {
               selectedNewsletter && (
-                <Modal show={showModal} onHide={handleCloseModal}>
+                <Modal show={showModal} onHide={handleCloseModal} className='border-success'>
                   <Modal.Header closeButton>
                       <Modal.Title>Details de la newsletter</Modal.Title>
                   </Modal.Header>
@@ -96,7 +125,7 @@ function Newsletter() {
                       <p>{selectedNewsletter.contenuNewsletter}</p>
                     </Card.Body>
                     <Card.Footer>
-                    <Button variant='danger'><FaShareSquare/>&nbsp;Partager</Button>&nbsp;&nbsp;
+                    <Button variant='danger' onClick={sendEmail}><FaShareSquare/>&nbsp;Partager</Button>&nbsp;&nbsp;
                     <Button variant='outline-danger'><FaEdit/>&nbsp;Modifier</Button>&nbsp;&nbsp;
                     <Button variant='outline-secondary'><FaTrash/>&nbsp;Supprimer</Button>
                     </Card.Footer>
@@ -106,8 +135,15 @@ function Newsletter() {
                     <Button variant='secondary' onClick={handleCloseModal}>Fermer</Button>
                   </Modal.Footer>
                 </Modal>
-              )
-            }
+              )}
+              <ToastContainer>
+                <Toast show={showToast} onClose={handleCloseToast} delay={3000} autohide>
+                  <Toast.Header>
+                    <strong className='me-auto'>Succès!</strong>
+                  </Toast.Header>
+                  <Toast.Body>La newsletter a été partagée avec succès!</Toast.Body>
+                </Toast>
+              </ToastContainer>
         </Card>
   )
 }

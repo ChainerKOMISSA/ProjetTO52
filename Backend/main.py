@@ -1,9 +1,12 @@
 from flask import Flask, request, session, jsonify
 from flask_cors import CORS
-
-import mysql.connector
+import smtplib, mysql.connector, os
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 from werkzeug.utils import secure_filename
-import os
+import sendgrid
+from sendgrid.helpers.mail import Mail
+
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*" : {"origins" : "*"}})
@@ -298,6 +301,45 @@ def deletevent(idEvenement):
 
 
 #fonctions qui permet d'envoyer un mail contenant la newsletter aux utilisateurs
+@app.route('/send_emails', methods=['POST'])
+def send_emails():
+    # Récupération les informations de la newsletter à partager depuis la requête
+    data = request.get_json()
+    libelleNewsletter = data['libelleNewsletter']
+    contenuNewsletter = data['contenuNewsletter']
+
+    # Récupération de la liste des adresses e-mail des utilisateurs depuis votre base de données
+    cursor = db.cursor()
+    query = "SELECT emailUtilisateur FROM Utilisateur"
+    cursor.execute(query)
+    users = cursor.fetchall()
+    cursor.close()
+    sender = 'Events.com'
+
+    #Initialisation de l'API de messagerie
+    sg = sendgrid.SendGridAPIClient(api_key='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')
+
+
+    #Envoi de mail à chaque utilisateur
+    for user in users:
+        emailUtilisateur = user[0]
+        message = Mail(
+            from_email='essikomissa@gmail.com',
+            to_emails=emailUtilisateur,
+            subject=libelleNewsletter,
+            plain_text_content=contenuNewsletter
+        )
+        try:
+            response = sg.send(message)
+            print(response.status_code)
+            print(response.body)
+            print(response.headers)
+        except Exception as e:
+            print(str(e))
+
+    return jsonify({'message' : 'E-mails envoyés avec succès'})
+
+
 
 
 
