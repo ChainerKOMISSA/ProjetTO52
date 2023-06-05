@@ -9,6 +9,10 @@ import Listefestival from "./pages/dashboard/listefestival";
 import Newsletter from "./pages/dashboard/newsletter";
 import Createnewsletter from "./pages/dashboard/createnewsletter";
 import Dashindex from "./pages/dashboard/dashindex";
+import Listespectacle from "./pages/dashboard/listespectacle";
+import Listeformation from "./pages/dashboard/listeformation";
+import Createpub from "./pages/dashboard/createpub";
+import Listepub from "./pages/dashboard/listepub";
 
 
 const router = createBrowserRouter([
@@ -51,6 +55,22 @@ const router = createBrowserRouter([
             {
               path : "createnewsletter", 
               element : <Createnewsletter/>,
+            },
+            {
+              path : "listespectacle",
+              element : <Listespectacle/>
+            },
+            {
+              path : "listeformation",
+              element : <Listeformation/>
+            },
+            {
+              path : "createpub",
+              element : <Createpub/>
+            },
+            {
+              path : 'listepub',
+              element : <Listepub/>
             }
         ]
     },

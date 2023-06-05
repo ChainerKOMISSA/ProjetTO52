@@ -79,7 +79,7 @@ function Dashboard() {
               </Link>
             </Nav.Link>
             <Nav.Link href="">
-              <Link to="">
+              <Link to="/dashboard/listeformation">
                 <Button style={buttonStyles}>
                 <FaBookOpen style={sidebarIconStyles}/>
                 Formations
@@ -87,7 +87,7 @@ function Dashboard() {
               </Link>
             </Nav.Link>
             <Nav.Link href="">
-              <Link to="">
+              <Link to="/dashboard/listespectacle">
                 <Button style={buttonStyles}>
                 <FaGuitar style={sidebarIconStyles}/>
                 Spectacles
@@ -95,7 +95,7 @@ function Dashboard() {
               </Link>
             </Nav.Link>
             <Nav.Link href="">
-              <Link to="">
+              <Link to="/dashboard/listepub">
                 <Button style={buttonStyles}>
                 <FaCube style={sidebarIconStyles}/>
                 Publicités

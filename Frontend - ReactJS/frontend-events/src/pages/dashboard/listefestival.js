@@ -69,8 +69,6 @@ function Listefestival() {
                   </td>
                   </tr>
                 ))}
-                <tr>
-                </tr>
           </tbody>
       </Table>
     </Card.Body>

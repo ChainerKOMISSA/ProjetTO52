@@ -112,7 +112,7 @@ function Newsletter() {
           </Card.Body>
             {
               selectedNewsletter && (
-                <Modal show={showModal} onHide={handleCloseModal} className='border-success'>
+                <Modal show={showModal} onHide={handleCloseModal} size='lg'>
                   <Modal.Header closeButton>
                       <Modal.Title>Details de la newsletter</Modal.Title>
                   </Modal.Header>
@@ -137,7 +137,7 @@ function Newsletter() {
                 </Modal>
               )}
               <ToastContainer>
-                <Toast show={showToast} onClose={handleCloseToast} delay={3000} autohide>
+                <Toast show={showToast} onClose={handleCloseToast} delay={3000} autohide border="outline-success">
                   <Toast.Header>
                     <strong className='me-auto'>Succès!</strong>
                   </Toast.Header>

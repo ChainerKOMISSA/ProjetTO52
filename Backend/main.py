@@ -1,8 +1,6 @@
 from flask import Flask, request, session, jsonify
 from flask_cors import CORS
-import smtplib, mysql.connector, os
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+import mysql.connector, os
 from werkzeug.utils import secure_filename
 import sendgrid
 from sendgrid.helpers.mail import Mail
@@ -12,6 +10,7 @@ app = Flask(__name__)
 cors = CORS(app, resources={r"/*" : {"origins" : "*"}})
 app.secret_key = 'secret-key' # Clé secrète utilisée pour la gestion de la session
 upload_folder = r"C:\Users\KOMISSA ZOTSU SHINER\Documents\GitHub\ProjetTO52\Images"
+
 
 # Configuration de la base de données MySQL
 db = mysql.connector.connect(
@@ -107,7 +106,17 @@ def createnewsletter():
     cursor.close()
     return jsonify({'message': 'Newsletter créée avec succès'})
 
-
+@app.route('/createpub', methods=['POST'])
+def createpub():
+    data = request.get_json()
+    libelle = data['libellePub']
+    admin = data['idAdmin']
+    cursor = db.cursor()
+    query = "INSERT INTO Publicite(libellePub, idAdmin) VALUES (%s, %s)"
+    cursor.execute(query, (libelle, admin))
+    db.commit()
+    cursor.close()
+    return jsonify({'message': 'Publicité créée avec succès!'})
 
 
 #----------------------------------------------------
@@ -159,6 +168,78 @@ def readfestival():
         }
         festivals_list.append(festival_dict)
     return jsonify({'festivals': festivals_list})
+
+@app.route('/spectacle', methods=['GET', 'POST'])
+def readspectacle():
+    cursor = db.cursor()
+    query = "SELECT * FROM Evenement WHERE idType = 4"
+    cursor.execute(query)
+    spectacles = cursor.fetchall()
+    cursor.close()
+
+    spectacles_list = []
+    for spectacle in spectacles:
+        spectacle_dict = {
+            'idEvenement': spectacle[0],
+            'nomEvenement': spectacle[1],
+            'descriptionEvenement': spectacle[2],
+            'dateDebut': spectacle[4],
+            'dateFin': spectacle[5],
+            'heureDebut': serialize_timedelta(spectacle[6]),
+            'heureFin': serialize_timedelta(spectacle[7]),
+            'lieuEvenement': spectacle[8],
+            'programme': spectacle[9],
+        }
+        spectacles_list.append(spectacle_dict)
+    return jsonify({'spectacles': spectacles_list})
+
+@app.route('/formation', methods = ['GET', 'POST'])
+def readformation():
+    cursor = db.cursor()
+    query = "SELECT * FROM Evenement WHERE idType = 6"
+    cursor.execute(query)
+    formations = cursor.fetchall()
+    cursor.close()
+
+    formations_list = []
+    for formation in formations:
+        formation_dict = {
+            'idEvenement': formation[0],
+            'nomEvenement': formation[1],
+            'descriptionEvenement': formation[2],
+            'dateDebut': formation[4],
+            'dateFin': formation[5],
+            'heureDebut': serialize_timedelta(formation[6]),
+            'heureFin': serialize_timedelta(formation[7]),
+            'lieuEvenement': formation[8],
+            'programme': formation[9],
+        }
+        formations_list.append(formation_dict)
+    return jsonify({'formations': formations_list})
+
+@app.route('/autres', methods=['GET', 'POST'])
+def readothers():
+    cursor = db.cursor()
+    query = "SELECT * FROM Evenement WHERE idType = 4"
+    cursor.execute(query)
+    autres = cursor.fetchall()
+    cursor.close()
+
+    autres_list = []
+    for autre in autres:
+        autre_dict = {
+            'idEvenement': autre[0],
+            'nomEvenement': autre[1],
+            'descriptionEvenement': autre[2],
+            'dateDebut': autre[4],
+            'dateFin': autre[5],
+            'heureDebut': serialize_timedelta(autre[6]),
+            'heureFin': serialize_timedelta(autre[7]),
+            'lieuEvenement': autre[8],
+            'programme': autre[9],
+        }
+        autres_list.append(autre_dict)
+    return jsonify({'autres': autres_list})
 
 @app.route('/type', methods=['GET', 'POST'])
 def readtype():
@@ -267,6 +348,24 @@ def readusers():
         users_list.append(user_dict)
     return jsonify({'users' : users_list})
 
+@app.route('/publicite', methods=['GET', 'POST'])
+def readpub():
+    cursor = db.cursor()
+    query = "SELECT * FROM Publicite"
+    cursor.execute(query)
+    publicites = cursor.fetchall()
+    cursor.close()
+
+    publicites_list = []
+    for publicite in publicites:
+        publicite_dict = {
+            'idPub' : publicite[0],
+            'libellePub' : publicite[1],
+            'idAdmin' : publicite[2]
+        }
+        publicites_list.append(publicite_dict)
+    return jsonify({'publicites' : publicites_list})
+
 
 
 #---------------------------------------------------
@@ -312,7 +411,7 @@ def deletevent(idEvenement):
     return jsonify({'message' : 'Evènement supprimé avec succès'})
 
 
-#fonctions qui permet d'envoyer un mail contenant la newsletter aux utilisateurs
+#fonction qui permet d'envoyer un mail contenant la newsletter aux utilisateurs
 @app.route('/send_emails', methods=['POST'])
 def send_emails():
     # Récupération les informations de la newsletter à partager depuis la requête
@@ -357,8 +456,9 @@ def send_emails():
 
 
 
+
 #main
 if __name__ == "__main__":
     app.run(debug=True)
-    #app.run(host="http://127.0.0.1/", port=5000, debug=True)
+
 

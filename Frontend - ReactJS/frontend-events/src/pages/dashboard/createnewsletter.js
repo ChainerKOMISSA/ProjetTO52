@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Container, Row, Col, Card, Nav, Navbar , Button, Form, FormSelect, Toast, ToastContainer} from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Container, Row, Card, Button, Form, FormSelect, Toast, ToastContainer} from 'react-bootstrap';
 import { faUsers, faShoppingCart, faChartLine, faTachometerAlt,faCalendarDays, faEnvelope, faMusic} from '@fortawesome/free-solid-svg-icons';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
 
