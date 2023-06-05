@@ -1,6 +1,8 @@
 import React , {useState, useEffect} from 'react';
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
-import { FaMusic, FaGuitar, FaMask, FaGlassCheers, FaStar, FaHamburger, FaBookOpen, FaHospitalSymbol} from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { Container, Row, Col, Card, Button, Modal } from 'react-bootstrap';
+import { FaMusic, FaGuitar, FaMask, FaGlassCheers, FaStar, FaHamburger, FaBookOpen, FaHospitalSymbol, FaHeart, FaCcPaypal} from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
   
   const buttonStyles = {
@@ -28,7 +30,10 @@ import { FaMusic, FaGuitar, FaMask, FaGlassCheers, FaStar, FaHamburger, FaBookOp
   }
 
 function Body(){
+  const navigate = useNavigate()
     const [events, setEvents] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [selectedEvent, setSelectedEvent] = useState(null);
 
     useEffect(() => {
       fetch('http://127.0.0.1:5000/readevents')
@@ -40,6 +45,20 @@ function Body(){
         console.error('Erreur lors de la récupération des concerts:', error);
       });
     }, []);
+
+    const handleVoirDetails = (idEvenement) => {
+      navigate('/evenement/${idEvenement}')
+    };
+
+    const handleCloseModal = () => {
+      setShowModal(false);
+      setSelectedEvent(null);
+    }
+
+    const handleOpenModal = (event) => {
+      setSelectedEvent(event);
+      setShowModal(true);
+    }
 
     return (
         <Container fluid>
@@ -192,18 +211,44 @@ function Body(){
             <br></br>
             <Row>
               {events.map(event => (
-                <Col md={3}>
+                <Col md={3} key={event.idEvenement}>
                 <Card style={{ width: '18rem' }}>
                     <Card.Img variant="top" src={event.imageEvenement} />
                     <Card.Body>
                         <Card.Title>{event.nomEvenement}</Card.Title>
                         <Card.Text>{event.descriptionEvenement}</Card.Text>
-                        <Button style={buttonStyles}>Plus de détails</Button>
+                        <Button style={buttonStyles} onClick={() => handleOpenModal(event)}>Plus de détails</Button>
                     </Card.Body>
                 </Card>
                 </Col>
               ))}
             </Row>
+              {
+                selectedEvent && (
+                  <Modal show={showModal} onHide={handleCloseModal} size='lg'>
+                    <Modal.Header closeButton>
+                    <Modal.Title>Détails de l'évènement</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <Card border='danger'>
+                        <Card.Header>
+                          <h3>{selectedEvent.nomEvenement}</h3>
+                        </Card.Header>
+                        <Card.Body>
+                          <p>{selectedEvent.descriptionEvenement}</p>
+                        </Card.Body>
+                        <Card.Footer>
+                        <Button variant='outline-danger'><FaCcPaypal/>&nbsp;Payer un ticket</Button>&nbsp;&nbsp;
+                        <Button variant='outline-secondary'><FaHeart/>&nbsp;Ajouter à ma liste</Button>
+                        </Card.Footer>
+                      </Card>
+                </Modal.Body>
+                <Modal.Footer>
+                <Button variant='secondary' onClick={handleCloseModal}>Fermer</Button>
+                </Modal.Footer>
+                  </Modal>
+                )
+              }
       </Container>
     )
 }

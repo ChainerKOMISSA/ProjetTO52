@@ -238,6 +238,19 @@ def readevents():
         events_list.append(event_dict)
     return jsonify({'events': events_list})
 
+@app.route('/getevent/<int:idEvenement>', methods=['GET'])
+def get_event_details(idEvenement):
+    cursor = db.cursor()
+    query = "SELECT * FROM Evenement WHERE idEvenement = %s"
+    cursor.execute(query, (idEvenement))
+    event = cursor.fetchone()
+    cursor.close()
+
+    if event:
+        return jsonify({'event' : event})
+    else :
+        return jsonify({'message' : 'Evènement non trouvé'})
+
 @app.route('/users', methods=['GET', 'POST'])
 def readusers():
     cursor = db.cursor()
@@ -253,6 +266,7 @@ def readusers():
         }
         users_list.append(user_dict)
     return jsonify({'users' : users_list})
+
 
 
 #---------------------------------------------------
