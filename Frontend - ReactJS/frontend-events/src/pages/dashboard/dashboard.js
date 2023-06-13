@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, Nav, Navbar , Button, Image} from 'react-bootstrap';
 import { FaEnvelope, FaCube, FaMusic, FaDrum, FaTachometerAlt, FaBookOpen, FaGuitar} from 'react-icons/fa';
 
@@ -8,7 +8,7 @@ import { FaEnvelope, FaCube, FaMusic, FaDrum, FaTachometerAlt, FaBookOpen, FaGui
 const sidebarStyles = {
   backgroundColor: '#343a40',
   color: '#fff',
-  height: '100vh',
+  height: '150vh',
 };
 
 const sidebarIconStyles = {
@@ -40,6 +40,7 @@ const logoStyles = {
 }
 
 function Dashboard() {
+  const user = localStorage.getItem('user')
   
   return (
     <>
@@ -51,9 +52,9 @@ function Dashboard() {
           <Nav.Link href="">
             <Button style={buttonStyles}>
             <Image src='' style={logoStyles}/>
-            <h3>Bienvenue, Essi</h3>
+            <h3>Bienvenue {user}</h3>
             </Button>
-            </Nav.Link><br></br><br></br>
+            </Nav.Link><br></br>
             <Nav.Link href="">
               <Link to="/">
                 <Button style={buttonStyles}>

@@ -40,7 +40,7 @@ def login():
     cursor.close()
     if user:
         session['username'] = user[1]  # Sauvegarde du nom d'utilisateur en session
-        return jsonify({'message': 'Connexion réussie'})
+        return jsonify({'user': session['username']})
     else:
         return jsonify({'message': 'Identifiants invalides'})
 

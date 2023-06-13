@@ -29,9 +29,11 @@ function Login() {
       body: JSON.stringify(data),
     })
       .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        navigate('/dashboard/dashindex')
+      .then(data => {
+        setUsername(data.user)
+        console.log(data.user)
+        localStorage.setItem('user', data.user)
+        navigate('/dashboard/dashindex');
       })
       .catch((error) => {
         console.error(error);

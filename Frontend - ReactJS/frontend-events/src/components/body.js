@@ -26,7 +26,11 @@ import { useNavigate } from 'react-router-dom';
 
   const cardtitleStyles = {
     marginTop : '10px',
-    
+  }
+
+  const readStyles = {
+    maxHeight : "400px",
+    minHeight : "400px"
   }
 
 function Body(){
@@ -70,7 +74,7 @@ function Body(){
 
     return (
         <div>
-            <br></br>
+            <br></br><br></br>
             <h3>Découvrez les catégories du moment</h3>
             <br></br>
             <Row>
@@ -214,13 +218,13 @@ function Body(){
               </Col>
             </Row>
 
-            <br></br>
+            <br></br><br></br><br></br><br></br>
             <h3>Evènements à ne pas rater</h3>
             <br></br>
             <Row>
               {events.map(event => (
                 <Col md={3} key={event.idEvenement}>
-                <Card style={{ width: '18rem' }}>
+                <Card style={readStyles}>
                     <Card.Img variant="top" src={event.imageEvenement} />
                     <Card.Body>
                         <Card.Title>{event.nomEvenement}</Card.Title>

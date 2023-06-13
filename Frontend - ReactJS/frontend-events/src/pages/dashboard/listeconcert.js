@@ -166,7 +166,7 @@ function Listeconcert() {
                 <Button variant='secondary' onClick={handleCloseModal}>Fermer</Button>
                 </Modal.Footer>
               </Modal>
-              )};
+              )}
         </Card>
   )
 }
