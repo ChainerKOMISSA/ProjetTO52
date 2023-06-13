@@ -51,9 +51,17 @@ function Dashboard() {
           <Nav.Link href="">
             <Button style={buttonStyles}>
             <Image src='' style={logoStyles}/>
-            Events.com
+            <h3>Bienvenue, Essi</h3>
             </Button>
-            </Nav.Link>
+            </Nav.Link><br></br><br></br>
+            <Nav.Link href="">
+              <Link to="/">
+                <Button style={buttonStyles}>
+                <FaTachometerAlt style={sidebarIconStyles}/>
+                Acceuil
+                </Button>
+              </Link>
+            </Nav.Link><br></br>
             <Nav.Link href="">
               <Link to="/dashboard/dashindex">
                 <Button style={buttonStyles}>
@@ -61,7 +69,7 @@ function Dashboard() {
                 Tableau de bord
                 </Button>
               </Link>
-            </Nav.Link>
+            </Nav.Link><br></br>
             <Nav.Link href="">
               <Link to="/dashboard/listeconcert">
                 <Button style={buttonStyles}>
@@ -69,7 +77,7 @@ function Dashboard() {
                 Concerts
                 </Button>
               </Link>
-            </Nav.Link>
+            </Nav.Link><br></br>
             <Nav.Link href="">
               <Link to="/dashboard/listefestival">
                 <Button style={buttonStyles}>
@@ -77,7 +85,7 @@ function Dashboard() {
                 Festivals
                 </Button>
               </Link>
-            </Nav.Link>
+            </Nav.Link><br></br>
             <Nav.Link href="">
               <Link to="/dashboard/listeformation">
                 <Button style={buttonStyles}>
@@ -85,7 +93,7 @@ function Dashboard() {
                 Formations
                 </Button>
               </Link>
-            </Nav.Link>
+            </Nav.Link><br></br>
             <Nav.Link href="">
               <Link to="/dashboard/listespectacle">
                 <Button style={buttonStyles}>
@@ -93,7 +101,7 @@ function Dashboard() {
                 Spectacles
                 </Button>
               </Link>
-            </Nav.Link>
+            </Nav.Link><br></br>
             <Nav.Link href="">
               <Link to="/dashboard/listepub">
                 <Button style={buttonStyles}>
@@ -101,7 +109,7 @@ function Dashboard() {
                 Publicités
                 </Button>
               </Link>
-            </Nav.Link>
+            </Nav.Link><br></br>
             <Nav.Link href="">
               <Link to="/dashboard/newsletter">
                 <Button style={buttonStyles}>
@@ -109,7 +117,7 @@ function Dashboard() {
                 Newsletter
                 </Button>
               </Link>
-            </Nav.Link>
+            </Nav.Link><br></br>
           </Nav>
           </Navbar>
         </Col>

@@ -5,7 +5,6 @@ from werkzeug.utils import secure_filename
 import sendgrid
 from sendgrid.helpers.mail import Mail
 
-
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*" : {"origins" : "*"}})
 app.secret_key = 'secret-key' # Clé secrète utilisée pour la gestion de la session

@@ -24,7 +24,7 @@ function Header(){
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.5">Autres</NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link href=""><Link to={'/'}>Mon compte</Link></Nav.Link>
+              <Nav.Link href="">Mon compte</Nav.Link>
             </Nav>
             <Form className="d-flex">
                   <Form.Control
@@ -35,7 +35,7 @@ function Header(){
                   />
                   <Button variant="outline-danger">Rechercher</Button>
             </Form>
-            <Link to={'/login'} className='m-2'><Button variant="danger">Login</Button></Link>
+            <Link to={'/login'} className='m-2'><Button variant="danger">Se connecter</Button></Link>
           </Navbar.Collapse>
         </Container>
       </Navbar>

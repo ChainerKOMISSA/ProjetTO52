@@ -47,8 +47,8 @@ function Dashindex() {
                 <Card.Body>
                   <Card bg='danger' style={cardStyles}>
                   <FaMusic style={iconStyles}/>
-                  </Card>
-                  <Card.Title>Concerts</Card.Title>
+                  </Card><br></br>
+                  <Card.Title>Mes évènements</Card.Title>
                   <Card.Text>100</Card.Text>
                 </Card.Body>
               </Card>
@@ -58,8 +58,8 @@ function Dashindex() {
                 <Card.Body>
                 <Card bg='danger' style={cardStyles}>
                   <FaDrum style={iconStyles}/>
-                  </Card>
-                  <Card.Title>Festivals</Card.Title>
+                  </Card><br></br>
+                  <Card.Title>Mes newsletters</Card.Title>
                   <Card.Text>50</Card.Text>
                 </Card.Body>
               </Card>
@@ -69,8 +69,8 @@ function Dashindex() {
                 <Card.Body>
                 <Card bg='danger' style={cardStyles}>
                   <FaGuitar style={iconStyles}/>
-                  </Card>
-                  <Card.Title>Spectacles</Card.Title>
+                  </Card><br></br>
+                  <Card.Title>Mes publicités</Card.Title>
                   <Card.Text>5000</Card.Text>
                 </Card.Body>
               </Card>
@@ -80,8 +80,8 @@ function Dashindex() {
                 <Card.Body>
                 <Card bg='danger' style={cardStyles}>
                   <FaUserAlt style={iconStyles}/>
-                  </Card>
-                  <Card.Title>Utilisateurs</Card.Title>
+                  </Card><br></br>
+                  <Card.Title>Gérer mon compte</Card.Title>
                   <Card.Text>5000</Card.Text>
                 </Card.Body>
               </Card>

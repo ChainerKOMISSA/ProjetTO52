@@ -10,7 +10,6 @@ function Carouselfunction() {
         <img
           className="d-block w-100"
           src={car2} 
-          fluid
           alt="First slide"
           height= "500vh"
         />

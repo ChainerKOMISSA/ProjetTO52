@@ -34,21 +34,29 @@ function Body(){
     const [events, setEvents] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [selectedEvent, setSelectedEvent] = useState(null);
+    const [pubs, setPubs] = useState([]);
 
     useEffect(() => {
+
       fetch('http://127.0.0.1:5000/readevents')
       .then(response => response.json())
       .then(data => {
         setEvents(data.events)
+        fetch('http://127.0.0.1:5000/publicite')
+          .then(response => response.json())
+          .then(data => {
+            setPubs(data.publicites)
+          })
+          .catch(error => {
+            console.error('Erreur lors de la récupération des publicités:', error);
+          })
       })
       .catch(error => {
-        console.error('Erreur lors de la récupération des concerts:', error);
+        console.error('Erreur lors de la récupération des évènements:', error);
       });
+
     }, []);
 
-    const handleVoirDetails = (idEvenement) => {
-      navigate('/evenement/${idEvenement}')
-    };
 
     const handleCloseModal = () => {
       setShowModal(false);
@@ -61,7 +69,7 @@ function Body(){
     }
 
     return (
-        <Container fluid>
+        <div>
             <br></br>
             <h3>Découvrez les catégories du moment</h3>
             <br></br>
@@ -223,6 +231,20 @@ function Body(){
                 </Col>
               ))}
             </Row>
+            <br></br>
+            <h3>Publicités</h3>
+            <br></br>
+            <Row>
+              {pubs.map(pub => (
+                <Col md={3} key={pub.idPub}>
+                  <Card style={{ width: '18rem' }}>
+                      <Card.Body>
+                        <Card.Text>{pub.libellePub}</Card.Text>
+                      </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
               {
                 selectedEvent && (
                   <Modal show={showModal} onHide={handleCloseModal} size='lg'>
@@ -249,7 +271,7 @@ function Body(){
                   </Modal>
                 )
               }
-      </Container>
+      </div>
     )
 }
 
