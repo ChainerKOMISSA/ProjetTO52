@@ -40,53 +40,71 @@ const logoStyles = {
 
 function Dashindex() {
   return (
+    <div>
           <Row>
             <Row><h2>Tableau de bord</h2></Row>
             <Col md={3}>
               <Card border="danger" text="black">
                 <Card.Body>
-                  <Card bg='danger' style={cardStyles}>
-                  <FaMusic style={iconStyles}/>
-                  </Card><br></br>
+                  <Link>
+                    <Card bg='danger' style={cardStyles}>
+                    <FaMusic style={iconStyles}/>
+                    </Card><br></br>
+                  </Link>
                   <Card.Title>Mes évènements</Card.Title>
-                  <Card.Text>100</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
             <Col md={3}>
               <Card border="danger" text="black">
                 <Card.Body>
-                <Card bg='danger' style={cardStyles}>
-                  <FaDrum style={iconStyles}/>
-                  </Card><br></br>
+                  <Link to="/dashboard/newsletter">
+                    <Card bg='danger' style={cardStyles}>
+                    <FaDrum style={iconStyles}/>
+                    </Card><br></br>
+                  </Link>
                   <Card.Title>Mes newsletters</Card.Title>
-                  <Card.Text>50</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
             <Col md={3}>
               <Card border="danger" text="black">
                 <Card.Body>
-                <Card bg='danger' style={cardStyles}>
-                  <FaGuitar style={iconStyles}/>
-                  </Card><br></br>
+                  <Link to="/dashboard/listepub">
+                    <Card bg='danger' style={cardStyles}>
+                    <FaGuitar style={iconStyles}/>
+                    </Card><br></br>
+                  </Link >
                   <Card.Title>Mes publicités</Card.Title>
-                  <Card.Text>5000</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
             <Col md={3}>
               <Card border="danger" text="black">
                 <Card.Body>
-                <Card bg='danger' style={cardStyles}>
-                  <FaUserAlt style={iconStyles}/>
-                  </Card><br></br>
+                  <Link to="">
+                    <Card bg='danger' style={cardStyles}>
+                    <FaUserAlt style={iconStyles}/>
+                    </Card><br></br>
+                  </Link>
                   <Card.Title>Gérer mon compte</Card.Title>
-                  <Card.Text>5000</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
+          </Row><br></br><br></br>
+
+          <Row>
+          <Row><h2>Mes statistiques</h2></Row>
+            <Card border='secondary'>
+              <Card.Body>
+
+              </Card.Body>
+              <Card.Footer>
+                
+              </Card.Footer>
+            </Card>
           </Row>
+    </div>
   )
 }
 

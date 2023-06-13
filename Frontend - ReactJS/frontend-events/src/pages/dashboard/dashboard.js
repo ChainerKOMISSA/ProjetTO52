@@ -52,9 +52,9 @@ function Dashboard() {
           <Nav.Link href="">
             <Button style={buttonStyles}>
             <Image src='' style={logoStyles}/>
-            <h3>Bienvenue {user}</h3>
+            <h4>Bienvenue {user} </h4>
             </Button>
-            </Nav.Link><br></br>
+            </Nav.Link>
             <Nav.Link href="">
               <Link to="/">
                 <Button style={buttonStyles}>

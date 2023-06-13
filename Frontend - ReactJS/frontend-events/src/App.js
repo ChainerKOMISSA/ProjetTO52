@@ -5,6 +5,7 @@ import Header from './components/header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Carouselfunction from './components/carousel';
 import Body from './components/body';
+import Footer from './components/footer';
 
 function App() {
   return (
@@ -13,8 +14,9 @@ function App() {
       <div className='Carousel'>
       <Carouselfunction/>
       </div>
-      <Body/>
-      <p></p>
+      <Body/> 
+      <br></br><br></br>
+      <Footer/>
     </div>
   );
 }
