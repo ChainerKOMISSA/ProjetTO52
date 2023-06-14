@@ -264,8 +264,12 @@ function Body(){
                           <p>{selectedEvent.descriptionEvenement}</p>
                         </Card.Body>
                         <Card.Footer>
-                        <Button variant='outline-danger'><FaCcPaypal/>&nbsp;Payer un ticket</Button>&nbsp;&nbsp;
-                        <Button variant='outline-secondary'><FaHeart/>&nbsp;Ajouter à ma liste</Button>
+                          <Link to='/payer'>
+                            <Button variant='outline-danger'><FaCcPaypal/>&nbsp;Payer un ticket</Button>&nbsp;&nbsp;
+                          </Link> 
+                          <Link >
+                            <Button variant='outline-secondary'><FaHeart/>&nbsp;Ajouter à ma liste</Button>
+                          </Link> 
                         </Card.Footer>
                       </Card>
                 </Modal.Body>

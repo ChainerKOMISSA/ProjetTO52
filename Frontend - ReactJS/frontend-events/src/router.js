@@ -13,12 +13,17 @@ import Listespectacle from "./pages/dashboard/listespectacle";
 import Listeformation from "./pages/dashboard/listeformation";
 import Createpub from "./pages/dashboard/createpub";
 import Listepub from "./pages/dashboard/listepub";
+import Achat from "./components/achat";
 
 
 const router = createBrowserRouter([
     {
       path: "/",
       element: <App/>,
+    },
+    {
+      path : "/payer",
+      element : <Achat/>
     },
     {
         path: "/login",

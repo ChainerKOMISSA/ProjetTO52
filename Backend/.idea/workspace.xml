@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="2ec56bf7-5e6c-49c4-abf6-89fd41a729a3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend - ReactJS/frontend-events/src/components/body.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend - ReactJS/frontend-events/src/components/body.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend - ReactJS/frontend-events/src/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend - ReactJS/frontend-events/src/router.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
