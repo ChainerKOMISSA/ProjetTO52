@@ -1,45 +1,36 @@
 import React from 'react'
-import { Col, Row , Image} from 'react-bootstrap'
+import { Col, Row , Image, Button} from 'react-bootstrap'
 import Elogo from '../images/ELogo.png';
-import { FaFigma, FaGithub} from 'react-icons/fa';
+import { FaFigma, FaGithub, FaFacebookF, FaLinkedinIn} from 'react-icons/fa';
 
 
 const footerStyles =  {
     backgroundColor: '#343a40',
     color: '#fff',
     height: '40vh',
+    width : '195vh',
 }
 
 const logoStyles = {
-    width : '35px'
+    width : '50px'
 }
+
+const buttonStyles = {
+    margin: '55px 0',
+    backgroundColor: '#343a40',
+    border: 'none',
+}
+
+
 
 function Footer() {
   return (
     <div style={footerStyles}>
         <Row>
-            <Col md={3}>
-
-            </Col>
-            <Col md={6}>
-                
-            </Col>
-            <Col md={3}>
-                
-            </Col>
+            <Button style={buttonStyles}><Image src={Elogo} style={logoStyles}/>Events.com</Button>
         </Row>
-        <Row>
-            <Col md={3}>
-            <Image src={Elogo} style={logoStyles}/>
-            </Col>
-            <Col md={6}>
-                
-            </Col>
-            <Col md={3}>
-                
-            </Col>
-        </Row>
-            <FaFigma/>&nbsp;<FaGithub/>
+            <FaFigma/>&nbsp;<FaGithub/>&nbsp;<FaFacebookF/>&nbsp;<FaLinkedinIn/><br></br><br></br>
+            Copyright &copy;2023 - Events.com - Tous droits réservés
     </div>
   )
 }

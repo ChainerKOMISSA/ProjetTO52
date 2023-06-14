@@ -1,7 +1,5 @@
 import React , { useEffect, useState } from 'react';
 import { Container, Row, Col, Card, Nav, Navbar , Button, Form} from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUsers, faShoppingCart, faChartLine, faTachometerAlt,faCalendarDays, faEnvelope, faMusic} from '@fortawesome/free-solid-svg-icons';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
 import { Link, useNavigate} from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -99,6 +97,7 @@ function Newevent() {
     formData.append('lieuEvenement', lieuEvenement);
     formData.append('programme', programme);
     formData.append('imageEvenement', imageEvenement);
+    
 
     try {
       const response = await fetch('http://127.0.0.1:5000/createvent', {
@@ -109,7 +108,7 @@ function Newevent() {
       if (response.ok) {
         const data = await response.json();
         toast.success('Evènement ajouté avec succès')
-        navigate('/listeconcert')
+        navigate('/dashboard/listeconcert')
       } else {
         toast.error('Une erreur s\'est produite.')
       }
@@ -137,7 +136,7 @@ function Newevent() {
       </CardHeader>
       <Card.Body>
       <Row>
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit} encType='multipart/form-data'>
           <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridEmail">
             <Form.Label>Nom de l'évènement</Form.Label>
@@ -197,7 +196,7 @@ function Newevent() {
 
           <Form.Group as={Col} controlId="formGridPassword">
             <Form.Label>Image</Form.Label>
-            <Form.Control type="file" onChange={handleImageEvenementChange} placeholder="Ajoutez une image" value={imageEvenement} required/>
+            <Form.Control type="file" onChange={handleImageEvenementChange} placeholder="Ajoutez une image" accept='image/*' />
           </Form.Group>
           </Row>
 
