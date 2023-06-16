@@ -1,10 +1,11 @@
 import React , {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
-import { Carousel, CarouselItem, Row, Col, Card, Button, Modal } from 'react-bootstrap';
+import { Button, Container, Form, Nav, Navbar, NavDropdown, Image, Carousel, Row, Col, Card, Modal } from 'react-bootstrap';
 import { FaMusic, FaGuitar, FaMask, FaGlassCheers, FaCalendarAlt, FaStar, FaHamburger, FaBookOpen, FaHospitalSymbol, FaHeart, FaCcPaypal, FaMapMarkerAlt} from 'react-icons/fa';
 import { BsSmartwatch } from "react-icons/bs";
 import { useNavigate } from 'react-router-dom';
 import car2 from "../images/car2.png";
+import Elogo from '../images/ELogo.png';
 
 
   
@@ -48,12 +49,20 @@ import car2 from "../images/car2.png";
     minHeight : "310px"
   }
 
+  const logoStyles = {
+  width : '35px'
+  }
+
 function Body(){
   const navigate = useNavigate()
     const [events, setEvents] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [pubs, setPubs] = useState([]);
+    const [filteredEvents, setFilteredEvents] = useState([]);
+    const [searchValue, setSearchValue] = useState('');
+
+
 
     useEffect(() => {
 
@@ -87,8 +96,51 @@ function Body(){
       setShowModal(true);
     }
 
+    const handleSearchInputChange = (event) => {
+      setSearchValue(event.target.value);
+    };
+
+    const handleSearch = () => {
+      const filtered = events.filter(event => {
+        return event.nomEvenement.toLowerCase().includes(searchValue.toLowerCase());
+      })
+
+      setFilteredEvents(filtered);
+    }
+
     return (
         <div>
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" id="navbar">
+        <Container>
+          <Navbar.Brand className="text-danger" href="#home"><Image src={Elogo} style={logoStyles}/>Events.com</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link href="#home">Acceuil</Nav.Link>
+              <NavDropdown title="Evènements" id="basic-nav-dropdown">
+                <NavDropdown.Item href="#">Concerts</NavDropdown.Item>
+                <NavDropdown.Item href="#">Festivals</NavDropdown.Item>
+                <NavDropdown.Item href="#">Formations</NavDropdown.Item>
+                <NavDropdown.Item href="#">Spectacles pour enfants</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#">Autres</NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+            <Form className="d-flex">
+                  <Form.Control
+                    type="text"
+                    placeholder="Recherche..."
+                    className="me-2"
+                    aria-label="Search"
+                    value={searchValue}
+                    onChange={handleSearchInputChange}
+                  />
+                  <Button variant="outline-danger" onClick={handleSearch}>Rechercher</Button>
+            </Form>
+            <Link to={'/login'} className='m-2'><Button variant="danger">Se connecter</Button></Link>
+          </Navbar.Collapse>
+        </Container>
+        </Navbar>
           <Carousel>
             {pubs.map(pub => (
               <Carousel.Item key={pub.idPub}>

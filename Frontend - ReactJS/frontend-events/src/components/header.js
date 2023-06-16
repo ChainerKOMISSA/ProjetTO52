@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Button, Container, Form, Nav, Navbar, NavDropdown, Image} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Elogo from '../images/ELogo.png';
@@ -8,6 +8,7 @@ const logoStyles = {
 }
 
 function Header(){
+
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" id="navbar">
         <Container>
