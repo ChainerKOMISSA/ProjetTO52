@@ -39,6 +39,21 @@ function Listepub() {
         setShowModal(true)
       }
 
+      const handleDelete = (idPub) => {
+        if(window.confirm('Êtes-vous sûr de vouloir supprimer cette publicité ?')){
+          fetch(`http://127.0.0.1:5000/deletepub/${idPub}`, {
+            method: 'DELETE'
+          })
+          .then(response => response.json())
+          .then(data => {
+          console.log(data.message);
+          navigate('/dashboard/listepub');
+          })
+          .catch(error => {
+            console.error('Erreur lors de la suppression de la publicité:', error);
+          })
+        }
+      }
 
   return (
     <Card border="secondary">
@@ -60,7 +75,6 @@ function Listepub() {
                 <tr>
                     <th>N°</th>
                     <th>Libellé de la publicité</th>
-                    <th>Créateur de la publicité</th>
                 </tr>
             </thead>
             <tbody>
@@ -68,12 +82,7 @@ function Listepub() {
                     <tr key={publicite.idPub}>
                         <td>{publicite.idPub}</td>
                         <td>{publicite.libellePub}</td>
-                        <td>{publicite.idAdmin}</td>
-                        <td>
-                            <Link to="">
-                                    <Button variant='danger' onClick={() => handleOpenModal(publicite)}><FaFolderOpen /></Button>
-                            </Link>
-                        </td>
+                        <td><Button variant='danger' onClick={() => handleOpenModal(publicite)}><FaFolderOpen /></Button></td>
                     </tr>
                 ))}
             </tbody>
@@ -91,7 +100,7 @@ function Listepub() {
                         </Card.Body>
                         <Card.Footer>
                         <Button variant='outline-danger'><FaEdit/>&nbsp;Modifier</Button>&nbsp;&nbsp;
-                        <Button variant='outline-secondary'><FaTrash/>&nbsp;Supprimer</Button>
+                        <Button variant='outline-secondary' onClick={() => handleDelete(selectecPub.idPub)}><FaTrash/>&nbsp;Supprimer</Button>
                         </Card.Footer>
                     </Card>
                   </Modal.Body>

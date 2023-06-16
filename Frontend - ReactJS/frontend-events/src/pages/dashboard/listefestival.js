@@ -1,12 +1,15 @@
 import React , {useState, useEffect} from 'react';
-import { Link } from 'react-router-dom';
-import {Row, Col, Button, Table, Card} from 'react-bootstrap';
-import { FaFolderOpen} from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router-dom';
+import {Row, Col, Button, Table, Card, Modal} from 'react-bootstrap';
+import { FaFolderOpen, FaTrash, FaEdit} from 'react-icons/fa';
 
 
 
 function Listefestival() {
+  const navigate = useNavigate();
   const [festivals, setFestivals] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedFestival, setSelectedFestival] = useState(null);
 
   useEffect(() => {
     fetch('http://127.0.0.1:5000/festival')
@@ -15,9 +18,35 @@ function Listefestival() {
       setFestivals(data.festivals)
     })
     .catch(error => {
-      console.error('Erreur lors de la récupération des concerts:', error);
+      console.error('Erreur lors de la récupération des festivals:', error);
     });
   }, []);
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedFestival(null);
+  }
+
+  const handleOpenModal = (festival) => {
+    setSelectedFestival(festival);
+    setShowModal(true);
+  }
+
+  const handleDelete = (idEvenement) => {
+    if(window.confirm('Êtes-vous sûr de vouloir supprimer cet évènement ?')){
+      fetch(`http://127.0.0.1:5000/deletevent/${idEvenement}`, {
+      method : 'DELETE'
+      })
+      .then(response => response.json())
+      .then(data => {
+      console.log(data.message);
+      navigate('/dashboard/listeconcert');
+      })
+      .catch(error => {
+        console.error('Erreur lors de la suppression de l\'évènement:', error);
+      })
+    }
+  }
 
 
   return (
@@ -64,7 +93,7 @@ function Listefestival() {
                     <td>{festival.programme}</td>
                     <td>
                     <Link to="">
-                        <Button variant='danger'><FaFolderOpen /></Button>
+                        <Button variant='danger' onClick={() => handleOpenModal(festival)}><FaFolderOpen /></Button>
                     </Link>
                   </td>
                   </tr>
@@ -72,6 +101,32 @@ function Listefestival() {
           </tbody>
       </Table>
     </Card.Body>
+    {
+      selectedFestival && (
+        <Modal show={showModal} onHide={handleCloseModal}>
+          <Modal.Header closeButton>
+          < Modal.Title>Détails de l'évènement</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+                  <Card border='danger'>
+                    <Card.Header>
+                      <h3>{selectedFestival.nomEvenement}</h3>
+                    </Card.Header>
+                    <Card.Body>
+                      <p>{selectedFestival.descriptionEvenement}</p>
+                    </Card.Body>
+                    <Card.Footer>
+                    <Button variant='outline-danger'><FaEdit/>&nbsp;Modifier</Button>&nbsp;&nbsp;
+                    <Button variant='outline-secondary' onClick={() => handleDelete(selectedFestival.idEvenement)}><FaTrash/>&nbsp;Supprimer</Button>
+                    </Card.Footer>
+                  </Card>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant='secondary' onClick={handleCloseModal}>Fermer</Button>
+            </Modal.Footer>
+        </Modal>
+      )
+    }
   </Card>
   )
 }

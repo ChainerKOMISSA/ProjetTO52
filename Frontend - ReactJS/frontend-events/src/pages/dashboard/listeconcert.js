@@ -4,27 +4,6 @@ import {Row, Col, Button, Table, Card, Modal} from 'react-bootstrap';
 import { FaFolderOpen, FaTrash, FaEdit} from 'react-icons/fa';
 
 
-const sidebarStyles = {
-  backgroundColor: '#343a40',
-  color: '#fff',
-  height: '100vh',
-};
-
-const sidebarIconStyles = {
-  marginRight: '8px',
-
-};
-
-const buttonStyles = {
-  margin: '5px 0',
-  backgroundColor: '#343a40',
-  //color: '#dc3545',
-  color: '#fff',
-  border: 'none',
-};
-
-
-
 function Listeconcert() {
   const navigate = useNavigate();
   const [concerts, setConcerts] = useState([]);
@@ -54,40 +33,49 @@ function Listeconcert() {
   };
 
   const handleDelete = (idEvenement) => {
-    fetch(`http://127.0.0.1:5000/deletevent/${idEvenement}`, {
+    if(window.confirm('Êtes-vous sûr de vouloir supprimer cet évènement ?')) {
+      fetch(`http://127.0.0.1:5000/deletevent/${idEvenement}`, {
       method : 'DELETE'
-    })
-    .then(response => response.json())
-    .then(data => {
-    console.log(data.message);
-    navigate('/listeconcert');
-  })
-    .catch(error => {
-      console.error('Erreur lors de la suppression de l\'évènement:', error);
-  })
+      })
+      .then(response => response.json())
+      .then(data => {
+      console.log(data.message);
+      navigate('/dashboard/listeconcert');
+      })
+      .catch(error => {
+        console.error('Erreur lors de la suppression de l\'évènement:', error);
+      })
+    }
   }
 
   
-
   const handleEdit = (idEvenement) => {
     const selectedConcert = concerts.find(concert => concert.idEvenement === idEvenement);
-    const updatedData = {
-      nomEvenement: selectedConcert.nomEvenement,
-      descriptionEvenement: selectedConcert.descriptionEvenement,
-      // Ajouter d'autres champs à mettre à jour
-    };
+    const updatedData = new FormData();
+
+      updatedData.append('nomEvenement', selectedConcert.nomEvenement);
+      updatedData.append('descriptionEvenement', selectedConcert.descriptionEvenement);
+      updatedData.append('idType', selectedConcert.idType);
+      updatedData.append('dateDebut', selectedConcert.dateDebut);
+      updatedData.append('dateFin', selectedConcert.dateFin);
+      updatedData.append('heureDebut', selectedConcert.heureDebut);
+      updatedData.append('heureFin', selectedConcert.heureFin);
+      updatedData.append('lieuEvenement', selectedConcert.lieuEvenement);
+      updatedData.append('programme', selectedConcert.programme);
+      updatedData.append('imageEvenement', selectedConcert.imageEvenement);
+    
 
     fetch(`http://127.0.0.1:5000/updatevent/${idEvenement}`, {
     method: 'PUT',
+    body: updatedData,
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'multipart/form-data' 
     },
-    body: JSON.stringify(updatedData),
   })
     .then(response => response.json())
     .then(data => {
       console.log(data);
-      navigate('/listeconcert');
+      navigate('/dashboard/listeconcert');
     })
     .catch(error => {
       console.error('Erreur lors de la mise à jour de l\'événement:', error);
@@ -147,7 +135,7 @@ function Listeconcert() {
           </Card.Body>
           {
             selectedConcert && (
-              <Modal show={showModal} onHide={handleCloseModal}>
+              <Modal show={showModal} onHide={handleCloseModal} size='lg'>
                 <Modal.Header closeButton>
                     <Modal.Title>Détails de l'évènement</Modal.Title>
                 </Modal.Header>

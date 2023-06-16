@@ -51,6 +51,7 @@ function Newsletter() {
       libelleNewsletter : libelleNewsletter,
       contenuNewsletter : contenuNewsletter
     };
+
     fetch('http://localhost:5000/send_emails', {
       method : 'POST',
       headers : {
@@ -68,6 +69,23 @@ function Newsletter() {
       console.error('Erreur lors de l\'envoi des e-mails:', error)
     })
   }
+
+  const handleDelete = (idNewsletter) => {
+    if(window.confirm('Êtes-vous sûr de vouloir supprimer cette newsletter ?')) {
+      fetch(`http://127.0.0.1:5000/deletenewsletter/${idNewsletter}`, {
+        method:'DELETE'
+      })
+      .then(response => response.json())
+      .then(data => {
+      console.log(data.message);
+      navigate('/dashboard/newsletter');
+      })
+      .catch(error => {
+        console.error('Erreur lors de la suppression de la newsletter:', error);
+      })
+    }
+  }
+
 
   return (
         <Card border="secondary">
@@ -90,7 +108,6 @@ function Newsletter() {
             <th>N°</th>
             <th>Titre de la newsletter</th>
             <th>Contenu de la newsletter</th>
-            <th>Créateur</th>
           </tr>
         </thead>
         <tbody>
@@ -99,11 +116,8 @@ function Newsletter() {
                 <td>{newsletter.idNewsletter}</td>
                 <td>{newsletter.libelleNewsletter}</td>
                 <td>{newsletter.contenuNewsletter}</td>
-                <td>{newsletter.idAdmin}</td>
                 <td>
-                  <Link to="">
-                          <Button variant='danger' onClick={() => handleOpenModal(newsletter)}><FaFolderOpen /></Button>
-                  </Link>
+                  <Button variant='danger' onClick={() => handleOpenModal(newsletter)}><FaFolderOpen /></Button>
                 </td>
             </tr>
           ))}
@@ -127,7 +141,7 @@ function Newsletter() {
                     <Card.Footer>
                     <Button variant='danger' onClick={sendEmail}><FaShareSquare/>&nbsp;Partager</Button>&nbsp;&nbsp;
                     <Button variant='outline-danger'><FaEdit/>&nbsp;Modifier</Button>&nbsp;&nbsp;
-                    <Button variant='outline-secondary'><FaTrash/>&nbsp;Supprimer</Button>
+                    <Button variant='outline-secondary' onClick={() => handleDelete(selectedNewsletter.idNewsletter)}><FaTrash/>&nbsp;Supprimer</Button>
                     </Card.Footer>
                   </Card>
                   </Modal.Body>

@@ -380,7 +380,7 @@ def readpub():
 #fonctions UPDATE
 @app.route('/updatevent/<int:idEvenement>', methods=['PUT'])
 def updatevent(idEvenement):
-    data = request.get_json()
+    data = request.form
     nom = data['nomEvenement']
     description = data['descriptionEvenement']
     type = data['idType']
@@ -391,6 +391,7 @@ def updatevent(idEvenement):
     lieu = data['lieuEvenement']
     programme = data['programme']
     image_file = request.files['imageEvenement']
+
     filename = secure_filename(image_file.filename)
     image_path = os.path.join(upload_folder, filename)
     image_file.save(image_path)
@@ -398,8 +399,16 @@ def updatevent(idEvenement):
     cursor = db.cursor()
     query = "UPDATE Evenement SET nomEvenement = %s, descriptionEvenement = %s, " \
             "idType = %s, dateDebut = %s, dateFin = %s, heureDebut = %s, " \
-            "heureFin = %s, lieuEvenement = %s, programme = %s, imageEvenement = %s WHERE idEvenement = %s"
-    cursor.execute(query, (nom, description, type, dateDebut, dateFin, heureDebut, heureFin, lieu, programme, idEvenement, image_path))
+            "heureFin = %s, lieuEvenement = %s, programme = %s"
+    params = [nom, description, type, dateDebut, dateFin, heureDebut, heureFin, lieu, programme]
+    if filename!='':
+        query+=", imageEvenement = %s"
+        params.append(filename)
+
+    query += "WHERE idEvenement = %s"
+    params.append(idEvenement)
+
+    cursor.execute(query, tuple(params))
     db.commit()
     cursor.close()
     return jsonify({'message': 'Evènement mis à jour avec succès'})
@@ -412,11 +421,31 @@ def updatevent(idEvenement):
 def deletevent(idEvenement):
     cursor = db.cursor()
     query = "DELETE FROM Evenement WHERE idEvenement = %s"
-    cursor.execute(query, (idEvenement))
+    cursor.execute(query, (idEvenement,))
     db.commit()
     cursor.close()
 
     return jsonify({'message' : 'Evènement supprimé avec succès'})
+
+@app.route('/deletenewsletter/<int:idNewsletter>', methods=['DELETE'])
+def deletenewsletter(idNewsletter):
+    cursor = db.cursor()
+    query = "DELETE FROM Newsletter WHERE idNewsletter = %s"
+    cursor.execute(query, (idNewsletter,))
+    db.commit()
+    cursor.close()
+
+    return jsonify({'message': 'Newsletter supprimée avec succès'})
+
+@app.route('/deletepub/<int:idPub>', methods=['DELETE'])
+def deletepub(idPub):
+    cursor = db.cursor()
+    query = "DELETE  FROM Publicite WHERE idPub = %s"
+    cursor.execute(query, (idPub,))
+    db.commit()
+    cursor.close()
+
+    return jsonify({'message' : 'Publicité supprimée avec succès'})
 
 
 #fonction qui permet d'envoyer un mail contenant la newsletter aux utilisateurs
