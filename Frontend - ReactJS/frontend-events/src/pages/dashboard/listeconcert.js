@@ -30,6 +30,7 @@ function Listeconcert() {
   const [concerts, setConcerts] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedConcert, setSelectedConcert] = useState(null);
+  
 
   useEffect(() => {
     fetch('http://127.0.0.1:5000/concert')
@@ -53,7 +54,7 @@ function Listeconcert() {
   };
 
   const handleDelete = (idEvenement) => {
-    fetch('http://127.0.0.1:5000/deletevent/${idEvenement}', {
+    fetch(`http://127.0.0.1:5000/deletevent/${idEvenement}`, {
       method : 'DELETE'
     })
     .then(response => response.json())
@@ -65,6 +66,8 @@ function Listeconcert() {
       console.error('Erreur lors de la suppression de l\'évènement:', error);
   })
   }
+
+  
 
   const handleEdit = (idEvenement) => {
     const selectedConcert = concerts.find(concert => concert.idEvenement === idEvenement);

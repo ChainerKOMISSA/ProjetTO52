@@ -1,8 +1,11 @@
 import React , {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Row, Col, Card, Button, Modal } from 'react-bootstrap';
-import { FaMusic, FaGuitar, FaMask, FaGlassCheers, FaStar, FaHamburger, FaBookOpen, FaHospitalSymbol, FaHeart, FaCcPaypal} from 'react-icons/fa';
+import { Carousel, CarouselItem, Row, Col, Card, Button, Modal } from 'react-bootstrap';
+import { FaMusic, FaGuitar, FaMask, FaGlassCheers, FaCalendarAlt, FaStar, FaHamburger, FaBookOpen, FaHospitalSymbol, FaHeart, FaCcPaypal, FaMapMarkerAlt} from 'react-icons/fa';
+import { BsSmartwatch } from "react-icons/bs";
 import { useNavigate } from 'react-router-dom';
+import car2 from "../images/car2.png";
+
 
   
   const buttonStyles = {
@@ -16,6 +19,11 @@ import { useNavigate } from 'react-router-dom';
     width: '4rem',
     height : '3rem'
   }
+
+  const cardStyles2 = {
+    width: '2rem',
+    height : '2rem'
+  }
   
   const iconStyles = {
     marginTop : '16px',
@@ -24,13 +32,20 @@ import { useNavigate } from 'react-router-dom';
     color : '#fff'
   }
 
+  const iconStyles2 = {
+    marginTop : '7px',
+    marginLeft : '7px',
+    size : "lg",
+    color : 'red'
+  }
+
   const cardtitleStyles = {
     marginTop : '10px',
   }
 
   const readStyles = {
-    maxHeight : "400px",
-    minHeight : "400px"
+    maxHeight : "310px",
+    minHeight : "310px"
   }
 
 function Body(){
@@ -74,6 +89,22 @@ function Body(){
 
     return (
         <div>
+          <Carousel>
+            {pubs.map(pub => (
+              <Carousel.Item key={pub.idPub}>
+              <img
+                className="d-block w-100"
+                src={car2} 
+                alt="First slide"
+                height= "500vh"
+              />
+              <Carousel.Caption>
+                <p>{pub.libellePub}</p>
+              </Carousel.Caption>
+              </Carousel.Item>
+            ))}
+          </Carousel>
+
             <br></br><br></br>
             <h3>Découvrez les catégories du moment</h3>
             <br></br>
@@ -225,10 +256,12 @@ function Body(){
               {events.map(event => (
                 <Col md={3} key={event.idEvenement}>
                 <Card style={readStyles}>
-                    <Card.Img variant="top" src={event.imageEvenement} />
+                    <Card.Img variant="top" src={event.imageEvenement} /><br></br>
+                    <Card.Title>{event.nomEvenement}</Card.Title>
                     <Card.Body>
-                        <Card.Title>{event.nomEvenement}</Card.Title>
-                        <Card.Text>{event.descriptionEvenement}</Card.Text>
+                        <Card.Text>
+                          {event.descriptionEvenement}<br></br><br></br><br></br>
+                        </Card.Text>
                         <Button style={buttonStyles} onClick={() => handleOpenModal(event)}>Plus de détails</Button>
                     </Card.Body>
                 </Card>
@@ -236,7 +269,8 @@ function Body(){
               ))}
             </Row>
             <br></br>
-            <h3>Publicités</h3>
+            {
+              /** <h3>Publicités</h3>
             <br></br>
             <Row>
               {pubs.map(pub => (
@@ -248,7 +282,8 @@ function Body(){
                   </Card>
                 </Col>
               ))}
-            </Row>
+            </Row>*/
+            }
               {
                 selectedEvent && (
                   <Modal show={showModal} onHide={handleCloseModal} size='lg'>
@@ -261,12 +296,44 @@ function Body(){
                           <h3>{selectedEvent.nomEvenement}</h3>
                         </Card.Header>
                         <Card.Body>
-                          <p>{selectedEvent.descriptionEvenement}</p>
+                          <p>{selectedEvent.descriptionEvenement}</p><br></br>
+                          <Card border='light'>
+                          <Row>
+                          <Col md={2}>
+                              <Card border='danger' style={cardStyles2}>
+                              <BsSmartwatch  style={iconStyles2}/>
+                              </Card>
+                          </Col>
+                          <Col md={10}>
+                            {selectedEvent.heureDebut} - {selectedEvent.heureFin}
+                          </Col>
+                          </Row><br></br>
+                          <Row>
+                          <Col md={2}>
+                              <Card border='danger' style={cardStyles2}>
+                              <FaCalendarAlt style={iconStyles2}/>
+                              </Card>
+                          </Col>
+                          <Col md={10}>
+                            {selectedEvent.dateDebut} - {selectedEvent.dateFin}
+                          </Col>
+                          </Row><br></br>
+                          <Row>
+                          <Col md={2}>
+                              <Card border='danger' style={cardStyles2}>
+                                  <FaMapMarkerAlt style={iconStyles2}/>
+                              </Card>
+                          </Col>
+                          <Col md={10}>
+                          {selectedEvent.lieuEvenement}
+                          </Col>
+                          </Row>
+                          </Card>
                         </Card.Body>
                         <Card.Footer>
                           <Link to='/payer'>
                             <Button variant='outline-danger'><FaCcPaypal/>&nbsp;Payer un ticket</Button>&nbsp;&nbsp;
-                          </Link> 
+                          </Link>&nbsp; 
                           <Link >
                             <Button variant='outline-secondary'><FaHeart/>&nbsp;Ajouter à ma liste</Button>
                           </Link> 

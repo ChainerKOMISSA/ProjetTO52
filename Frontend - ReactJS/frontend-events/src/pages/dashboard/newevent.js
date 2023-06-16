@@ -40,6 +40,7 @@ function Newevent() {
   const [programme, setProgramme] = useState('');
   const [imageEvenement, setImageEvenement] = useState(null);
   const [types, SetTypes] = useState([]);
+  const id = localStorage.getItem('id');
 
 
   const handleNomEvenementChange = (e) => {
@@ -83,6 +84,7 @@ function Newevent() {
     setImageEvenement(file);
   }
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -97,6 +99,7 @@ function Newevent() {
     formData.append('lieuEvenement', lieuEvenement);
     formData.append('programme', programme);
     formData.append('imageEvenement', imageEvenement);
+    formData.append('idUser', id);
     
 
     try {

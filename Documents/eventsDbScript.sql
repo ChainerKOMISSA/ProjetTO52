@@ -18,7 +18,9 @@ CREATE TABLE Evenement(
     lieuEvenement VARCHAR(255) NOT NULL,
     programme VARCHAR(255) NOT NULL,
     imageEvenement VARCHAR(255) NOT NULL,
-    CONSTRAINT fk_type FOREIGN KEY (idType) REFERENCES Type(idType)
+    idUtilisateur INTEGER NOT NULL,
+    CONSTRAINT fk_type FOREIGN KEY (idType) REFERENCES Type(idType),
+    CONSTRAINT fk_user FOREIGN KEY (idUtilisateur) REFERENCES Utilisateur(idUtilisateur)
 );
 
 CREATE TABLE Ticket(

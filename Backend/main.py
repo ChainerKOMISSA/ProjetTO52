@@ -9,7 +9,8 @@ from sendgrid.helpers.mail import Mail
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*" : {"origins" : "*"}})
 app.secret_key = 'secret-key' # Clé secrète utilisée pour la gestion de la session
-upload_folder = r"C:\Users\essik\OneDrive\Documents\GitHub\ProjetTO52\Images"
+#upload_folder = r"C:\Users\essik\OneDrive\Documents\GitHub\ProjetTO52\Images"
+upload_folder = r"Images"
 allowed_extensions = set(['png', 'jpg', 'jpeg'])
 app.config['UPLOAD_FOLDER'] = upload_folder
 
@@ -41,9 +42,11 @@ def login():
     cursor.execute(query, (username, password))
     user = cursor.fetchone()
     cursor.close()
+    user_dict = {}
     if user:
-        session['username'] = user[1]  # Sauvegarde du nom d'utilisateur en session
-        return jsonify({'user': session['username']})
+        user_dict['id'] = user[0]
+        user_dict['username'] = user[1]
+        return jsonify({'user': user_dict})
     else:
         return jsonify({'message': 'Identifiants invalides'})
 
@@ -76,27 +79,26 @@ def createvent():
     heureFin = request.form['heureFin']
     lieu = request.form['lieuEvenement']
     programme = request.form['programme']
+    user = request.form['idUser']
     image_file = request.files['imageEvenement']
 
     filename = secure_filename(image_file.filename)
     image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     image_file.save(image_path)
 
-    if nom and description and type and dateDebut and dateFin and heureDebut and heureFin and lieu and programme and image_path:
+    if nom and description and type and dateDebut and dateFin and heureDebut and heureFin and lieu and programme and image_path and user:
         cursor = db.cursor()
         query = "INSERT INTO Evenement " \
                 "(nomEvenement, descriptionEvenement, idType, dateDebut, dateFin, " \
-                "heureDebut, heureFin, lieuEvenement, programme, imageEvenement) " \
-                "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s) "
+                "heureDebut, heureFin, lieuEvenement, programme, imageEvenement, idUtilisateur) " \
+                "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) "
 
-        cursor.execute(query, (nom, description, type, dateDebut, dateFin, heureDebut, heureFin, lieu, programme, image_path))
+        cursor.execute(query, (nom, description, type, dateDebut, dateFin, heureDebut, heureFin, lieu, programme, image_path, user))
         db.commit()
         cursor.close()
         return jsonify({'message' : 'Evènement créé avec succès'})
     else :
         print("Erreur! Tous les champs requis ne sont pas remplis")
-
-
 
 @app.route('/addnewsletter', methods=['POST'])
 def createnewsletter():
@@ -146,7 +148,7 @@ def readconcert():
             'heureDebut': serialize_timedelta(concert[6]),
             'heureFin': serialize_timedelta(concert[7]),
             'lieuEvenement': concert[8],
-            'programme': concert[9],
+            'programme': concert[9]
         }
         concerts_list.append(concert_dict)
     return jsonify({'concerts': concerts_list})

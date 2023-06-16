@@ -6,6 +6,7 @@ function Login() {
   const navigate = useNavigate()
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [id, setId] = useState('');
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -29,10 +30,11 @@ function Login() {
       body: JSON.stringify(data),
     })
       .then((response) => response.json())
-      .then(data => {
-        setUsername(data.user)
-        console.log(data.user)
-        localStorage.setItem('user', data.user)
+      .then(({user}) => {
+        setUsername(user.username)
+        setId(user.id)
+        localStorage.setItem('username', user.username)
+        localStorage.setItem('id', user.id)
         navigate('/dashboard/dashindex');
       })
       .catch((error) => {

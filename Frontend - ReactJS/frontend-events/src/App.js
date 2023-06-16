@@ -11,9 +11,13 @@ function App() {
   return (
     <div className="App">
       <Header/>
-      <div className='Carousel'>
+      {
+        /*
+        <div className='Carousel'>
       <Carouselfunction/>
       </div>
+         */
+      }
       <Body/> 
       <br></br><br></br>
       <Footer/>

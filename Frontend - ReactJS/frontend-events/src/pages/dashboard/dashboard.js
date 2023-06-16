@@ -40,7 +40,8 @@ const logoStyles = {
 }
 
 function Dashboard() {
-  const user = localStorage.getItem('user')
+  const username = localStorage.getItem('username')
+  //const id = localStorage.getItem('id')
   
   return (
     <>
@@ -52,7 +53,7 @@ function Dashboard() {
           <Nav.Link href="">
             <Button style={buttonStyles}>
             <Image src='' style={logoStyles}/>
-            <h4>Bienvenue {user} </h4>
+            <h4>Bienvenue {username} </h4>
             </Button>
             </Nav.Link>
             <Nav.Link href="">
