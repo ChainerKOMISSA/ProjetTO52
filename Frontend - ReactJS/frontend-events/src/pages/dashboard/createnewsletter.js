@@ -31,6 +31,7 @@ function Createnewsletter() {
   const [idAdmin, setIdAdmin] = useState('');
   const [showToast, setShowToast] = useState(false);
   const [admins, SetAdmins] = useState([]);
+  const id = localStorage.getItem('id');
 
   const handleLibelleNewsletterChange = (e) => {
     setLibelleNewsletter(e.target.value);
@@ -54,7 +55,7 @@ function Createnewsletter() {
     const data = {
       libelleNewsletter : libelleNewsletter,
       contenuNewsletter : contenuNewsletter,
-      idAdmin : idAdmin
+      idAdmin : id
     };
 
     try {
@@ -108,17 +109,6 @@ function Createnewsletter() {
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                     <Form.Label>Contenu de la newsletter</Form.Label>
                     <Form.Control as="textarea" name='contenuNewsletter' onChange={handleContenuNewsletterChange} value={contenuNewsletter} rows={2} />
-                </Form.Group>
-                </Row>
-                <Row className="mb-3">
-                <Form.Group controlId="formGridEmail">
-                <Form.Label>Créateur de la newsletter</Form.Label>
-                <Form.Select aria-label="Default select example" name='idAdmin' onChange={handleIdAdminChange} value={idAdmin}>
-                    <option>Choisissez un administrateur</option>
-                {admins.map(admin => (
-                    <option value={admin.idAdmin}>{admin.nomAdmin}</option>
-                ))}
-                  </Form.Select>
                 </Form.Group>
                 </Row>
                 <Button variant="danger" type="submit">Enregister</Button>

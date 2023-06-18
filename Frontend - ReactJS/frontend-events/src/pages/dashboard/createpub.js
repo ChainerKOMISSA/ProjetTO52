@@ -5,17 +5,19 @@ import CardHeader from 'react-bootstrap/esm/CardHeader';
 
 function Createpub() {
     const navigate = useNavigate()
-    const [libellePub, setLibellePub] = useState('')
-    const [idAdmin, setIdAdmin] = useState('')
+    const [libellePub, setLibellePub] = useState('');
+    const [idAdmin, setIdAdmin] = useState('');
+    const [imagePub, setImagePub] = useState(null);
     const [showToast, setShowToast] = useState(false);
-    const [admins, SetAdmins] = useState([]);
+    const id = localStorage.getItem('id');
 
     const handleLibellePubChange = (e) => {
         setLibellePub(e.target.value)
     }
 
-    const handleIdAdminChange = (e) => {
-        setIdAdmin(e.target.value)
+    const handleImagePubChange = (e) => {
+      const file = e.target.files[0];
+      setImagePub(file);
     }
 
     const handleCloseToast = () => {
@@ -25,18 +27,15 @@ function Createpub() {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const data = {
-            libellePub : libellePub,
-            idAdmin : idAdmin
-        }
+        const formData = new FormData();
+        formData.append("libellePub", libellePub);
+        formData.append("imagePub", imagePub);
+        formData.append("idAdmin", id);
 
         try {
             const response = await fetch('http://127.0.0.1:5000/createpub', {
                 method : 'POST', 
-                headers : {
-                    'Content-Type' : 'application/json',
-                },
-                body : JSON.stringify(data),
+                body : formData,
             })
 
             if (response.ok) {
@@ -51,18 +50,6 @@ function Createpub() {
                 console.error('Une erreur s\'est produite: ', error)
               } 
     }
-
-
-    useEffect(() => {
-        fetch('http://127.0.0.1:5000/admin')
-        .then(response => response.json())
-        .then(data => {
-          SetAdmins(data.admins)
-        })
-        .catch(error => {
-          console.error('Erreur lors de la récupération des admins:', error);
-        });
-    }, []);
     
 
 
@@ -73,22 +60,17 @@ function Createpub() {
         </CardHeader>
         <Card.Body>
             <Row>
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} encType='multipart/form-data'>
                 <Row className="mb-6">
                 <Form.Group controlId="formGridEmail">
                 <Form.Label>Titre de la publicité</Form.Label>
                 <Form.Control type="text" name='libellePub' onChange={handleLibellePubChange} value={libellePub} placeholder="Entrez le libellé" />
                 </Form.Group>
                 </Row>
-                <Row className="mb-6">
-                <Form.Group controlId="formGridEmail">
-                <Form.Label>Créateur de la publicité</Form.Label>
-                <Form.Select aria-label="Default select example" name='idAdmin' onChange={handleIdAdminChange} value={idAdmin}>
-                    <option>Choisissez un administrateur</option>
-                {admins.map(admin => (
-                    <option value={admin.idAdmin}>{admin.nomAdmin}</option>
-                ))}
-                  </Form.Select>
+                <Row>
+                <Form.Group as={Col} controlId="formGridPassword">
+                  <Form.Label>Image de la publicité</Form.Label>
+                  <Form.Control type="file" onChange={handleImagePubChange} placeholder="Ajoutez une image" accept='image/*' />
                 </Form.Group>
                 </Row><br></br>
                 <Button variant="danger" type="submit">Enregister</Button>&nbsp;&nbsp;

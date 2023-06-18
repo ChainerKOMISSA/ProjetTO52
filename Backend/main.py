@@ -10,7 +10,7 @@ app = Flask(__name__)
 cors = CORS(app, resources={r"/*" : {"origins" : "*"}})
 app.secret_key = 'secret-key' # Clé secrète utilisée pour la gestion de la session
 #upload_folder = r"C:\Users\essik\OneDrive\Documents\GitHub\ProjetTO52\Images"
-upload_folder = r"Images"
+upload_folder = r"static\Images"
 allowed_extensions = set(['png', 'jpg', 'jpeg'])
 app.config['UPLOAD_FOLDER'] = upload_folder
 
@@ -116,12 +116,15 @@ def createnewsletter():
 
 @app.route('/createpub', methods=['POST'])
 def createpub():
-    data = request.get_json()
-    libelle = data['libellePub']
-    admin = data['idAdmin']
+    libelle = request.form['libellePub']
+    admin = request.form['idAdmin']
+    image_file = request.files['imagePub']
+    filename = secure_filename(image_file.filename)
+    image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    image_file.save(image_path)
     cursor = db.cursor()
-    query = "INSERT INTO Publicite(libellePub, idAdmin) VALUES (%s, %s)"
-    cursor.execute(query, (libelle, admin))
+    query = "INSERT INTO Publicite(libellePub, imagePub, idAdmin) VALUES (%s, %s, %s)"
+    cursor.execute(query, (libelle, image_path, admin))
     db.commit()
     cursor.close()
     return jsonify({'message': 'Publicité créée avec succès!'})
@@ -369,7 +372,8 @@ def readpub():
         publicite_dict = {
             'idPub' : publicite[0],
             'libellePub' : publicite[1],
-            'idAdmin' : publicite[2]
+            'imagePub' : publicite[2],
+            'idAdmin' : publicite[3]
         }
         publicites_list.append(publicite_dict)
     return jsonify({'publicites' : publicites_list})

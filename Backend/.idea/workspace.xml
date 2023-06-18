@@ -6,9 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="2ec56bf7-5e6c-49c4-abf6-89fd41a729a3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frontend - ReactJS/frontend-events/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend - ReactJS/frontend-events/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Beyonce-2023-tour.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/static/Images/Beyonce-2023-tour.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/FIMU.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/Images/FIMU.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/cirque_zavatta.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/Images/cirque_zavatta.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documents/DOCUMENT TECHNIQUE version 2.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../Documents/DOCUMENT TECHNIQUE version 2.docx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Frontend - ReactJS/frontend-events/src/components/body.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend - ReactJS/frontend-events/src/components/body.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frontend - ReactJS/frontend-events/src/components/header.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend - ReactJS/frontend-events/src/components/header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Images/Mc-Wrap-Vegan.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +39,11 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\essik\OneDrive\Documents\GitHub\ProjetTO52\Backend\static" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="Backend" />

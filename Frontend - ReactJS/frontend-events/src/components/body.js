@@ -45,8 +45,8 @@ import Elogo from '../images/ELogo.png';
   }
 
   const readStyles = {
-    maxHeight : "310px",
-    minHeight : "310px"
+    maxHeight : "550px",
+    minHeight : "550px"
   }
 
   const logoStyles = {
@@ -146,7 +146,7 @@ function Body(){
               <Carousel.Item key={pub.idPub}>
               <img
                 className="d-block w-100"
-                src={car2} 
+                src={'http://127.0.0.1:5000\\'+pub.imagePub} 
                 alt="First slide"
                 height= "500vh"
               />
@@ -308,7 +308,7 @@ function Body(){
               {events.map(event => (
                 <Col md={3} key={event.idEvenement}>
                 <Card style={readStyles}>
-                    <Card.Img variant="top" src={event.imageEvenement} /><br></br>
+                    <Card.Img variant="top" src={'http://127.0.0.1:5000\\'+event.imageEvenement} /><br></br>
                     <Card.Title>{event.nomEvenement}</Card.Title>
                     <Card.Body>
                         <Card.Text>
