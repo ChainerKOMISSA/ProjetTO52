@@ -69,7 +69,7 @@ function Body(){
       .then(response => response.json())
       .then(data => {
         setEvents(data.events)
-        fetch('http://127.0.0.1:5000/publicite')
+        fetch('http://127.0.0.1:5000/pubs')
           .then(response => response.json())
           .then(data => {
             setPubs(data.publicites)

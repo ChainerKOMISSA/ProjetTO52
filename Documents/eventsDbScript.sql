@@ -64,16 +64,16 @@ CREATE TABLE Publicite(
     idPub INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
     libellePub VARCHAR(255) NOT NULL,
     imagePub VARCHAR(255) NOT NULL,
-    idAdmin INTEGER NOT NULL,
-    CONSTRAINT fk_admin FOREIGN KEY (idAdmin) REFERENCES Administrateur(idAdmin)
+    idUtilisateur INTEGER NOT NULL,
+    CONSTRAINT fk_user_pub FOREIGN KEY (idUtilisateur) REFERENCES Utilisateur(idUtilisateur)
 );
 
 CREATE TABLE Newsletter(
     idNewsletter INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
     libelleNewsletter VARCHAR(255) NOT NULL,
     contenuNewsletter VARCHAR(255) NOT NULL,
-    idAdmin INTEGER NOT NULL,
-    CONSTRAINT fk_admin_news FOREIGN KEY (idAdmin) REFERENCES Administrateur(idAdmin)
+    idUtilisateur INTEGER NOT NULL,
+    CONSTRAINT fk_user_news FOREIGN KEY (idUtilisateur) REFERENCES Utilisateur(idUtilisateur)
 );
 
 

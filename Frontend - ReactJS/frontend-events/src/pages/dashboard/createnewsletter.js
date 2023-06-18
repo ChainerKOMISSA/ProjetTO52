@@ -41,9 +41,6 @@ function Createnewsletter() {
     setContenuNewsletter(e.target.value);
   }
 
-  const handleIdAdminChange = (e) => {
-    setIdAdmin(e.target.value);
-  }
 
   const handleCloseToast = () => {
     setShowToast(false)

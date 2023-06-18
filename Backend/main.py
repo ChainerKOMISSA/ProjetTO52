@@ -108,7 +108,7 @@ def createnewsletter():
     admin = data['idAdmin']
     cursor = db.cursor()
     query = "INSERT INTO Newsletter(libelleNewsletter, contenuNewsletter, " \
-            "idAdmin) VALUES (%s, %s, %s)"
+            "idUtilisateur) VALUES (%s, %s, %s)"
     cursor.execute(query, (titre, contenu, admin))
     db.commit()
     cursor.close()
@@ -123,7 +123,7 @@ def createpub():
     image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     image_file.save(image_path)
     cursor = db.cursor()
-    query = "INSERT INTO Publicite(libellePub, imagePub, idAdmin) VALUES (%s, %s, %s)"
+    query = "INSERT INTO Publicite(libellePub, imagePub, idUtilisateur) VALUES (%s, %s, %s)"
     cursor.execute(query, (libelle, image_path, admin))
     db.commit()
     cursor.close()
@@ -272,7 +272,7 @@ def readtype():
 @app.route('/newsletter/<int:id>', methods=['GET', 'POST'])
 def newsletter(id):
     cursor = db.cursor()
-    query = "SELECT * FROM Newsletter WHERE idAdmin = %s"
+    query = "SELECT * FROM Newsletter WHERE idUtilisateur = %s"
     cursor.execute(query, (id,))
     newsletters = cursor.fetchall()
     cursor.close()
@@ -385,10 +385,31 @@ def readusers():
         users_list.append(user_dict)
     return jsonify({'users' : users_list})
 
+
+@app.route('/pubs', methods=['GET', 'POST'])
+def readpubs():
+    cursor = db.cursor()
+    query = "SELECT * FROM Publicite"
+    cursor.execute(query)
+    publicites = cursor.fetchall()
+    cursor.close()
+
+    publicites_list = []
+    for publicite in publicites:
+        publicite_dict = {
+            'idPub' : publicite[0],
+            'libellePub' : publicite[1],
+            'imagePub' : publicite[2],
+            'idAdmin' : publicite[3]
+        }
+        publicites_list.append(publicite_dict)
+    return jsonify({'publicites' : publicites_list})
+
+
 @app.route('/publicite/<int:id>', methods=['GET', 'POST'])
 def readpub(id):
     cursor = db.cursor()
-    query = "SELECT * FROM Publicite WHERE idAdmin = %s"
+    query = "SELECT * FROM Publicite WHERE idUtilisateur = %s"
     cursor.execute(query, (id,))
     publicites = cursor.fetchall()
     cursor.close()
