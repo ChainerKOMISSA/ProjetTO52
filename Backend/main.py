@@ -132,11 +132,11 @@ def createpub():
 
 #----------------------------------------------------
 #fonctions READ
-@app.route('/concert', methods = ['GET','POST'])
-def readconcert():
+@app.route('/concert/<int:id>', methods = ['GET','POST'])
+def readconcert(id):
     cursor = db.cursor()
-    query = "SELECT * FROM Evenement WHERE idType = 1"
-    cursor.execute(query)
+    query = "SELECT * FROM Evenement WHERE idType = 1 HAVING idUtilisateur = %s"
+    cursor.execute(query, (id,))
     concerts = cursor.fetchall()
     cursor.close()
 
@@ -156,11 +156,11 @@ def readconcert():
         concerts_list.append(concert_dict)
     return jsonify({'concerts': concerts_list})
 
-@app.route('/festival', methods = ['GET','POST'])
-def readfestival():
+@app.route('/festival/<int:id>', methods = ['GET','POST'])
+def readfestival(id):
     cursor = db.cursor()
-    query = "SELECT * FROM Evenement WHERE idType = 2"
-    cursor.execute(query)
+    query = "SELECT * FROM Evenement WHERE idType = 2 HAVING idUtilisateur = %s"
+    cursor.execute(query, (id,))
     festivals = cursor.fetchall()
     cursor.close()
 
@@ -180,11 +180,11 @@ def readfestival():
         festivals_list.append(festival_dict)
     return jsonify({'festivals': festivals_list})
 
-@app.route('/spectacle', methods=['GET', 'POST'])
-def readspectacle():
+@app.route('/spectacle/<int:id>', methods=['GET', 'POST'])
+def readspectacle(id):
     cursor = db.cursor()
-    query = "SELECT * FROM Evenement WHERE idType = 4"
-    cursor.execute(query)
+    query = "SELECT * FROM Evenement WHERE idType = 4 HAVING idUtilisateur = %s"
+    cursor.execute(query, (id,))
     spectacles = cursor.fetchall()
     cursor.close()
 
@@ -204,11 +204,11 @@ def readspectacle():
         spectacles_list.append(spectacle_dict)
     return jsonify({'spectacles': spectacles_list})
 
-@app.route('/formation', methods = ['GET', 'POST'])
-def readformation():
+@app.route('/formation/<int:id>', methods = ['GET', 'POST'])
+def readformation(id):
     cursor = db.cursor()
-    query = "SELECT * FROM Evenement WHERE idType = 6"
-    cursor.execute(query)
+    query = "SELECT * FROM Evenement WHERE idType = 6 HAVING idUtilisateur = %s"
+    cursor.execute(query, (id,))
     formations = cursor.fetchall()
     cursor.close()
 
@@ -269,11 +269,11 @@ def readtype():
         types_list.append(type_dict)
     return jsonify({'types': types_list})
 
-@app.route('/newsletter', methods=['GET', 'POST'])
-def newsletter():
+@app.route('/newsletter/<int:id>', methods=['GET', 'POST'])
+def newsletter(id):
     cursor = db.cursor()
-    query = "SELECT * FROM Newsletter"
-    cursor.execute(query)
+    query = "SELECT * FROM Newsletter WHERE idAdmin = %s"
+    cursor.execute(query, (id,))
     newsletters = cursor.fetchall()
     cursor.close()
 
@@ -359,11 +359,11 @@ def readusers():
         users_list.append(user_dict)
     return jsonify({'users' : users_list})
 
-@app.route('/publicite', methods=['GET', 'POST'])
-def readpub():
+@app.route('/publicite/<int:id>', methods=['GET', 'POST'])
+def readpub(id):
     cursor = db.cursor()
-    query = "SELECT * FROM Publicite"
-    cursor.execute(query)
+    query = "SELECT * FROM Publicite WHERE idAdmin = %s"
+    cursor.execute(query, (id,))
     publicites = cursor.fetchall()
     cursor.close()
 

@@ -11,9 +11,11 @@ function Listepub() {
     const [showModal, setShowModal] = useState(false)
     const [selectecPub, setSelectedPub] = useState(null)
     const [showToast, setShowToast] = useState(false)
+    const id = localStorage.getItem('id')
+
 
     useEffect(() => {
-        fetch('http://127.0.0.1:5000/publicite')
+        fetch(`http://127.0.0.1:5000/publicite/${id}`)
         .then(response => response.json())
         .then(data => {
             setPublicites(data.publicites)

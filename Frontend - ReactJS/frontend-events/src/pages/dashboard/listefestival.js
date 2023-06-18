@@ -10,9 +10,13 @@ function Listefestival() {
   const [festivals, setFestivals] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedFestival, setSelectedFestival] = useState(null);
+  const id = localStorage.getItem('id')
+
+
+
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/festival')
+    fetch(`http://127.0.0.1:5000/festival/${id}`)
     .then(response => response.json())
     .then(data => {
       setFestivals(data.festivals)

@@ -8,9 +8,12 @@ function Listespectacle() {
     const [spectacles, setSpectacles] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [selectedSpectacle, setSelectedSpectacle] = useState(null);
+    const id = localStorage.getItem('id')
+
+
 
     useEffect(() => {
-        fetch('http://127.0.0.1:5000/spectacle')
+        fetch(`http://127.0.0.1:5000/spectacle/${id}`)
         .then(response => response.json())
         .then(data => {
             setSpectacles(data.spectacles)

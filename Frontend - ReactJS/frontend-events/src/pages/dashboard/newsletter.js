@@ -12,11 +12,12 @@ function Newsletter() {
   const [showModal, setShowModal] = useState(false);
   const [selectedNewsletter, setSelectedNewsletter] = useState(null);
   const [showToast, setShowToast] = useState(false);
-  
+  const id = localStorage.getItem('id')
+
 
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/newsletter')
+    fetch(`http://127.0.0.1:5000/newsletter/${id}`)
     .then(response => response.json())
     .then(data => {
       setNewsletters(data.newsletters)

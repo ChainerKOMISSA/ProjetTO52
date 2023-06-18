@@ -4,7 +4,6 @@ import { Button, Container, Form, Nav, Navbar, NavDropdown, Image, Carousel, Row
 import { FaMusic, FaGuitar, FaMask, FaGlassCheers, FaCalendarAlt, FaStar, FaHamburger, FaBookOpen, FaHospitalSymbol, FaHeart, FaCcPaypal, FaMapMarkerAlt} from 'react-icons/fa';
 import { BsSmartwatch } from "react-icons/bs";
 import { useNavigate } from 'react-router-dom';
-import car2 from "../images/car2.png";
 import Elogo from '../images/ELogo.png';
 
 

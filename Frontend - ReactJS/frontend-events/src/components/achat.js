@@ -2,7 +2,6 @@ import React from 'react'
 import { Button, Card, Col, FormGroup, FormSelect, Image, Row, InputGroup, Form } from 'react-bootstrap'
 import car2 from "../images/car2.png";
 import {FaCcVisa, FaCcPaypal, FaExpeditedssl} from 'react-icons/fa';
-import Header from './header';
 
 const buttonStyles = {
     margin: '45px 0',
@@ -15,7 +14,6 @@ const buttonStyles = {
 function Achat() {
   return (
     <div>
-        <Header/>
         <Row><Button style={buttonStyles}><h2>Paiement</h2></Button></Row>
         <Card border='secondary'>
             <Card.Body>

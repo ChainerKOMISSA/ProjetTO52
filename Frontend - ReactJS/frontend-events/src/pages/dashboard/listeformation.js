@@ -9,9 +9,12 @@ function Listeformation() {
     const [showModal, setShowModal] = useState(false);
     const [formations, setFormations] = useState([]);
     const [selectedFormation, setSelectedFormation] = useState(null);
+    const id = localStorage.getItem('id')
+
+
 
     useEffect(() => {
-        fetch('http://127.0.0.1:5000/formation')
+        fetch(`http://127.0.0.1:5000/formation/${id}`)
         .then(response => response.json())
         .then(data => {
             setFormations(data.formations)
