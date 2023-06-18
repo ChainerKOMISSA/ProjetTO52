@@ -330,6 +330,32 @@ def readevents():
         events_list.append(event_dict)
     return jsonify({'events': events_list})
 
+
+@app.route('/readmyevents/<int:id>', methods=['GET', 'POST'])
+def readmyevents(id):
+    cursor = db.cursor()
+    query = "SELECT * FROM Evenement WHERE idUtilisateur = %s"
+    cursor.execute(query, (id,))
+    events = cursor.fetchall()
+    cursor.close()
+
+    events_list = []
+    for event in events:
+        event_dict = {
+            'idEvenement': event[0],
+            'nomEvenement': event[1],
+            'descriptionEvenement': event[2],
+            'dateDebut': event[4],
+            'dateFin': event[5],
+            'heureDebut': serialize_timedelta(event[6]),
+            'heureFin': serialize_timedelta(event[7]),
+            'lieuEvenement': event[8],
+            'programme': event[9],
+            'imageEvenement' : event[10]
+        }
+        events_list.append(event_dict)
+    return jsonify({'events': events_list})
+
 @app.route('/getevent/<int:idEvenement>', methods=['GET'])
 def get_event_details(idEvenement):
     cursor = db.cursor()

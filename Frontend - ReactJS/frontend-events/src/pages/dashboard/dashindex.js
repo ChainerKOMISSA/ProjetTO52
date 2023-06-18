@@ -1,26 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import { Container, Row, Col, Card, Nav, Navbar , Button, Image} from 'react-bootstrap';
+import { Container, Row, Col, Card, Nav, Navbar , Button, Image, Table} from 'react-bootstrap';
 import { FaMusic, FaDrum, FaGuitar, FaUserAlt} from 'react-icons/fa';
 
-const sidebarStyles = {
-  backgroundColor: '#343a40',
-  color: '#fff',
-  height: '100vh',
-};
 
-const sidebarIconStyles = {
-  marginRight: '8px',
-
-};
-
-const buttonStyles = {
-  margin: '5px 0',
-  backgroundColor: '#343a40',
-  //color: '#dc3545',
-  color: '#fff',
-  border: 'none',
-};
 
 const cardStyles = {
   width: '3rem',
@@ -39,6 +22,20 @@ const logoStyles = {
 }
 
 function Dashindex() {
+  const [events, setEvents] = useState([])
+  const id = localStorage.getItem('id')
+
+  useEffect(() => {
+    fetch(`http://127.0.0.1:5000/readmyevents/${id}`)
+    .then(response => response.json())
+    .then(data => {
+      setEvents(data.events)
+    })
+    .catch(error => {
+      console.error('Erreur lors de la récupération des évènements:', error);
+    });
+  }, [])
+
   return (
     <div>
           <Row>
@@ -94,10 +91,37 @@ function Dashindex() {
           </Row><br></br><br></br>
 
           <Row>
-          <Row><h2>Mes statistiques</h2></Row>
+          <Row><h2>Mes évènements</h2></Row>
             <Card border='secondary'>
               <Card.Body>
-
+                <Table striped hover bordered>
+                  <thead>
+                    <th>Nom de l'évènement</th>
+                    <th>Description</th>
+                    <th>Date (début)</th>
+                    <th>Date (fin)</th>
+                    <th>Heure (début)</th>
+                    <th>Heure (fin)</th>
+                    <th>Lieu</th>
+                    <th>Programme</th>
+                  </thead>
+                  <tbody>
+                    {
+                      events.map(event => (
+                        <tr key={event.idEvenement}>
+                          <td>{event.nomEvenement}</td>
+                          <td>{event.descriptionEvenement}</td>
+                          <td>{event.dateDebut}</td>
+                          <td>{event.dateFin}</td>
+                          <td>{event.heureDebut}</td>
+                          <td>{event.heureFin}</td>
+                          <td>{event.lieuEvenement}</td>
+                          <td>{event.programme}</td>
+                        </tr>
+                      ))
+                    }
+                  </tbody>
+                </Table>
               </Card.Body>
               <Card.Footer>
                 
