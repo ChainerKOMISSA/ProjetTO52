@@ -123,9 +123,6 @@ function Dashindex() {
                   </tbody>
                 </Table>
               </Card.Body>
-              <Card.Footer>
-                
-              </Card.Footer>
             </Card>
           </Row>
     </div>
