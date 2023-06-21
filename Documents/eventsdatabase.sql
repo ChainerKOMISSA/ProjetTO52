@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 22, 2023 at 08:15 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 7.4.33
+-- Generation Time: Jun 21, 2023 at 12:46 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -70,59 +70,21 @@ CREATE TABLE `evenement` (
   `heureDebut` time DEFAULT NULL,
   `heureFin` time DEFAULT NULL,
   `lieuEvenement` varchar(255) NOT NULL,
-  `programme` varchar(255) DEFAULT NULL,
-  `imageEvenement` varchar(255) DEFAULT NULL
+  `programme` varchar(255) NOT NULL,
+  `imageEvenement` varchar(255) NOT NULL,
+  `idUtilisateur` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `evenement`
 --
 
-INSERT INTO `evenement` (`idEvenement`, `nomEvenement`, `descriptionEvenement`, `idType`, `dateDebut`, `dateFin`, `heureDebut`, `heureFin`, `lieuEvenement`, `programme`, `imageEvenement`) VALUES
-(1, 'LES EUROCKEENNES', 'Festival de musique ', 2, '2023-04-27', '2023-05-27', '15:00:00', '20:00:00', 'Citadelle de Belfort', NULL, NULL),
-(2, 'JUNIOR UTBM SHOW', 'La Poudrière X Junior UTBM. Un évènement caritatif hors normes à Belfort 100% étudiants, 100% fun et 100% caritatif. ', 1, '2023-05-16', '2023-05-16', '20:30:00', '23:30:00', 'La Poudrière - Belfort', ' SAMEDI :\r\n\r\n- 14 h 15 - 14h45 : Éveil musical avec Baptiste Jeandel\r\n\r\n- 15 h 15 - 15h45 : Spectacle par Margot Weité\r\n\r\n- 16 h 15 - 16h45 : Théâtre de Marionnettes\r\n\r\n\r\nDIMANCHE :\r\n\r\n- 11 h 00 - 11h30 : Spectacle par Margot Weité\r\n\r\n- 14 h 15 - 14h45 : ', NULL),
-(3, 'RENAISSANCE WORLD TOUR', 'Tour du monde en concert pour la présentation du nouvel album de Beyoncé', 1, '2023-04-13', '2023-10-17', '20:00:00', '05:00:00', 'Vesoul, Mulhouse, Colmar, Belfort, Troyes, Paris', 'Programme indisponible', NULL),
-(4, 'FIMU BELFORT EDITION 36', 'Organisé et financé par la Ville de Belfort avec le soutien des associations étudiantes de l’Aire urbaine, le FIMU de Belfort se déroule chaque année le week-end de la Pentecôte. Du 25 au 28 mai 2023 la cité du Lion se transformera en une majestueuse scèn', 2, '2023-05-25', '2023-05-28', '10:56:00', '22:00:00', 'Belfort', 'Temporairement indisponible', 'C:\\Users\\KOMISSA ZOTSU SHINER\\Documents\\GitHub\\ProjetTO52\\Images\\FIMU_BELFORT_EDITION_36fimu1.jpg'),
-(5, 'HACKATHON PHOTOGRAPHIE', 'nothing to say', 5, '2023-05-23', '2023-05-28', '17:11:00', '20:12:00', 'Troyes', 'indisponible', 'C:\\Users\\KOMISSA ZOTSU SHINER\\Documents\\GitHub\\ProjetTO52\\Images\\HACKATHON_PHOTOGRAPHIEimgtest.jpeg'),
-(6, 'FORMATION MANICURE-PEDICURE', 'Formation', 5, '2023-05-22', '2023-05-24', '09:30:00', '20:30:00', 'Lure', 'manicure 2 heures\r\npédicure 2 heures', 'C:\\Users\\KOMISSA ZOTSU SHINER\\Documents\\GitHub\\ProjetTO52\\Images\\FORMATION_MANICURE-PEDICUREImages.jpg');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `failed_jobs`
---
-
-CREATE TABLE `failed_jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) NOT NULL,
-  `connection` text NOT NULL,
-  `queue` text NOT NULL,
-  `payload` longtext NOT NULL,
-  `exception` longtext NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `migrations`
---
-
-CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) NOT NULL,
-  `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `migrations`
---
-
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_resets_table', 1),
-(3, '2019_08_19_000000_create_failed_jobs_table', 1),
-(4, '2019_12_14_000001_create_personal_access_tokens_table', 1);
+INSERT INTO `evenement` (`idEvenement`, `nomEvenement`, `descriptionEvenement`, `idType`, `dateDebut`, `dateFin`, `heureDebut`, `heureFin`, `lieuEvenement`, `programme`, `imageEvenement`, `idUtilisateur`) VALUES
+(1, 'Cirque ZAVATTA', 'Cirque de jeux pour enfants, entrée gratuite', 4, '2023-06-15', '2023-06-22', '09:00:00', '20:00:00', 'Vesoul, Mulhouse, Colmar, Belfort, Troyes, Paris', 'Disponible sur www.Zavatta-cirque.com', 'static\\Images\\cirque_zavatta.jpg', 4),
+(3, 'FIMU BELFORT EDITION 36', 'Organisé et financé par la Ville de Belfort avec le soutien des associations étudiantes de l’Aire urbaine.', 2, '2023-06-15', '2023-06-23', '10:00:00', '23:00:00', 'Belfort', 'Temporairement confidentiel', 'static\\Images\\FIMU.jpg', 1),
+(4, 'RENAISSANCE WORLD TOUR', 'Tour du monde en concert pour la présentation du nouvel album de Beyoncé', 1, '2023-06-01', '2023-06-30', '19:00:00', '23:00:00', 'Tour du monde', 'Disponible sur  www.renaissance-world-tour.com', 'static\\Images\\Beyonce-2023-tour.jpeg', 1),
+(6, 'JUNIOR UTBM SHOW', 'Concert organisé parldes étudiants pour des étudiants en partenariat avec La Poudrière Belfort', 1, '2023-06-23', '2023-06-23', '19:00:00', '23:00:00', 'La Poudrière Belfort', 'Partagé via Teams et sur la page instagram de la Junior UTBM', 'static\\Images\\concert.jpg', 4),
+(7, 'THEATRE LES MOULINETS', 'Théâtre en plein air sur les Champs Elysées', 3, '2023-06-25', '2023-06-25', '19:30:00', '22:30:00', 'Paris', 'A découvrir sur www.theatre-les-moulinets.com', 'static\\Images\\theatre1.jpg', 4);
 
 -- --------------------------------------------------------
 
@@ -132,19 +94,18 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 CREATE TABLE `newsletter` (
   `idNewsletter` int(11) NOT NULL,
-  `libelleNewsletter` varchar(255) DEFAULT NULL,
-  `contenuNewsletter` varchar(255) DEFAULT NULL,
-  `idAdmin` int(11) NOT NULL
+  `libelleNewsletter` varchar(255) NOT NULL,
+  `contenuNewsletter` varchar(255) NOT NULL,
+  `idUtilisateur` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `newsletter`
 --
 
-INSERT INTO `newsletter` (`idNewsletter`, `libelleNewsletter`, `contenuNewsletter`, `idAdmin`) VALUES
-(1, 'Lettre d\'information', 'Une lettre d\'information, lettre d\'information électronique, infolettre, cyberlettre, newsletter ou lettre-info, est un document d\'information envoyé de manière périodique par courrier électronique à une liste de diffusion regroupant l\'ensemble des person', 1),
-(2, 'Grand concert ce 27 Mai de Beyoncé!!', NULL, 1),
-(3, 'Concert AYA NAKAMURA', 'Ce 28 Mai, Aya Nakamura sera en concert à Paris!!!', 2);
+INSERT INTO `newsletter` (`idNewsletter`, `libelleNewsletter`, `contenuNewsletter`, `idUtilisateur`) VALUES
+(1, 'Festival TUDUM ', 'Ce 17 Juin 2023 au Brésil, se tiendra le festival TUDUM, grande initiative de Netflix qui rassemblera les acteurs de toutes vos séries préférées!!', 4),
+(2, 'FIN DU FIMU CE 28 MAI', 'Le festival du FIMU prendra officiellement fin ce dimanche 28 Mai 2023!', 1);
 
 -- --------------------------------------------------------
 
@@ -162,44 +123,24 @@ CREATE TABLE `paiement` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `password_resets`
---
-
-CREATE TABLE `password_resets` (
-  `email` varchar(255) NOT NULL,
-  `token` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `personal_access_tokens`
---
-
-CREATE TABLE `personal_access_tokens` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) NOT NULL,
-  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `token` varchar(64) NOT NULL,
-  `abilities` text DEFAULT NULL,
-  `last_used_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `publicite`
 --
 
 CREATE TABLE `publicite` (
   `idPub` int(11) NOT NULL,
-  `libellePub` varchar(255) DEFAULT NULL,
-  `idAdmin` int(11) NOT NULL
+  `libellePub` varchar(255) NOT NULL,
+  `imagePub` varchar(255) NOT NULL,
+  `idUtilisateur` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `publicite`
+--
+
+INSERT INTO `publicite` (`idPub`, `libellePub`, `imagePub`, `idUtilisateur`) VALUES
+(1, 'McDonald ouvre un nouveau spot à Belfort!! ', 'static\\Images\\mcdonalds.jpg', 4),
+(2, 'Nouveau parfum DIOR', 'static\\Images\\Sauvage.jpg', 1),
+(3, 'EXTREME Fraises, Nouveau parfum fraise pour vos glaces préférées', 'static\\Images\\parfum_fraises.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -235,7 +176,8 @@ INSERT INTO `type` (`idType`, `libelleType`) VALUES
 (2, 'festival'),
 (3, 'theatre'),
 (4, 'spectacle pour enfants'),
-(5, 'Autres');
+(5, 'Autres'),
+(6, 'Formations');
 
 -- --------------------------------------------------------
 
@@ -273,7 +215,9 @@ CREATE TABLE `utilisateur` (
 
 INSERT INTO `utilisateur` (`idUtilisateur`, `nomUtilisateur`, `emailUtilisateur`, `mdpUtilisateur`) VALUES
 (1, 'Shiner', 'chainerkomissazotsu@gmail.com', '123456789'),
-(2, 'Franc', 'francamouzou@gmail.com', '111111111');
+(2, 'Franc', 'francamouzou@gmail.com', '111111111'),
+(3, 'Gwladystone SANVI', 'gwladystonesanvi@gmail.com', 'shinermonunivers'),
+(4, 'Stone', 'stonesanvi@gmail.com', '123456789');
 
 --
 -- Indexes for dumped tables
@@ -297,48 +241,22 @@ ALTER TABLE `avis`
 --
 ALTER TABLE `evenement`
   ADD PRIMARY KEY (`idEvenement`),
-  ADD KEY `fk_type` (`idType`);
-
---
--- Indexes for table `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
-
---
--- Indexes for table `migrations`
---
-ALTER TABLE `migrations`
-  ADD PRIMARY KEY (`id`);
+  ADD KEY `fk_type` (`idType`),
+  ADD KEY `fk_user` (`idUtilisateur`);
 
 --
 -- Indexes for table `newsletter`
 --
 ALTER TABLE `newsletter`
   ADD PRIMARY KEY (`idNewsletter`),
-  ADD KEY `fk_admin_news` (`idAdmin`);
-
---
--- Indexes for table `password_resets`
---
-ALTER TABLE `password_resets`
-  ADD KEY `password_resets_email_index` (`email`);
-
---
--- Indexes for table `personal_access_tokens`
---
-ALTER TABLE `personal_access_tokens`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
-  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+  ADD KEY `fk_user_news` (`idUtilisateur`);
 
 --
 -- Indexes for table `publicite`
 --
 ALTER TABLE `publicite`
   ADD PRIMARY KEY (`idPub`),
-  ADD KEY `fk_admin` (`idAdmin`);
+  ADD KEY `fk_user_pub` (`idUtilisateur`);
 
 --
 -- Indexes for table `ticket`
@@ -386,37 +304,19 @@ ALTER TABLE `avis`
 -- AUTO_INCREMENT for table `evenement`
 --
 ALTER TABLE `evenement`
-  MODIFY `idEvenement` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `migrations`
---
-ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idEvenement` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `newsletter`
 --
 ALTER TABLE `newsletter`
-  MODIFY `idNewsletter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `personal_access_tokens`
---
-ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idNewsletter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `publicite`
 --
 ALTER TABLE `publicite`
-  MODIFY `idPub` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPub` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ticket`
@@ -428,7 +328,7 @@ ALTER TABLE `ticket`
 -- AUTO_INCREMENT for table `type`
 --
 ALTER TABLE `type`
-  MODIFY `idType` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idType` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -440,7 +340,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `idUtilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idUtilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -456,19 +356,20 @@ ALTER TABLE `avis`
 -- Constraints for table `evenement`
 --
 ALTER TABLE `evenement`
-  ADD CONSTRAINT `fk_type` FOREIGN KEY (`idType`) REFERENCES `type` (`idType`);
+  ADD CONSTRAINT `fk_type` FOREIGN KEY (`idType`) REFERENCES `type` (`idType`),
+  ADD CONSTRAINT `fk_user` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateur` (`idUtilisateur`);
 
 --
 -- Constraints for table `newsletter`
 --
 ALTER TABLE `newsletter`
-  ADD CONSTRAINT `fk_admin_news` FOREIGN KEY (`idAdmin`) REFERENCES `administrateur` (`idAdmin`);
+  ADD CONSTRAINT `fk_user_news` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateur` (`idUtilisateur`);
 
 --
 -- Constraints for table `publicite`
 --
 ALTER TABLE `publicite`
-  ADD CONSTRAINT `fk_admin` FOREIGN KEY (`idAdmin`) REFERENCES `administrateur` (`idAdmin`);
+  ADD CONSTRAINT `fk_user_pub` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateur` (`idUtilisateur`);
 
 --
 -- Constraints for table `ticket`
