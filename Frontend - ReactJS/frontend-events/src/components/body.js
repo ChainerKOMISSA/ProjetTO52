@@ -109,6 +109,7 @@ function Body(){
 
     return (
         <div>
+          {/**Barre de navigation */}
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" id="navbar">
         <Container>
           <Navbar.Brand className="text-danger" href="#home"><Image src={Elogo} style={logoStyles}/>Events.com</Navbar.Brand>
@@ -125,6 +126,7 @@ function Body(){
                 <NavDropdown.Item href="#">Autres</NavDropdown.Item>
               </NavDropdown>
             </Nav>
+            {/**Barre de recherche */}
             <Form className="d-flex">
                   <Form.Control
                     type="text"
@@ -141,6 +143,7 @@ function Body(){
         </Container>
         </Navbar>
           <Carousel>
+            {/**Récupération des données reçues par l'API */}
             {pubs.map(pub => (
               <Carousel.Item key={pub.idPub}>
               <img
@@ -304,6 +307,7 @@ function Body(){
             <h3>Evènements à ne pas rater</h3>
             <br></br>
             <Row>
+              {/**Récupération des données reçues par l'API */}
               {events.map(event => (
                 <Col md={3} key={event.idEvenement}>
                 <Card style={readStyles}>
@@ -320,21 +324,7 @@ function Body(){
               ))}
             </Row>
             <br></br>
-            {
-              /** <h3>Publicités</h3>
-            <br></br>
-            <Row>
-              {pubs.map(pub => (
-                <Col md={3} key={pub.idPub}>
-                  <Card style={{ width: '18rem' }}>
-                      <Card.Body>
-                        <Card.Text>{pub.libellePub}</Card.Text>
-                      </Card.Body>
-                  </Card>
-                </Col>
-              ))}
-            </Row>*/
-            }
+            {/**Mise en forme de la boîte de dialogue */}
               {
                 selectedEvent && (
                   <Modal show={showModal} onHide={handleCloseModal} size='lg'>

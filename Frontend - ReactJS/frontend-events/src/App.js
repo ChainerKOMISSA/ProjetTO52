@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+//Importation des composants
 import Body from './components/body';
 import Footer from './components/footer';
 

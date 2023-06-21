@@ -7,52 +7,61 @@ import CardHeader from 'react-bootstrap/esm/CardHeader';
 
 
 function Newsletter() {
+  //Déclaration des variables
   const navigate = useNavigate();
   const [newsletters, setNewsletters] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedNewsletter, setSelectedNewsletter] = useState(null);
   const [showToast, setShowToast] = useState(false);
+  //Récupération de l'identifiant de l'administrateur
   const id = localStorage.getItem('id')
 
 
 
+  //Fonction de récupération des newsletters
   useEffect(() => {
     fetch(`http://127.0.0.1:5000/newsletter/${id}`)
     .then(response => response.json())
     .then(data => {
+      //Gestion du résultat de la requête
       setNewsletters(data.newsletters)
     })
     .catch(error => {
+      //Gestion en cas d'erreur
       console.error('Erreur lors de la récupération des concerts:', error);
     });
   }, []);
 
-
+//Fonctions de gestion de la boîte de dialogue
   const handleCloseModal = () => {
     setShowModal(false)
     setSelectedNewsletter(null)
     setShowToast(false)
   }
 
-  const handleCloseToast = () => {
-    setShowToast(false)
-  }
-
-
   const handleOpenModal = (newsletter) => {
     setSelectedNewsletter(newsletter)
     setShowModal(true)
   }
 
+  //Fonction de gestion du toast
+  const handleCloseToast = () => {
+    setShowToast(false)
+  }
+
+  //Fonction d'envoi de mails
   const sendEmail = () => {
+    //Déclaration des variables locales
     const libelleNewsletter = selectedNewsletter.libelleNewsletter;
     const contenuNewsletter = selectedNewsletter.contenuNewsletter;
 
+    //Attribution des valeurs aux variables locales
     const data = {
       libelleNewsletter : libelleNewsletter,
       contenuNewsletter : contenuNewsletter
     };
 
+    //Requête vers l'api pour l'envoi de mails
     fetch('http://localhost:5000/send_emails', {
       method : 'POST',
       headers : {
@@ -62,26 +71,34 @@ function Newsletter() {
     })
     .then(response => response.json())
     .then(data => {
+      //Gestion du résultat de la requête
       console.log(data.message)
       setShowToast(true)
+      //Redirection vers une autre route
       navigate('/dashboard/newsletter')
     })
     .catch(error => {
+      //Gestion en cas d'erreur
       console.error('Erreur lors de l\'envoi des e-mails:', error)
     })
   }
 
+  //Fonction de suppression d'un évènement
   const handleDelete = (idNewsletter) => {
     if(window.confirm('Êtes-vous sûr de vouloir supprimer cette newsletter ?')) {
+      //Envoi de la requête de suppression
       fetch(`http://127.0.0.1:5000/deletenewsletter/${idNewsletter}`, {
         method:'DELETE'
       })
       .then(response => response.json())
       .then(data => {
+        //Gestion du résultat de la requête
       console.log(data.message);
+      //Redirection vers une autre route
       navigate('/dashboard/newsletter');
       })
       .catch(error => {
+        //Gestion en cas d'erreur
         console.error('Erreur lors de la suppression de la newsletter:', error);
       })
     }
@@ -89,6 +106,7 @@ function Newsletter() {
 
 
   return (
+    //Code jsx pour le formulaire de création de la newsletter
         <Card border="secondary">
           <CardHeader>
             <Row>
@@ -112,6 +130,7 @@ function Newsletter() {
           </tr>
         </thead>
         <tbody>
+          {/**Récupération des données reçues par l'API */}
           {newsletters.map(newsletter => (
             <tr key={newsletter.idNewsletter}>
                 <td>{newsletter.idNewsletter}</td>
@@ -125,6 +144,7 @@ function Newsletter() {
         </tbody>
             </Table>
           </Card.Body>
+          {/**Mise en forme de la boîte de dialogue */}
             {
               selectedNewsletter && (
                 <Modal show={showModal} onHide={handleCloseModal} size='lg'>
@@ -151,6 +171,7 @@ function Newsletter() {
                   </Modal.Footer>
                 </Modal>
               )}
+              {/**Mise en forme du toast de gestion des évènements */}
               <ToastContainer>
                 <Toast show={showToast} onClose={handleCloseToast} delay={3000} autohide border="outline-success">
                   <Toast.Header>

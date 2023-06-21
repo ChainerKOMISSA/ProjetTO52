@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, Row , Image, Button} from 'react-bootstrap'
+import { Row , Image, Button} from 'react-bootstrap'
 import Elogo from '../images/ELogo.png';
 import { FaFigma, FaGithub, FaFacebookF, FaLinkedinIn} from 'react-icons/fa';
 
@@ -24,6 +24,7 @@ const buttonStyles = {
 
 
 function Footer() {
+    //Mise en forme du footer
   return (
     <div style={footerStyles}>
         <Row>

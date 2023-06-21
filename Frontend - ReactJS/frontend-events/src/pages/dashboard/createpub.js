@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Container, Row, Col, Card, Nav, Navbar , Button, Form, FormSelect, Toast, ToastContainer} from 'react-bootstrap';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Row, Col, Card, Button, Form} from 'react-bootstrap';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
 
 function Createpub() {
+    //Déclaration des variables
     const navigate = useNavigate()
     const [libellePub, setLibellePub] = useState('');
-    const [idAdmin, setIdAdmin] = useState('');
     const [imagePub, setImagePub] = useState(null);
     const [showToast, setShowToast] = useState(false);
+    //identifiant  de l'administrateur
     const id = localStorage.getItem('id');
 
+    //Fonctions de gestions des zones de saisie
     const handleLibellePubChange = (e) => {
         setLibellePub(e.target.value)
     }
@@ -20,19 +22,24 @@ function Createpub() {
       setImagePub(file);
     }
 
+    //Fonction de gestion du toast
     const handleCloseToast = () => {
         setShowToast(false)
     }
 
+    //Fonction d'envoi du formulaire
     const handleSubmit = async (e) => {
         e.preventDefault()
 
+        //Attibution des valeurs aux variables locales
         const formData = new FormData();
         formData.append("libellePub", libellePub);
         formData.append("imagePub", imagePub);
+        //identifiant  de l'administrateur
         formData.append("idAdmin", id);
 
         try {
+          //Envoi des données à l'API
             const response = await fetch('http://127.0.0.1:5000/createpub', {
                 method : 'POST', 
                 body : formData,
@@ -40,13 +47,16 @@ function Createpub() {
 
             if (response.ok) {
                 const data = await response.json();
+                 //Ouverture du toast
                 setShowToast(true)
                 navigate('/dashboard/listepub')
               } else {
+                //Gestion en cas d'erreur
                 console.error('Une erreur s\'est produite: ')
               }
                 
               } catch (error) {
+                //Gestion en cas d'erreur
                 console.error('Une erreur s\'est produite: ', error)
               } 
     }
@@ -54,6 +64,7 @@ function Createpub() {
 
 
   return (
+    //Code jsx pour le formulaire de création de newsletter
     <Card border='secondary'>
         <CardHeader>
         <h2>Créer une nouvelle publicité</h2>

@@ -13,6 +13,7 @@ const buttonStyles = {
 
 function Achat() {
   return (
+    //Code jsx pour l'affichage de la page de paiement
     <div>
         <Row><Button style={buttonStyles}><h2>Paiement</h2></Button></Row>
         <Card border='secondary'>

@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 function Detailsevents() {
+    //Déclaration des variables 
     const {idEvenement} = useParams();
     const [event, setEvent] = useState(null);
 
+    //Envoi d'une requête à l'API
     useEffect(() => {
         fetch(`http://127.0.0.1:5000/getevent/${idEvenement}`)
         .then(response => response.json())

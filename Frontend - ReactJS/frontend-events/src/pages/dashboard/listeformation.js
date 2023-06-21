@@ -5,25 +5,31 @@ import { FaFolderOpen, FaTrash, FaEdit} from 'react-icons/fa';
 
 
 function Listeformation() {
+    //Déclaration des variables
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
     const [formations, setFormations] = useState([]);
     const [selectedFormation, setSelectedFormation] = useState(null);
+    //Récupération de l'identifiant de l'administrateur
     const id = localStorage.getItem('id')
 
 
-
+    //Fonction de récupération des formations
     useEffect(() => {
+        //Envoi de la requête de récupération à l'API
         fetch(`http://127.0.0.1:5000/formation/${id}`)
         .then(response => response.json())
         .then(data => {
+            //Gestion des données reçues par l'API
             setFormations(data.formations)
         })
         .catch(error => {
+            //Gestion en cas d'erreur
             console.error('Erreur lors de la récupération des formations:', error)
         })
     }, [])
 
+    //Fonctions de gestion de la boîte de dialogue
     const handleCloseModal = () => {
         setShowModal(false)
         setSelectedFormation(null)
@@ -34,14 +40,18 @@ function Listeformation() {
         setShowModal(true);
     }
 
+    //Fonction de suppression d'un évènement
     const handleDelete = (idEvenement) => {
         if(window.confirm('Êtes-vous sûr de vouloir supprimer cet évènement ?')) {
+            //Envoi de la requête de suppression
             fetch(`http://127.0.0.1:5000/deletevent/${idEvenement}`, {
             method : 'DELETE'
             })
             .then(response => response.json())
             .then(data => {
+
             console.log(data.message);
+            //Redirection vers une autre route
             navigate('/dashboard/listeconcert');
             })
             .catch(error => {
@@ -51,6 +61,7 @@ function Listeformation() {
     }
 
   return (
+    //Affichage de la liste des formations
     <Card border="secondary">
         <Card.Header>
             <Row>
@@ -81,6 +92,7 @@ function Listeformation() {
                 </tr>
             </thead>
             <tbody>
+                {/**Récupération des données reçues par l'API */}
                 {formations.map(formation => (
                     <tr key={formation.idEvenement}>
                         <td>{formation.idEvenement}</td>
@@ -98,6 +110,7 @@ function Listeformation() {
             </tbody>
         </Table>
       </Card.Body>
+      {/**Mise en forme de la boîte de dialogue */}
       {
         selectedFormation && (
             <Modal show={showModal} onHide={handleCloseModal} size='lg'>

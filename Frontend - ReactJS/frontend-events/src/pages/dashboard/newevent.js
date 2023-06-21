@@ -1,33 +1,14 @@
 import React , { useEffect, useState } from 'react';
-import { Container, Row, Col, Card, Nav, Navbar , Button, Form} from 'react-bootstrap';
+import { Row, Col, Card, Button, Form} from 'react-bootstrap';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
-import { Link, useNavigate} from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-const sidebarStyles = {
-  backgroundColor: '#343a40',
-  color: '#fff',
-  height: '100vh',
-};
-
-const sidebarIconStyles = {
-  marginRight: '8px',
-
-};
-
-const buttonStyles = {
-  margin: '5px 0',
-  backgroundColor: '#343a40',
-  //color: '#dc3545',
-  color: '#fff',
-  border: 'none',
-};
-
 
 function Newevent() {
-
+  //Déclaration des variables
   const navigate = useNavigate()
   const [nomEvenement, setNomEvenement] = useState('');
   const [descriptionEvenement, setDescriptionEvenement] = useState('');
@@ -40,9 +21,10 @@ function Newevent() {
   const [programme, setProgramme] = useState('');
   const [imageEvenement, setImageEvenement] = useState(null);
   const [types, SetTypes] = useState([]);
+  //Récupération de l'identifiant de l'administrateur
   const id = localStorage.getItem('id');
 
-
+  //Fonctions de gestions des zones de saisie
   const handleNomEvenementChange = (e) => {
     setNomEvenement(e.target.value);
   }
@@ -85,10 +67,12 @@ function Newevent() {
   }
 
 
+  //Fonction d'envoi du formulaire
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
+    //Attribution des valeurs aux variables locales
     formData.append('nomEvenement', nomEvenement);
     formData.append('descriptionEvenement', descriptionEvenement);
     formData.append('idType', idType);
@@ -99,10 +83,12 @@ function Newevent() {
     formData.append('lieuEvenement', lieuEvenement);
     formData.append('programme', programme);
     formData.append('imageEvenement', imageEvenement);
+    //identifiant  de l'administrateur
     formData.append('idUser', id);
     
 
     try {
+      //Envoi des données à l'API
       const response = await fetch('http://127.0.0.1:5000/createvent', {
         method: 'POST',
         body: formData,
@@ -110,29 +96,37 @@ function Newevent() {
 
       if (response.ok) {
         const data = await response.json();
+         //Ouverture du toast
         toast.success('Evènement ajouté avec succès')
+        //Redirection vers une autre route
         navigate('/dashboard/listeconcert')
       } else {
+        //Ouverture du toast erreur
         toast.error('Une erreur s\'est produite.')
       }
     } catch (error) {
+      //Gestion en cas d'erreur
       console.log('Une erreur s\'est produite.', error);
       toast.error('Une erreur s\'est produite.')
     }
   }
 
+  //Récupération des types de la base de données
   useEffect(()  => {
     fetch('http://127.0.0.1:5000/type')
     .then(response => response.json())
     .then(data => {
+      //Récupération des types de la base de données
       SetTypes(data.types)
     })
     .catch(error => {
+      //Gestion en cas d'erreur
       console.error('Erreur lors de la récupération des types:', error);
     });
   }, []);
 
   return (
+    //Code jsx pour le formulaire de création de newsletter
     <Card border='secondary'>
       <CardHeader>
       <h2>Enregister un nouvel évènement</h2>

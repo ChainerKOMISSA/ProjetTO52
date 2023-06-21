@@ -5,24 +5,30 @@ import { FaFolderOpen, FaTrash, FaEdit} from 'react-icons/fa';
 
 
 function Listeconcert() {
+  //Déclaration des variables
   const navigate = useNavigate();
   const [concerts, setConcerts] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedConcert, setSelectedConcert] = useState(null);
+  //Récupération de l'identifiant de l'administrateur
   const id = localStorage.getItem('id')
   
 
+  //Récupération des concerts
   useEffect(() => {
     fetch(`http://127.0.0.1:5000/concert/${id}`)
     .then(response => response.json())
     .then(data => {
+      //Récupération des concerts
       setConcerts(data.concerts)
     })
     .catch(error => {
+      //Gestion en cas d'erreur
       console.error('Erreur lors de la récupération des concerts:', error);
     });
   }, []);
 
+  //Fonctions de gestion de la boîte de dialogue
   const handleCloseModal = () => {
     setShowModal(false);
     setSelectedConcert(null);
@@ -33,27 +39,32 @@ function Listeconcert() {
     setShowModal(true);
   };
 
+  //Fonction de suppression d'un évènement
   const handleDelete = (idEvenement) => {
     if(window.confirm('Êtes-vous sûr de vouloir supprimer cet évènement ?')) {
+      //Envoi de la requête de suppression
       fetch(`http://127.0.0.1:5000/deletevent/${idEvenement}`, {
       method : 'DELETE'
       })
       .then(response => response.json())
       .then(data => {
+        //Gestion du résultat de la requête
       console.log(data.message);
+      //Redirection vers une autre route
       navigate('/dashboard/listeconcert');
       })
       .catch(error => {
+        //Gestion en cas d'erreur
         console.error('Erreur lors de la suppression de l\'évènement:', error);
       })
     }
   }
 
-  
+  //Fonction de modification
   const handleEdit = (idEvenement) => {
     const selectedConcert = concerts.find(concert => concert.idEvenement === idEvenement);
     const updatedData = new FormData();
-
+      //Attribution des valeurs aux variables locales
       updatedData.append('nomEvenement', selectedConcert.nomEvenement);
       updatedData.append('descriptionEvenement', selectedConcert.descriptionEvenement);
       updatedData.append('idType', selectedConcert.idType);
@@ -66,6 +77,7 @@ function Listeconcert() {
       updatedData.append('imageEvenement', selectedConcert.imageEvenement);
     
 
+      //Envoi de la requête de modification à l'API
     fetch(`http://127.0.0.1:5000/updatevent/${idEvenement}`, {
     method: 'PUT',
     body: updatedData,
@@ -75,16 +87,20 @@ function Listeconcert() {
   })
     .then(response => response.json())
     .then(data => {
+      //Gestion du résultat de la requête
       console.log(data);
+      //Redirection vers une autre route
       navigate('/dashboard/listeconcert');
     })
     .catch(error => {
+      //Gestion en cas d'erreur
       console.error('Erreur lors de la mise à jour de l\'événement:', error);
     });
   };
 
 
   return (
+    //Code jsx pour l'affichage des newsletters
         <Card border="secondary">
           <Card.Header>
             <Row>
@@ -115,6 +131,7 @@ function Listeconcert() {
                 </tr>
               </thead>
               <tbody>
+                {/**Récupération des données reçues par l'API */}
                 {concerts.map(concert => (
                   <tr key={concert.idEvenement}>
                     <td>{concert.idEvenement}</td>
@@ -134,6 +151,7 @@ function Listeconcert() {
               </tbody>
             </Table>
           </Card.Body>
+          {/**Mise en forme de la boîte de dialogue */}
           {
             selectedConcert && (
               <Modal show={showModal} onHide={handleCloseModal} size='lg'>

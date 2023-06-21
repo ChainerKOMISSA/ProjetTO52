@@ -19,31 +19,20 @@ const sidebarIconStyles = {
 const buttonStyles = {
   margin: '5px 0',
   backgroundColor: '#343a40',
-  //color: '#dc3545',
   color: '#fff',
   border: 'none',
 };
-
-const cardStyles = {
-  width: '3rem',
-  height : '3rem'
-}
-
-const iconStyles = {
-  marginTop : '16px',
-  size : "lg",
-  color : '#fff'
-}
 
 const logoStyles = {
   width : '35px'
 }
 
 function Dashboard() {
+  //Récupération du nom de l'utilisateur
   const username = localStorage.getItem('username')
-  //const id = localStorage.getItem('id')
   
   return (
+    //Affichage de la barre latérale gauche
     <>
     <Container fluid>
       <Row>

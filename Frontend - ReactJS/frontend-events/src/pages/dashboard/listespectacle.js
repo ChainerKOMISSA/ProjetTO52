@@ -4,25 +4,30 @@ import {Row, Col, Button, Table, Card, Modal} from 'react-bootstrap';
 import { FaFolderOpen, FaTrash, FaEdit} from 'react-icons/fa';
 
 function Listespectacle() {
+    //Déclaration des variables
     const navigate = useNavigate();
     const [spectacles, setSpectacles] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [selectedSpectacle, setSelectedSpectacle] = useState(null);
+    //Récupération de l'identifiant de l'administrateur
     const id = localStorage.getItem('id')
 
 
-
+    //Fonction de récupérartion des spectacles
     useEffect(() => {
         fetch(`http://127.0.0.1:5000/spectacle/${id}`)
         .then(response => response.json())
         .then(data => {
+            //Gestion du résultat de la requête
             setSpectacles(data.spectacles)
         })
         .catch(error => {
+            //Gestion en cas d'erreur
             console.error('Erreur lors de la récupération des spectacles:', error)
         })
     }, [])
 
+    //Fonctions de gestion de la boîte de dialogue
     const handleCloseModal = () => {
         setShowModal(false);
         setSelectedSpectacle(null)
@@ -33,17 +38,21 @@ function Listespectacle() {
         setSelectedSpectacle(spectacle)
     }
 
+    //Fonction de suppression d'un évènement
     const handleDelete = (idEvenement) => {
     if(window.confirm('Êtes-vous sûr de vouloir supprimer cet évènement ?')) {
+        //Envoi de la requête de suppression
       fetch(`http://127.0.0.1:5000/deletevent/${idEvenement}`, {
       method : 'DELETE'
       })
       .then(response => response.json())
       .then(data => {
       console.log(data.message);
+      //Redirection vers une autre route
       navigate('/dashboard/listeconcert');
       })
       .catch(error => {
+        //Gestion en cas d'erreur
         console.error('Erreur lors de la suppression de l\'évènement:', error);
       })
     }
@@ -51,6 +60,7 @@ function Listespectacle() {
   }
 
   return (
+    //Code jsx pour l'affichage de la liste des spectacles
     <Card border='secondary'>
         <Card.Header>
             <Row>
@@ -81,6 +91,7 @@ function Listespectacle() {
                     </tr>
                 </thead>
                 <tbody>
+                    {/**Récupération des données reçues par l'API */}
                     {spectacles.map(spectacle => (
                         <tr key={spectacle.idEvenement}>
                             <td>{spectacle.idEvenement}</td>
@@ -102,6 +113,7 @@ function Listespectacle() {
                 </tbody>
             </Table>
         </Card.Body>
+        {/**Mise en forme de la boîte de dialogue */}
         {
             selectedSpectacle && (
                 <Modal show={showModal} onHide={handleCloseModal}>

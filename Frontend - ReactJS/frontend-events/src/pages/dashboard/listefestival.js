@@ -6,26 +6,32 @@ import { FaFolderOpen, FaTrash, FaEdit} from 'react-icons/fa';
 
 
 function Listefestival() {
+  //Déclaration des variables 
   const navigate = useNavigate();
   const [festivals, setFestivals] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedFestival, setSelectedFestival] = useState(null);
+  //Récupération de l'identifiant de l'administrateur
   const id = localStorage.getItem('id')
 
 
 
-
+  //Récupération des festivals
   useEffect(() => {
     fetch(`http://127.0.0.1:5000/festival/${id}`)
     .then(response => response.json())
     .then(data => {
+      //Gestion du résultat de la requête
       setFestivals(data.festivals)
     })
     .catch(error => {
+      //Gestion en cas d'erreur
       console.error('Erreur lors de la récupération des festivals:', error);
     });
   }, []);
 
+
+  //Fonctions de gestion de la boîte de dialogue
   const handleCloseModal = () => {
     setShowModal(false);
     setSelectedFestival(null);
@@ -36,17 +42,21 @@ function Listefestival() {
     setShowModal(true);
   }
 
+  //Fonction de suppression d'un évènement
   const handleDelete = (idEvenement) => {
     if(window.confirm('Êtes-vous sûr de vouloir supprimer cet évènement ?')){
+      //Envoi de la requête de suppression
       fetch(`http://127.0.0.1:5000/deletevent/${idEvenement}`, {
       method : 'DELETE'
       })
       .then(response => response.json())
       .then(data => {
       console.log(data.message);
+      //Redirection vers une autre route
       navigate('/dashboard/listeconcert');
       })
       .catch(error => {
+        //Gestion en cas d'erreur
         console.error('Erreur lors de la suppression de l\'évènement:', error);
       })
     }
@@ -54,6 +64,7 @@ function Listefestival() {
 
 
   return (
+    //Code jsx pour l'affichage des festivals
     <Card border="secondary">
     <Card.Header>
       <Row>
@@ -84,6 +95,7 @@ function Listefestival() {
           </tr>
         </thead>
         <tbody>
+          {/**Récupération des données reçues par l'API */}
                 {festivals.map(festival => (
                   <tr key={festival.idEvenement}>
                     <td>{festival.idEvenement}</td>
@@ -105,6 +117,7 @@ function Listefestival() {
           </tbody>
       </Table>
     </Card.Body>
+    {/**Mise en forme de la boîte de dialogue */}
     {
       selectedFestival && (
         <Modal show={showModal} onHide={handleCloseModal}>

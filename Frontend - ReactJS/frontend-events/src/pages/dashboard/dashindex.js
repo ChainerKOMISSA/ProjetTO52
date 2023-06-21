@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import { Container, Row, Col, Card, Nav, Navbar , Button, Image, Table} from 'react-bootstrap';
+import { Row, Col, Card, Table} from 'react-bootstrap';
 import { FaMusic, FaDrum, FaGuitar, FaUserAlt} from 'react-icons/fa';
 
 
@@ -17,21 +17,23 @@ const iconStyles = {
   color : '#fff'
 }
 
-const logoStyles = {
-  width : '35px'
-}
 
 function Dashindex() {
+  //Déclaration des variables
   const [events, setEvents] = useState([])
+  //Récupération de l'identifiant de l'utilisateur
   const id = localStorage.getItem('id')
 
   useEffect(() => {
+    //Envoi de la requête à l'API
     fetch(`http://127.0.0.1:5000/readmyevents/${id}`)
     .then(response => response.json())
     .then(data => {
+      //Gestion du résultat de la requête
       setEvents(data.events)
     })
     .catch(error => {
+      //Gestion en cas d'erreur
       console.error('Erreur lors de la récupération des évènements:', error);
     });
   }, [])
@@ -106,6 +108,7 @@ function Dashindex() {
                     <th>Programme</th>
                   </thead>
                   <tbody>
+                    {/**Récupération des données reçues par l'API */}
                     {
                       events.map(event => (
                         <tr key={event.idEvenement}>
