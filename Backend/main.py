@@ -21,7 +21,6 @@ db = mysql.connector.connect(
     database="eventsdatabase",
 )
 
-
 # Convertir les objets timedelta en une représentation sérialisable
 # Nous l'avons utilisée pour convertir les heures
 def serialize_timedelta(timedelta_obj):
@@ -599,7 +598,10 @@ def deletepub(idPub):
     return jsonify({'message': 'Publicité supprimée avec succès'})
 
 
+
+
 # fonction qui permet d'envoyer un mail contenant la newsletter aux utilisateurs
+# pour le déploiement, une autre personne a besoin de créer un compte sur sendgrid et générer sa clé
 @app.route('/send_emails', methods=['POST'])
 def send_emails():
     # Récupération les informations de la newsletter à partager depuis la requête
@@ -619,6 +621,8 @@ def send_emails():
     sender = 'Events.com'
 
     # Initialisation de l'API de messagerie
+    # Diffère selon l'utilisateur. Nous avons renseigné nos propres coordonnées de messagerie pour la clé
+    # Vous devez créer un compte sur Sendgrid et générer votre propre clé et la remplacer
     sg = sendgrid.SendGridAPIClient(api_key='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')
 
     # Envoi de mail à chaque utilisateur
