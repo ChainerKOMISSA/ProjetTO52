@@ -1,2 +1,3 @@
 # ProjetTO52
-Projet opérationnel (UTBM)
+Application web de gestion evènementielle.
+
