@@ -1,5 +1,6 @@
 # ProjetTO52
-##Application web de gestion evènementielle en Python
+Application web de gestion evènementielle en Python
+
 :point_right:Environnement technique frontend : 
 - React JS
 - Ajax
